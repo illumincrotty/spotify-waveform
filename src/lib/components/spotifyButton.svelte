@@ -3,6 +3,7 @@
 	import { AuthService } from '$lib/auth';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import { assets, base } from '$app/paths';
 
 	let authorization;
 
@@ -20,7 +21,7 @@
 			authParameters.get('access_token')
 		) {
 			goto(
-				`${window.location.origin}/generator?token=${
+				`${assets}/generator?token=${
 					authParameters.get('access_token') ?? ''
 				}`
 			);

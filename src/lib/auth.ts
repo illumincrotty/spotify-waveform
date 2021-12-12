@@ -1,7 +1,10 @@
 import type { SpotifyScope } from './scope';
 import { stateGen } from './stateGen';
 import type { ScopesBuilder } from './scopeBuilder';
+import { base } from '$app/paths';
 
+const mode = process.env.NODE_ENV;
+const dev = mode === 'development';
 interface authBase {
 	client_id: string;
 	response_type: string;
@@ -31,7 +34,13 @@ export class AuthService {
 	private readonly authConfig: authImplicitGrant = {
 		client_id: '9f38f4f91f784811b42898766ee7211a',
 		response_type: 'token',
-		redirect_uri: 'http://localhost:3000/authorized', // My URL
+		redirect_uri: `${
+			dev
+				? `${window.location.protocol}//${
+						window.location.hostname
+				  }${`:${window.location.port}`}`
+				: 'https://illumincrotty.github.io'
+		}${base}/authorized`, // My URL
 		state: `${this.state}`,
 		scope: 'user-read-private',
 		show_dialog: false,
