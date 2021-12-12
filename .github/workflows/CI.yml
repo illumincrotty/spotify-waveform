@@ -21,16 +21,18 @@ jobs:
               run: curl -f https://get.pnpm.io/v6.14.js | node - add --global pnpm@6
             - name: Install pnpm dependenices
               run: pnpm install
-            - name: Run Tests
-              run: pnpm ci
-            - name: Upload coverage to Codecov
-              uses: codecov/codecov-action@v2
-              with:
-                  files: coverage/lcov.info
-                  env_vars: OS,NODE
-                  name: codecov-umbrella
-                  fail_ci_if_error: false
-                  verbose: true
+            - name: Build Site
+              run: pnpm build
+            # - name: Run Tests
+            #   run: pnpm ci
+            # - name: Upload coverage to Codecov
+            #   uses: codecov/codecov-action@v2
+            #   with:
+            #       files: coverage/lcov.info
+            #       env_vars: OS,NODE
+            #       name: codecov-umbrella
+            #       fail_ci_if_error: false
+            #       verbose: true
             - name: Deploy Pages
               uses: peaceiris/actions-gh-pages@v3
               with:
