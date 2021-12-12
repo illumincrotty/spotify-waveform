@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<title>Spotify Waveform Generator</title>
+
+		<!-- <link rel="stylesheet" href="/assets/css/print.css" media="print" /> -->
+
+		<meta
+			name="description"
+			content="Creates waveform art from a spotify track"
+		/>
+		<meta property="og:title" content="Spotify Waveform Generator" />
+		<meta
+			property="og:description"
+			content="Creates waveform art from a spotify track"
+		/>
+
+		<!-- TODO: add site image -->
+		<!--<meta property="og:image" content="replace_image" /> -->
+		<!--<meta property="og:locale" content="en" /> -->
+		<!--<meta property="og:type" content="website" /> -->
+		<!--<meta name="twitter:card" content="summary_large_image" /> -->
+		<!--<meta name="twitter:dnt" content="on"> -->
+
+		<!-- TODO: add site url-->
+		<!--<meta property="og:url" content="replace_url" />-->
+		<!--<link rel="canonical" href="replace_url" />-->
+
+		<!-- TODO: add favicon -->
+		<link rel="icon" href="assets/images/wave v3.svg" />
+		<!-- <link rel="icon" href="/favicon.svg" type="image/svg+xml" /> -->
+
+		<!-- TODO: add theme color -->
+		<!--<meta name="theme-color" content="replace_theme_color" />-->
+
+		<!-- CSS modern normalize -->
+		<link
+			rel="preload"
+			href="https://cdn.jsdelivr.net/npm/modern-normalize@1.1.0/modern-normalize.min.css"
+			as="style"
+			onload="this.onload=null;this.rel='stylesheet'"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+
+	<body>
+		<!-- <script src="./src/auth.ts" type="module"></script> -->
+		<script type="module">
+			import '/assets/css/style.css';
+			import '/assets/css/load.css';
+		</script>
+		<script src="./src/lib/generatorIndex.ts" type="module"></script>
+		<script src="./src/lib/dropdown.ts" type="module"></script>
+		<!-- <script src="/dist/index.js" type="module"></script> -->
+		<header class="stack"><h1>Generator</h1></header>
+		<main class="stack">
+			<div id="top" class="cols">
+				<div class="stack">
+					<div>
+						<label> Top Tracks - </label>
+						<ds-select
+							id="top-tracks"
+							placeholderID="track-long-term"
+						>
+							<ds-option value="short_term">Short Term</ds-option>
+							<ds-option value="medium_term"
+								>Medium Term</ds-option
+							>
+							<ds-option value="long_term">Long Term</ds-option>
+						</ds-select>
+					</div>
+
+					<ul id="tracks"></ul>
+				</div>
+				<div class="stack">
+					<div>
+						<label> Top Artists - </label>
+						<ds-select
+							id="top-artists"
+							placeholderID="artist-long-term"
+						>
+							<ds-option value="short_term">Short Term</ds-option>
+							<ds-option value="medium_term"
+								>Medium Term</ds-option
+							>
+							<ds-option value="long_term">Long Term</ds-option>
+						</ds-select>
+					</div>
+
+					<ul id="artists"></ul>
+				</div>
+			</div>
+		</main>
+
+		<footer>WIP</footer>
+	</body>
+</html>
