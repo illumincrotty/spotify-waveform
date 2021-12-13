@@ -53,11 +53,11 @@
 		"cssnano": "^5.0.12",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.3.0",
-		"eslint-plugin-ava": "13",
+		"eslint-plugin-ava": "^13.1.0",
 		"eslint-plugin-jsdoc": "^37.2.0",
 		"eslint-plugin-svelte3": "^3.2.1",
 		"eslint-plugin-unicorn": "^39.0.0",
-		"postcss": "^8.4.4",
+		"postcss": "^8.4.5",
 		"postcss-load-config": "^3.1.0",
 		"postcss-nested": "^5.0.6",
 		"prettier": "^2.5.1",
@@ -68,7 +68,7 @@
 		"svelte-preprocess": "^4.9.8",
 		"ts-node": "^10.4.0",
 		"tslib": "^2.3.1",
-		"typescript": "^4.5.2"
+		"typescript": "^4.5.3"
 	},
 	"ava": {
 		"files": [

@@ -15,7 +15,7 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		target: 'body',
-		paths: { base: dev ? '/wave' : '/spotify-waveform' },
+		paths: { base: dev ? '' : '/spotify-waveform' },
 		appDir: 'internal',
 	},
 	compilerOptions: {},

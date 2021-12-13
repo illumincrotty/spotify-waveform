@@ -13,7 +13,9 @@
 
 	onMount(() => {
 		const authorization = new URLSearchParams(window.location.search);
+		console.log(authorization.get('token'));
 		spotify = new SpotifyConnector(authorization.get('token'));
+		console.log(spotify.head.get('Authorization'));
 		trackPromise = spotify.topTracks({
 			time_range: 'long_term',
 		});
