@@ -4,7 +4,7 @@ import type { ScopesBuilder } from './scopeBuilder';
 import { base } from '$app/paths';
 
 const mode = process.env.NODE_ENV;
-const dev = mode === 'development';
+const development = mode === 'development';
 interface authBase {
 	client_id: string;
 	response_type: string;
@@ -35,7 +35,7 @@ export class AuthService {
 		client_id: '9f38f4f91f784811b42898766ee7211a',
 		response_type: 'token',
 		redirect_uri: `${
-			dev
+			development
 				? `${window.location.protocol}//${
 						window.location.hostname
 				  }${`:${window.location.port}`}`

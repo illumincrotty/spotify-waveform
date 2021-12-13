@@ -1,10 +1,15 @@
 <script lang="ts">
+	const clickHandler = () => {
+		toTop();
+		clicked = true;
+	};
 	const toTop = () => {
 		scrollTo({ top: 0, behavior: 'smooth' });
 	};
+	let clicked = false;
 </script>
 
-<button on:click={toTop} class="svg-button">
+<button on:click={clickHandler} class="svg-button" class:clicked>
 	<svg
 		viewBox="0 0 24 24"
 		xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +25,6 @@
 
 <style>
 	@import './svgButton.postcss';
-
 	button {
 		position: fixed;
 		bottom: 3em;

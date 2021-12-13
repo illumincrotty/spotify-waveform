@@ -12,9 +12,9 @@
 
 	--dark: #262626;
 	--light: #fcddf2;
-	--green: #00a485;
+	--green: rgb(0, 164, 133);
 	--purple: #ab6dff;
-	--red: #f65d5a;
+	--red: rgb(246, 93, 90);
 
 	--t1: var(--green);
 	--t2: #6397ae;

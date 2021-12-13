@@ -27,8 +27,8 @@
 </svelte:head>
 <svelte:window bind:scrollY={y} />
 <svelte:body />
-<header class="stack"><h1>{title}</h1></header>
-<main class="stack" style="--gap:{gap}">
+<header class="stack" id="page-top"><h1>{title}</h1></header>
+<main class="stack" style="--gap:{gap}" id="page-main">
 	<slot>
 		<Swatch />
 		<p id="test-paragraph">
@@ -131,14 +131,21 @@
 			margin-right: auto;
 		}
 	}
-
+	/* 
 	.cols {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
-		justify-content: space-evenly;
+		justify-content: space-around;
 		align-items: baseline;
-	}
+		gap: 1em;
+		/* column-gap: 2em; 
+
+		& > * {
+			flex: 0.5 0.5;
+			min-width: max-content;
+		}
+	} */
 
 	.centered {
 		display: block;

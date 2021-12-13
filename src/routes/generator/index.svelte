@@ -1,21 +1,21 @@
 <script lang="ts">
-	import { SpotifyConnector } from '$lib/api';
+	import { createSpotifyConnection } from '$lib/api';
 	import { fade } from 'svelte/transition';
 	import { cubicInOut } from 'svelte/easing';
 
 	import Dropdown from '$lib/components/dropdown.svelte';
 	import Page from '$lib/components/page.svelte';
 	import { onMount } from 'svelte';
-	let spotify: SpotifyConnector;
+	let spotify: ReturnType<typeof createSpotifyConnection>;
 
 	$: artistPromise = undefined as Promise<SpotifyApi.UsersTopArtistsResponse>;
 	$: trackPromise = undefined as Promise<SpotifyApi.UsersTopTracksResponse>;
 
 	onMount(() => {
 		const authorization = new URLSearchParams(window.location.search);
-		console.log(authorization.get('token'));
-		spotify = new SpotifyConnector(authorization.get('token'));
-		console.log(spotify.head.get('Authorization'));
+		// console.log(authorization.get('token'));
+		spotify = createSpotifyConnection(authorization.get('token'));
+		// console.log(spotify);
 		trackPromise = spotify.topTracks({
 			time_range: 'long_term',
 		});
@@ -25,12 +25,12 @@
 	});
 </script>
 
-<svelte:head><title>Generation</title></svelte:head>
+<svelte:head><title>Top Spotify info</title></svelte:head>
 
 <svelte:body />
-<Page title="Generator">
-	<div id="top" class="cols">
-		<div>
+<Page title="Top Spotify info">
+	<div id="top">
+		<section>
 			<Dropdown
 				name="Top Tracks"
 				id="top-tracks"
@@ -67,8 +67,8 @@
 					<div>Failure</div>
 				{/await}
 			{/if}
-		</div>
-		<div>
+		</section>
+		<section>
 			<Dropdown
 				name="Top Artists"
 				id="top-artists"
@@ -107,12 +107,27 @@
 					<div>Failure</div>
 				{/await}
 			{/if}
-		</div>
+		</section>
 	</div>
 </Page>
 
 <style lang="postcss">
 	li {
 		font-size: 0.8em;
+	}
+	#top {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		gap: 1.5em;
+		justify-content: space-evenly;
+
+		& > * {
+			flex: 1;
+			/* width: clamp(max-content; */
+			min-width: max-content;
+			max-width: 12em;
+		}
+		/* grid-auto-cols: minmax(15rem, auto); */
 	}
 </style>
