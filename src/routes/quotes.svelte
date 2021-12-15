@@ -23,12 +23,10 @@
 
 <svelte:body />
 <Page title="Quotes" gap="4em">
-	<!-- <div class="stack" style="--gap: 5em"> -->
 	{#each { length: x } as _}
 		<SingleQuote />
 	{/each}
 	<div id="add_button">
 		<AddComponent on:click={handleClick} />
 	</div>
-	<!-- </div> -->
 </Page>

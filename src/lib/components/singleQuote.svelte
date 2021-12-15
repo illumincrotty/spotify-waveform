@@ -1,21 +1,6 @@
-<!-- <script lang="ts" context="module">
-	export async function load({ page, fetch, session, stuff }) {
-		const res = await fetch('https://api.quotable.io/random');
-
-		if (res.ok) {
-			return {
-				props: {
-					article: await res.json(),
-				},
-			};
-		}
-
-		return {
-			status: res.status,
-		};
-	}
-</script> -->
 <script lang="ts">
+	import TypewriterComponent from 'svelte-typewriter';
+
 	export const typewriter = true;
 	async function getRandomQuote() {
 		const res = await fetch(`https://api.quotable.io/random`);
@@ -33,38 +18,53 @@
 	// onMount(() => {});
 </script>
 
-<div>
+<template>
 	{#await promise then quote}
-		<figure class="stack" style="--gap:1em">
+		{#if typewriter}
+			<TypewriterComponent cursor="var(--text)" cascade={true}>
+				<blockquote>
+					<p>
+						{quote.content}
+					</p>
+					<p class="author">{quote.author}</p>
+				</blockquote>
+			</TypewriterComponent>
+		{:else}
 			<blockquote>
-				<span
-					class:type={typewriter}
-					style="--n:{quote.content.length}"
-				>
+				<p>
 					{quote.content}
-				</span>
+				</p>
+				<p class="author">{quote.author}</p>
 			</blockquote>
-			<figcaption>- {quote.author}</figcaption>
-		</figure>
+		{/if}
 	{:catch error}
 		<p style="color: red">{error.message}</p>
 	{/await}
-</div>
+</template>
 
-<style>
-	div {
-		padding-left: 0;
-	}
+<style lang="postcss">
 	blockquote {
 		padding: 0;
 		text-align: left;
 	}
-	figcaption {
+	.author {
 		text-align: right;
-		font-style: italic;
+		&::before {
+			content: '- ';
+		}
 	}
 
-	.type {
+	p {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	/* figcaption {
+		text-align: right;
+		font-style: italic;
+	} */
+
+	/* .type {
 		@media (prefers-reduced-motion: no-preference) {
 			font-family: monospace;
 			color: #0000;
@@ -98,5 +98,5 @@
 		50% {
 			background-position: 0 -100%, 0 0;
 		}
-	}
+	} */
 </style>

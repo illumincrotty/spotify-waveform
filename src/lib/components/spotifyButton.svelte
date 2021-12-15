@@ -1,31 +1,68 @@
 <!-- Component logic -->
 <script lang="ts">
-	import { AuthService } from '$lib/auth';
+	import { authorize } from '$lib/authPkce';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { assets, base } from '$app/paths';
+	import { assets } from '$app/paths';
 
-	let authorization;
+	let authorization: Awaited<ReturnType<typeof authorize>>;
+	export let pkce = true;
 
 	onMount(() => {
-		authorization = new AuthService();
+		authorize(pkce).then((auth) => {
+			authorization = auth;
+		});
 	});
 
 	const messageHandler = (event) => {
-		const authParameters = new URLSearchParams(
-			(event.data as string).slice(1)
-		);
-		console.log(...authParameters.entries());
-		if (
-			authParameters.get('state') === authorization.state &&
-			authParameters.get('access_token')
-		) {
-			goto(
-				`${assets}/generator?token=${
-					authParameters.get('access_token') ?? ''
-				}`
-			);
-			// window.location.href =
+		console.log('window message');
+		console.log(event);
+		if (typeof event.data === 'string') {
+			const authParameters = new URLSearchParams(event.data as string);
+			if (pkce) {
+				// PKCE Flow
+				if (authorization.verifyState(authParameters.get('state'))) {
+					authorization
+						.message(authParameters.get('code'))
+						.then((json) => {
+							// Complete Login
+							const token = {
+								access_token: json.access_token,
+								refresh_token: json.refresh_token,
+								expires_at:
+									Date.now() + 1000 * +json.expires_in,
+							};
+							console.log(token);
+							sessionStorage.setItem(
+								'token_set',
+								JSON.stringify(token)
+							);
+							goto(`${assets}/generator`);
+						});
+				} else {
+					console.error('State is not verifiable');
+				}
+			} else {
+				// Implicit Grant Flow
+
+				if (
+					authorization.verifyState(authParameters.get('state')) &&
+					authParameters.get('access_token')
+				) {
+					// console.log(new Date(token.expires_at).toTimeString());
+
+					sessionStorage.setItem(
+						'token_set',
+						JSON.stringify({
+							access_token: authParameters.get('access_token'),
+							expires_at:
+								Date.now() +
+								1000 * +authParameters.get('expires_in'),
+						})
+					);
+					goto(`${assets}/generator`);
+				}
+			}
 		}
 	};
 </script>
@@ -34,8 +71,8 @@
 <!-- Component markup -->
 <button
 	on:click={() => {
-		console.log('click');
-		authorization?.authorize();
+		// console.log('click');
+		authorization.login();
 	}}
 >
 	Login to <svg

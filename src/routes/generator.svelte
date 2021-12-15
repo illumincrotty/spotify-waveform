@@ -6,16 +6,19 @@
 	import Dropdown from '$lib/components/dropdown.svelte';
 	import Page from '$lib/components/page.svelte';
 	import { onMount } from 'svelte';
+	import type { grantToken, pkceToken } from 'tokens';
 	let spotify: ReturnType<typeof createSpotifyConnection>;
 
-	$: artistPromise = undefined as Promise<SpotifyApi.UsersTopArtistsResponse>;
-	$: trackPromise = undefined as Promise<SpotifyApi.UsersTopTracksResponse>;
+	let artistPromise =
+		undefined as Promise<SpotifyApi.UsersTopArtistsResponse>;
+	let trackPromise = undefined as Promise<SpotifyApi.UsersTopTracksResponse>;
 
 	onMount(() => {
-		const authorization = new URLSearchParams(window.location.search);
-		// console.log(authorization.get('token'));
-		spotify = createSpotifyConnection(authorization.get('token'));
-		// console.log(spotify);
+		const token = JSON.parse(sessionStorage.getItem('token_set') ?? '') as
+			| grantToken
+			| pkceToken;
+		spotify = createSpotifyConnection(token);
+
 		trackPromise = spotify.topTracks({
 			time_range: 'long_term',
 		});

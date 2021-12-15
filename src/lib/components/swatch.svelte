@@ -1,11 +1,19 @@
 <script lang="ts">
-	export const boxes = 7;
+	export let names = [
+		'#00A485',
+		'#6397AE',
+		'#8B86D6',
+		'#AB6DFF',
+		'#d166c7',
+		'#e86190',
+		'#F65D5A',
+	];
 </script>
 
 <ul>
-	{#each { length: boxes } as _, index}
-		<li style="background: var(--t{index + 1})">
-			{(index + 1).toLocaleString()}
+	{#each names as color, index}
+		<li style="background: {color}">
+			{names[index].toUpperCase()}
 		</li>
 	{/each}
 </ul>
@@ -26,7 +34,7 @@
 			flex: 2 2;
 
 			/* height: 4em; */
-			min-width: 3em;
+			min-width: min-content;
 			height: 2em;
 			color: var(--dark);
 			text-align: center;

@@ -7,13 +7,14 @@
 	export let options: { label: string; value: string }[];
 	let ignoreBlur = false;
 
-	$: activeIndex = placeHolder
+	let activeIndex = placeHolder
 		? typeof placeHolder === 'string'
 			? -1
 			: placeHolder
 		: 0;
-	$: menuOpen = false;
-	$: highlightIndex = -1;
+	let menuOpen = false;
+	let highlightIndex = -1;
+
 	$: {
 		if (activeIndex >= 0 && activeIndex < options.length)
 			dispatch('change', options[activeIndex]);

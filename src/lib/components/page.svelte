@@ -30,6 +30,7 @@
 <header class="stack" id="page-top"><h1>{title}</h1></header>
 <main class="stack" style="--gap:{gap}" id="page-main">
 	<slot>
+		<h2>Theme</h2>
 		<Swatch />
 		<p id="test-paragraph">
 			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia
@@ -46,15 +47,17 @@
 			nihil.
 		</p>
 	</slot>
-	{#if $$slots['main-2']}
+	{#if $$slots['main-bottom']}
 		<!-- This <hr> and slot will render only if a slot named "description" is provided. -->
-		<slot name="main-2" />
+		<slot name="main-bottom" />
 	{/if}
 	{#if y > 50}
 		<TopButton />
 	{/if}
 </main>
-<footer>WIP</footer>
+<footer>
+	<slot name="footer" />
+</footer>
 
 <style lang="postcss" global>
 	:root {
@@ -101,8 +104,8 @@
 				(var(--font-maximum-size) - var(--font-minimum-size)) *
 				((100vw - 320px) / (1280 - 300))
 		);
-		/* --font-l: calc(var(--font-m) * var(--font-ratio));
-	--font-xl: calc(var(--font-l) * var(--font-ratio)); */
+		/* --font-l: calc(var(--font-m) * var(--font-ratio)); */
+		/* --font-xl: calc(var(--font-l) * var(--font-ratio)); */
 		--font-2xl: calc(
 			var(--font-m) * var(--font-ratio) * var(--font-ratio) *
 				var(--font-ratio)
@@ -122,7 +125,6 @@
 			scroll-behavior: auto;
 		}
 	}
-
 	.stack {
 		& > * {
 			margin-top: var(--gap, 2.25rem);
@@ -131,21 +133,6 @@
 			margin-right: auto;
 		}
 	}
-	/* 
-	.cols {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: space-around;
-		align-items: baseline;
-		gap: 1em;
-		/* column-gap: 2em; 
-
-		& > * {
-			flex: 0.5 0.5;
-			min-width: max-content;
-		}
-	} */
 
 	.centered {
 		display: block;
@@ -198,7 +185,7 @@
 	footer {
 		text-align: center;
 		grid-area: footer;
-		padding-top: 1em;
+		padding-top: 4em;
 		padding-bottom: 1em;
 	}
 
