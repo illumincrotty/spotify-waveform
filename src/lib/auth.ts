@@ -73,7 +73,12 @@ export class AuthService {
 	}
 }
 
-const popupCenter = (url: string, title: string, w: number, h: number) => {
+export const popupCenter = (
+	url: string,
+	title: string,
+	w: number,
+	h: number
+): Window => {
 	// Fixes dual-screen position
 	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 	const dualScreenLeft = window.screenLeft ?? window.screenX;
