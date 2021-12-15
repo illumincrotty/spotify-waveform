@@ -11,7 +11,7 @@
 	"sideEffects": false,
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "svelte-kit dev",
+		"dev": "svelte-kit dev -H",
 		"build": "svelte-kit build",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
@@ -42,7 +42,7 @@
 	],
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",
-		"@sveltejs/adapter-static": "^1.0.0-next.21",
+		"@sveltejs/adapter-static": "^1.0.0-next.22",
 		"@sveltejs/kit": "next",
 		"@types/spotify-api": "^0.0.12",
 		"@typescript-eslint/eslint-plugin": "^4.33.0",
@@ -54,7 +54,7 @@
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-ava": "^13.1.0",
-		"eslint-plugin-jsdoc": "^37.2.0",
+		"eslint-plugin-jsdoc": "^37.2.1",
 		"eslint-plugin-svelte3": "^3.2.1",
 		"eslint-plugin-unicorn": "^39.0.0",
 		"postcss": "^8.4.5",
@@ -63,12 +63,13 @@
 		"prettier": "^2.5.1",
 		"prettier-plugin-svelte": "^2.5.1",
 		"source-map-support": "link:source-map-support",
-		"svelte": "^3.44.2",
+		"svelte": "^3.44.3",
 		"svelte-check": "^2.2.10",
-		"svelte-preprocess": "^4.9.8",
+		"svelte-preprocess": "^4.10.0",
+		"svelte-typewriter": "^3.0.0-alpha.5",
 		"ts-node": "^10.4.0",
 		"tslib": "^2.3.1",
-		"typescript": "^4.5.3"
+		"typescript": "^4.5.4"
 	},
 	"ava": {
 		"files": [
