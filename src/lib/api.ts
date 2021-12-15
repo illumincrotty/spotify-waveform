@@ -1,3 +1,4 @@
+import type { pkceToken, grantToken } from 'tokens';
 type timeOptions = 'long' | 'medium' | 'short';
 
 type query = Record<string, number | string | string[]>;
@@ -68,11 +69,11 @@ type easyFetchOptions<_options extends query> = {
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const createSpotifyConnection = (token: string) => {
-	const head = new Headers([
-		['Authorization', `Bearer ${token}`],
-		['Content-Type', 'application/json'],
-	]);
+const createSpotifyConnection = (token: pkceToken | grantToken) => {
+	console.log(token.access_token);
+	const head = new Headers({
+		Authorization: `Bearer ${token.access_token}`,
+	});
 
 	const easyFetch = async <returnValue, T extends query>(
 		options: easyFetchOptions<T>
