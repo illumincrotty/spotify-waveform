@@ -43,28 +43,29 @@
 			href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap"
 			rel="stylesheet"
 		/> -->
-		<title>Spotify Waveforms</title><link rel="icon" href="/spotify-waveform/favicon.png" data-svelte="svelte-1ten0on"><link rel="icon" href="/spotify-waveform/favicon.svg" type="image/svg+xml" data-svelte="svelte-1ten0on"><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-1ten0on"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-1ten0on"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-1ten0on"><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-4vkv10"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-4vkv10"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-4vkv10">
+		<title>Random Words</title><link rel="icon" href="/spotify-waveform/favicon.png" data-svelte="svelte-1ten0on"><link rel="icon" href="/spotify-waveform/favicon.svg" type="image/svg+xml" data-svelte="svelte-1ten0on"><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-1ten0on"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-1ten0on"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-1ten0on"><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-gzq4ss"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-gzq4ss"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-gzq4ss">
 
 		
 
-		<link rel="modulepreload" href="/spotify-waveform/internal/start-3589b947.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/vendor-4914c756.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/start-b63599ad.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/vendor-1761bc09.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/singletons-12a22614.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/paths-28a87002.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/pages/__layout.svelte-d66e911b.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/header-0ded6b3e.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/pages/words.svelte-3ccc0c5b.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/addComponent-2abee5e3.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/page-c34c918a.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/__layout.svelte-e45c21ed.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/header-8afd9f3d.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/words.svelte-83d52404.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/buttonPlus-10186dcb.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/page-bf6a53fe.js">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/start-464e9d0a.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/vendor-9fae2b11.css">
-		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/__layout.svelte-84e3dd2b.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/__layout.svelte-af2216b9.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/header-301fa98b.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/words.svelte-ff74827c.css">
-		<link rel="stylesheet" href="/spotify-waveform/internal/assets/addComponent-b8b8e26c.css">
-		<link rel="stylesheet" href="/spotify-waveform/internal/assets/page-32ad7fba.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/buttonPlus-68510dad.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/page-728eb58d.css">
 
 		<script type="module">
-			import { start } from "/spotify-waveform/internal/start-3589b947.js";
+			import { start } from "/spotify-waveform/internal/start-b63599ad.js";
 			start({
 				target: document.querySelector("body"),
 				paths: {"base":"/spotify-waveform","assets":""},
@@ -77,8 +78,8 @@
 					status: 200,
 					error: null,
 					nodes: [
-						import("/spotify-waveform/internal/pages/__layout.svelte-d66e911b.js"),
-						import("/spotify-waveform/internal/pages/words.svelte-3ccc0c5b.js")
+						import("/spotify-waveform/internal/pages/__layout.svelte-e45c21ed.js"),
+						import("/spotify-waveform/internal/pages/words.svelte-83d52404.js")
 					],
 					page: {
 						host: location.host, // TODO this is redundant
@@ -98,10 +99,13 @@
 
 
 
-<header id="page-top" role="banner"><nav class="switcher"><div style="flex-grow: 40;"><a href="/spotify-waveform/"><img src="/spotify-waveform/favicon.svg" alt="Logo" style="height: 2rem;"></a></div>
-		<div><a sveltekit:prefetch href="/spotify-waveform/quotes">Random Quote Generator</a>
-			</div><div><a sveltekit:prefetch href="/spotify-waveform/words">Random Word Generator</a>
-			</div></nav></header>
+<header id="page-top" role="banner" class="pad"><nav class="switcher"><div style="flex-grow: 40;" class="svelte-ugrx6r"><a href="/spotify-waveform/" id="link-to-base" class="svelte-ugrx6r"><img src="/spotify-waveform/favicon.svg" alt="Logo" style="height: 2rem;"></a></div>
+		<div class="svelte-ugrx6r"><a sveltekit:prefetch href="/spotify-waveform/quotes">Random Quote Generator</a>
+			</div><div class="svelte-ugrx6r"><a sveltekit:prefetch href="/spotify-waveform/words">Random Word Generator</a>
+			</div>
+		<div class="svelte-ugrx6r"><button class="svgo-button svelte-1egnmyv" aria-expanded="false"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round" class="svelte-1egnmyv"><path d="M13.525 1.212c-3.658-.498-7.33.876-9.734 3.629a10.95 10.95 0 00-2.579 8.684c.578 4.241 3.767 7.85 7.935 8.981.941.256 1.901.386 2.852.386l.154-.001a3.272 3.272 0 002.741-1.553 3.256 3.256 0 00.166-3.136l-.216-.453a2.09 2.09 0 01.102-2.083 2.183 2.183 0 012.806-.822l.449.214a3.24 3.24 0 001.417.326c1.778 0 3.247-1.45 3.274-3.232a10.834 10.834 0 00-.385-3.006c-1.132-4.167-4.741-7.356-8.982-7.934zm5.618 11.882l-.449-.214c-1.991-.956-4.433-.216-5.593 1.627-.804 1.281-.885 2.806-.222 4.185l.217.453c.164.342.144.723-.056 1.047a1.08 1.08 0 01-.919.521h-.122a8.768 8.768 0 01-2.282-.308c-3.336-.905-5.885-3.789-6.346-7.173-.349-2.565.384-5.036 2.062-6.959a8.715 8.715 0 017.799-2.902c3.384.461 6.268 3.011 7.173 6.346a8.68 8.68 0 01.307 2.404c-.013.879-.92 1.288-1.569.973zm-12.045-.005a1.635 1.635 0 11-.001 3.27 1.635 1.635 0 01.001-3.27zm0-4.357a1.635 1.635 0 11-.001 3.27 1.635 1.635 0 01.001-3.27zm7.625-3.267a1.634 1.634 0 110 3.269 1.634 1.634 0 010-3.269zm-4.357 0a1.634 1.634 0 110 3.269 1.634 1.634 0 010-3.269z"></path></svg>
+</button></div></nav>
+</header>
 
 
 
@@ -110,17 +114,17 @@
 
 
 
+<header class="dark contrast svelte-8dgum"><h1 class="stack">Random Words</h1></header>
 
-<h1 class="stack center">Random Words</h1>
-
-<main class="center stack" id="page-main">
+<main class="center stack pad" id="page-main">
 	<ul class="unlist center-i stack">
 		<div id="add_button" class="center svelte-wg20e3"><button class="svg-button" aria-pressed="false"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"></path></svg>
 </button></div></ul>
 
 	
 	</main>
-<footer></footer>
+<footer>
+</footer>
 
 
 
