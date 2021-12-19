@@ -46,7 +46,7 @@
 			href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap"
 			rel="stylesheet"
 		/> -->
-		<title>Spotify Waveforms</title><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-tsnif"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-tsnif"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-tsnif"><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-4vkv10"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-4vkv10"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-4vkv10">
+		<title>Top Spotify info</title><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-tsnif"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-tsnif"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-tsnif"><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-4vkv10"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-4vkv10"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-4vkv10">
 
 		
 
@@ -54,17 +54,19 @@
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/vendor-4914c756.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/singletons-12a22614.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/paths-6758d194.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/pages/__layout.svelte-36be29e3.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/tools/__layout.reset.svelte-732a83fe.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/header-3bfe29bb.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/pages/quotes.svelte-01ea86de.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/addComponent-2abee5e3.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/tools/generator.svelte-d6957f9f.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/spotifyButton-ca66dc93.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/page-c34c918a.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/overlayLoading-7a4a8709.js">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/start-464e9d0a.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/vendor-9fae2b11.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/__layout.svelte-84e3dd2b.css">
-		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/quotes.svelte-b47ed070.css">
-		<link rel="stylesheet" href="/spotify-waveform/internal/assets/addComponent-b8b8e26c.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/tools/generator.svelte-43ff3e17.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/spotifyButton-743fc6b8.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/page-32ad7fba.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/overlayLoading-45eab857.css">
 
 		<script type="module">
 			import { start } from "/spotify-waveform/internal/start-0a224dde.js";
@@ -80,12 +82,12 @@
 					status: 200,
 					error: null,
 					nodes: [
-						import("/spotify-waveform/internal/pages/__layout.svelte-36be29e3.js"),
-						import("/spotify-waveform/internal/pages/quotes.svelte-01ea86de.js")
+						import("/spotify-waveform/internal/pages/tools/__layout.reset.svelte-732a83fe.js"),
+						import("/spotify-waveform/internal/pages/tools/generator.svelte-d6957f9f.js")
 					],
 					page: {
 						host: location.host, // TODO this is redundant
-						path: "\u002Fquotes",
+						path: "\u002Ftools\u002Fgenerator",
 						query: new URLSearchParams(""),
 						params: {}
 					}
@@ -102,20 +104,17 @@
 
 
 <header id="page-top" role="banner"><nav class="switcher"><div style="flex-grow: 40;"><a href="/"><img src="/spotify-waveform/favicon.svg" alt="Logo" style="height: 2rem;"></a></div>
-		<div><a href="/quotes">Random Quote Generator</a>
-			</div><div><a href="/words">Random Word Generator</a>
+		<div><a href="/tools/generator">Top Data</a>
 			</div></nav></header>
 
 
 
 
 
+<h1 class="stack center">Top Spotify Info</h1>
 
-<h1 class="stack center">Quotes</h1>
-
-<main class="center stack" id="page-main">
-	<div id="add_button"><button class="svg-button" aria-pressed="false"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"></path></svg>
-</button></div>
+<main class="center stack" id="page-main"><div class="overlay svelte-jk6jwt"><section class="svelte-p9jnso"><div><svg xmlns="http://www.w3.org/2000/svg" class="loader svelte-i5s187" viewBox="0 0 20 20" style="margin: calc(-.5*5rem 0 0 calc(-.5*5rem; width: 5rem; height: 5rem;"><circle cx="2" cy="10" r="2" style="animation-delay: calc( var(--delay) * 0); transform-origin: center;" class="svelte-i5s187"></circle><circle cx="10" cy="10" r="2" style="animation-delay: calc( var(--delay) * 1); transform-origin: center;" class="svelte-i5s187"></circle><circle cx="18" cy="10" r="2" style="animation-delay: calc( var(--delay) * 2); transform-origin: center;" class="svelte-i5s187"></circle></svg></div></section>
+	</div>
 	</main>
 <footer></footer>
 

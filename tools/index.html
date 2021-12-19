@@ -46,7 +46,7 @@
 			href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap"
 			rel="stylesheet"
 		/> -->
-		<title>Spotify Waveforms</title><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-tsnif"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-tsnif"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-tsnif"><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-4vkv10"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-4vkv10"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-4vkv10">
+		<link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-tsnif"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-tsnif"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-tsnif"><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-4vkv10"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-4vkv10"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-4vkv10">
 
 		
 
@@ -54,16 +54,13 @@
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/vendor-4914c756.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/singletons-12a22614.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/paths-6758d194.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/pages/__layout.svelte-36be29e3.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/tools/__layout.reset.svelte-732a83fe.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/header-3bfe29bb.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/pages/quotes.svelte-01ea86de.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/addComponent-2abee5e3.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/tools/index.svelte-881bda29.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/page-c34c918a.js">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/start-464e9d0a.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/vendor-9fae2b11.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/__layout.svelte-84e3dd2b.css">
-		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/quotes.svelte-b47ed070.css">
-		<link rel="stylesheet" href="/spotify-waveform/internal/assets/addComponent-b8b8e26c.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/page-32ad7fba.css">
 
 		<script type="module">
@@ -80,12 +77,12 @@
 					status: 200,
 					error: null,
 					nodes: [
-						import("/spotify-waveform/internal/pages/__layout.svelte-36be29e3.js"),
-						import("/spotify-waveform/internal/pages/quotes.svelte-01ea86de.js")
+						import("/spotify-waveform/internal/pages/tools/__layout.reset.svelte-732a83fe.js"),
+						import("/spotify-waveform/internal/pages/tools/index.svelte-881bda29.js")
 					],
 					page: {
 						host: location.host, // TODO this is redundant
-						path: "\u002Fquotes",
+						path: "\u002Ftools",
 						query: new URLSearchParams(""),
 						params: {}
 					}
@@ -102,20 +99,38 @@
 
 
 <header id="page-top" role="banner"><nav class="switcher"><div style="flex-grow: 40;"><a href="/"><img src="/spotify-waveform/favicon.svg" alt="Logo" style="height: 2rem;"></a></div>
-		<div><a href="/quotes">Random Quote Generator</a>
-			</div><div><a href="/words">Random Word Generator</a>
+		<div><a href="/tools/generator">Top Data</a>
 			</div></nav></header>
 
 
 
-
-
-
-<h1 class="stack center">Quotes</h1>
+<h1 class="stack center">Tools</h1>
 
 <main class="center stack" id="page-main">
-	<div id="add_button"><button class="svg-button" aria-pressed="false"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"></path></svg>
-</button></div>
+		<h2>Theme Colors</h2>
+		<ul class="unlist switcher pad svelte-kgrbcy"><li class="pad dark svelte-kgrbcy" style="--bg: #00A485;">#00A485
+		</li><li class="pad dark svelte-kgrbcy" style="--bg: #6397AE;">#6397AE
+		</li><li class="pad dark svelte-kgrbcy" style="--bg: #8B86D6;">#8B86D6
+		</li><li class="pad dark svelte-kgrbcy" style="--bg: #AB6DFF;">#AB6DFF
+		</li><li class="pad dark svelte-kgrbcy" style="--bg: #d166c7;">#D166C7
+		</li><li class="pad dark svelte-kgrbcy" style="--bg: #e86190;">#E86190
+		</li><li class="pad dark svelte-kgrbcy" style="--bg: #F65D5A;">#F65D5A
+		</li>
+</ul>
+		<p class="box">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia
+			voluptas maiores dicta exercitationem nihil quae enim similique
+			porro esse corporis rem quisquam, illum quaerat alias tenetur illo
+			vitae dignissimos natus nobis quasi ipsa eum eveniet repellendus
+			suscipit. Quam aspernatur voluptate minus vitae temporibus animi
+			eius soluta doloremque earum quae ea molestiae, quia quod inventore,
+			dolorem facere asperiores quis ipsam odit? Quas atque esse libero
+			doloribus nobis vel quo id itaque, dignissimos nam suscipit deleniti
+			magni ratione repellendus beatae repudiandae. Optio odio eveniet
+			provident ab iste vitae illum illo exercitationem maxime impedit
+			debitis porro assumenda, magnam fugiat molestiae necessitatibus quas
+			nihil.
+		</p>
+	
 	</main>
 <footer></footer>
 

@@ -27,9 +27,8 @@
 		<!--<meta property="og:url" content="replace_url" />-->
 		<!--<link rel="canonical" href="replace_url" />-->
 
-		<!-- TODO: add favicon -->
-		<link rel="icon" href="favicon.png" />
-		<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+		<link rel="icon" href="/favicon.png" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
 		<!-- TODO: add theme color -->
 		<!--<meta name="theme-color" content="replace_theme_color" />-->
@@ -47,20 +46,23 @@
 			href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap"
 			rel="stylesheet"
 		/> -->
-		<title>Authorization</title>
+		<title>Authorization</title><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-tsnif"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-tsnif"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-tsnif">
 
 		
 
-		<link rel="modulepreload" href="/spotify-waveform/internal/start-ee35ef58.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/vendor-4aa6259f.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/paths-e7257673.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/layout.svelte-17abcd8e.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/pages/authorized.svelte-b1379449.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/start-0a224dde.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/vendor-4914c756.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/singletons-12a22614.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/paths-6758d194.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/__layout.svelte-36be29e3.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/header-3bfe29bb.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/authorized.svelte-db3e9309.js">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/start-464e9d0a.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/vendor-9fae2b11.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/__layout.svelte-84e3dd2b.css">
 
 		<script type="module">
-			import { start } from "/spotify-waveform/internal/start-ee35ef58.js";
+			import { start } from "/spotify-waveform/internal/start-0a224dde.js";
 			start({
 				target: document.querySelector("body"),
 				paths: {"base":"/spotify-waveform","assets":""},
@@ -73,8 +75,8 @@
 					status: 200,
 					error: null,
 					nodes: [
-						import("/spotify-waveform/internal/layout.svelte-17abcd8e.js"),
-						import("/spotify-waveform/internal/pages/authorized.svelte-b1379449.js")
+						import("/spotify-waveform/internal/pages/__layout.svelte-36be29e3.js"),
+						import("/spotify-waveform/internal/pages/authorized.svelte-db3e9309.js")
 					],
 					page: {
 						host: location.host, // TODO this is redundant
@@ -87,10 +89,17 @@
 		</script>
 	</head>
 
-	<body>
+	<body class="stack">
 		
 
 
+
+
+
+<header id="page-top" role="banner"><nav class="switcher"><div style="flex-grow: 40;"><a href="/"><img src="/spotify-waveform/favicon.svg" alt="Logo" style="height: 2rem;"></a></div>
+		<div><a href="/quotes">Random Quote Generator</a>
+			</div><div><a href="/words">Random Word Generator</a>
+			</div></nav></header>
 
 
 <h1>Approved</h1>

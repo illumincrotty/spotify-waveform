@@ -56,14 +56,13 @@
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/paths-6758d194.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/pages/__layout.svelte-36be29e3.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/header-3bfe29bb.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/pages/quotes.svelte-01ea86de.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/addComponent-2abee5e3.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/loading.svelte-5b234a0b.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/overlayLoading-7a4a8709.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/page-c34c918a.js">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/start-464e9d0a.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/vendor-9fae2b11.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/__layout.svelte-84e3dd2b.css">
-		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/quotes.svelte-b47ed070.css">
-		<link rel="stylesheet" href="/spotify-waveform/internal/assets/addComponent-b8b8e26c.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/overlayLoading-45eab857.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/page-32ad7fba.css">
 
 		<script type="module">
@@ -81,11 +80,11 @@
 					error: null,
 					nodes: [
 						import("/spotify-waveform/internal/pages/__layout.svelte-36be29e3.js"),
-						import("/spotify-waveform/internal/pages/quotes.svelte-01ea86de.js")
+						import("/spotify-waveform/internal/pages/loading.svelte-5b234a0b.js")
 					],
 					page: {
 						host: location.host, // TODO this is redundant
-						path: "\u002Fquotes",
+						path: "\u002Floading",
 						query: new URLSearchParams(""),
 						params: {}
 					}
@@ -111,13 +110,13 @@
 
 
 
-<h1 class="stack center">Quotes</h1>
+<h1 class="stack center">Loading</h1>
 
-<main class="center stack" id="page-main">
-	<div id="add_button"><button class="svg-button" aria-pressed="false"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"></path></svg>
-</button></div>
+<main class="center stack" id="page-main"><div class="overlay svelte-jk6jwt"><section class="svelte-p9jnso"><div><svg xmlns="http://www.w3.org/2000/svg" class="loader svelte-i5s187" viewBox="0 0 20 20" style="margin: calc(-.5*5rem 0 0 calc(-.5*5rem; width: 5rem; height: 5rem;"><circle cx="2" cy="10" r="2" style="animation-delay: calc( var(--delay) * 0); transform-origin: center;" class="svelte-i5s187"></circle><circle cx="10" cy="10" r="2" style="animation-delay: calc( var(--delay) * 1); transform-origin: center;" class="svelte-i5s187"></circle><circle cx="18" cy="10" r="2" style="animation-delay: calc( var(--delay) * 2); transform-origin: center;" class="svelte-i5s187"></circle></svg></div></section>
+	</div>
+	
 	</main>
-<footer></footer>
+<footer><div slot="footer"></div></footer>
 
 
 

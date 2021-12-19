@@ -27,9 +27,8 @@
 		<!--<meta property="og:url" content="replace_url" />-->
 		<!--<link rel="canonical" href="replace_url" />-->
 
-		<!-- TODO: add favicon -->
-		<link rel="icon" href="favicon.png" />
-		<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+		<link rel="icon" href="/favicon.png" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
 		<!-- TODO: add theme color -->
 		<!--<meta name="theme-color" content="replace_theme_color" />-->
@@ -47,23 +46,27 @@
 			href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap"
 			rel="stylesheet"
 		/> -->
-		<title>Spotify Waveforms</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modern-normalize@1.1.0/modern-normalize.min.css" data-svelte="svelte-1u8eazs"><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-1u8eazs"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-1u8eazs"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-1u8eazs">
+		<title>Spotify Waveforms</title><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-tsnif"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-tsnif"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-tsnif"><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-4vkv10"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-4vkv10"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-4vkv10">
 
 		
 
-		<link rel="modulepreload" href="/spotify-waveform/internal/start-ee35ef58.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/vendor-4aa6259f.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/paths-e7257673.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/layout.svelte-17abcd8e.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/pages/index.svelte-503ff991.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/page-676603f4.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/start-0a224dde.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/vendor-4914c756.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/singletons-12a22614.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/paths-6758d194.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/__layout.svelte-36be29e3.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/header-3bfe29bb.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/index.svelte-8943b650.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/page-c34c918a.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/spotifyButton-ca66dc93.js">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/start-464e9d0a.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/vendor-9fae2b11.css">
-		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/index.svelte-1eb44409.css">
-		<link rel="stylesheet" href="/spotify-waveform/internal/assets/page-c5ed1274.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/__layout.svelte-84e3dd2b.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/page-32ad7fba.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/spotifyButton-743fc6b8.css">
 
 		<script type="module">
-			import { start } from "/spotify-waveform/internal/start-ee35ef58.js";
+			import { start } from "/spotify-waveform/internal/start-0a224dde.js";
 			start({
 				target: document.querySelector("body"),
 				paths: {"base":"/spotify-waveform","assets":""},
@@ -76,8 +79,8 @@
 					status: 200,
 					error: null,
 					nodes: [
-						import("/spotify-waveform/internal/layout.svelte-17abcd8e.js"),
-						import("/spotify-waveform/internal/pages/index.svelte-503ff991.js")
+						import("/spotify-waveform/internal/pages/__layout.svelte-36be29e3.js"),
+						import("/spotify-waveform/internal/pages/index.svelte-8943b650.js")
 					],
 					page: {
 						host: location.host, // TODO this is redundant
@@ -90,42 +93,49 @@
 		</script>
 	</head>
 
-	<body>
+	<body class="stack">
 		
 
 
 
 
 
+<header id="page-top" role="banner"><nav class="switcher"><div style="flex-grow: 40;"><a href="/"><img src="/spotify-waveform/favicon.svg" alt="Logo" style="height: 2rem;"></a></div>
+		<div><a href="/quotes">Random Quote Generator</a>
+			</div><div><a href="/words">Random Word Generator</a>
+			</div></nav></header>
 
 
 
-<header class="stack" id="page-top"><h1>Spotify Data</h1></header>
-<main class="stack" style="--gap:" id="page-main"><div><h2>Theme:</h2>
-		<ul class="svelte-cz7lts"><li style="background: #00A485" class="svelte-cz7lts">#00A485
-		</li><li style="background: #6397AE" class="svelte-cz7lts">#6397AE
-		</li><li style="background: #8B86D6" class="svelte-cz7lts">#8B86D6
-		</li><li style="background: #AB6DFF" class="svelte-cz7lts">#AB6DFF
-		</li><li style="background: #d166c7" class="svelte-cz7lts">#D166C7
-		</li><li style="background: #e86190" class="svelte-cz7lts">#E86190
-		</li><li style="background: #F65D5A" class="svelte-cz7lts">#F65D5A
+
+
+<h1 class="stack center">Spotify Data</h1>
+
+<main class="center stack" id="page-main"><h2>Theme:</h2>
+	<ul class="unlist switcher pad svelte-kgrbcy"><li class="pad dark svelte-kgrbcy" style="--bg: #00A485;">#00A485
+		</li><li class="pad dark svelte-kgrbcy" style="--bg: #6397AE;">#6397AE
+		</li><li class="pad dark svelte-kgrbcy" style="--bg: #8B86D6;">#8B86D6
+		</li><li class="pad dark svelte-kgrbcy" style="--bg: #AB6DFF;">#AB6DFF
+		</li><li class="pad dark svelte-kgrbcy" style="--bg: #d166c7;">#D166C7
+		</li><li class="pad dark svelte-kgrbcy" style="--bg: #e86190;">#E86190
+		</li><li class="pad dark svelte-kgrbcy" style="--bg: #F65D5A;">#F65D5A
 		</li>
 </ul>
-		<p class="centered">A simple tool to generate artwork based off spotify tracks. Lorem
-			ipsum dolor sit amet consectetur adipisicing elit. Asperiores, non
-			praesentium minus consequatur, commodi iste tempora laborum eos nisi
-			eveniet officiis ab doloribus error in, soluta neque. Totam, nihil
-			enim. Mollitia, nobis quis hic ut eaque fugiat animi repellat saepe
-			officiis, quidem officia repudiandae corporis non numquam tempore.
-			Et quam repudiandae laudantium reiciendis nihil a, numquam inventore
-			error aspernatur recusandae voluptas ratione consequatur dolores ab
-			soluta sit tempore, quasi vel amet maiores labore odio? Itaque
-			delectus sequi aliquam eius quibusdam libero porro molestiae nihil
-			repellendus, est voluptate, officia blanditiis recusandae aliquid
-			eaque fuga ipsa consequatur hic iure numquam sapiente tempore.
-		</p></div>
+	<p class="centered">A simple tool to generate artwork based off spotify tracks. Lorem ipsum
+		dolor sit amet consectetur adipisicing elit. Asperiores, non praesentium
+		minus consequatur, commodi iste tempora laborum eos nisi eveniet
+		officiis ab doloribus error in, soluta neque. Totam, nihil enim.
+		Mollitia, nobis quis hic ut eaque fugiat animi repellat saepe officiis,
+		quidem officia repudiandae corporis non numquam tempore. Et quam
+		repudiandae laudantium reiciendis nihil a, numquam inventore error
+		aspernatur recusandae voluptas ratione consequatur dolores ab soluta sit
+		tempore, quasi vel amet maiores labore odio? Itaque delectus sequi
+		aliquam eius quibusdam libero porro molestiae nihil repellendus, est
+		voluptate, officia blanditiis recusandae aliquid eaque fuga ipsa
+		consequatur hic iure numquam sapiente tempore.
+	</p>
+
 	
-		
 
 
 
@@ -134,8 +144,7 @@
 
 
 	</main>
-<footer><div slot="footer"></div>
-</footer>
+<footer></footer>
 
 
 
