@@ -1,5 +1,5 @@
 <script lang="ts">
-	import TopButton from '$lib/components/toTop.svelte';
+	import TopButton from '$lib/components/buttonToTop.svelte';
 	import Swatch from './swatch.svelte';
 	export let title = 'Placeholder';
 	let normalize: HTMLLinkElement;
@@ -21,12 +21,14 @@
 		href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap"
 		rel="stylesheet"
 	/>
+	<title>{title}</title>
 </svelte:head>
 <svelte:window bind:scrollY={y} />
+<header class="dark contrast">
+	<h1 class="stack">{title}</h1>
+</header>
 
-<h1 class="stack center">{title}</h1>
-
-<main class="center stack" id="page-main">
+<main class="center stack pad" id="page-main">
 	<slot>
 		<h2>Theme Colors</h2>
 		<Swatch />
@@ -52,3 +54,9 @@
 <footer>
 	<slot name="footer" />
 </footer>
+
+<style>
+	header {
+		padding: 2ch;
+	}
+</style>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import AddComponent from '$lib/components/addComponent.svelte';
+	import AddComponent from '$lib/components/buttonPlus.svelte';
 	import Page from '$lib/components/page.svelte';
 	import SingleQuote from '$lib/components/singleQuote.svelte';
 	import { onMount } from 'svelte';
@@ -22,7 +22,7 @@
 <svelte:head><title>Spotify Waveforms</title></svelte:head>
 
 <svelte:body />
-<Page title="Quotes" gap="4em">
+<Page title="Quotes">
 	{#each { length: x } as _}
 		<SingleQuote />
 	{/each}

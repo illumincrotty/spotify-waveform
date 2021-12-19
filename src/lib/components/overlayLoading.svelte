@@ -6,7 +6,7 @@
 	import LoadingSpinner from './loadingSpinner.svelte';
 	import Overlay from './overlay.svelte';
 
-	export let symbol: 'spinner' | 'boxes' | 'dots' = 'dots';
+	export let symbol: 'spinner' | 'boxes' | 'dots' = 'spinner';
 </script>
 
 <Overlay>
@@ -28,14 +28,15 @@
 
 <style lang="postcss">
 	section {
+		background-color: unset;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		height: 100%;
 		text-align: center;
-		color: var(--t1);
-		fill: var(--t1);
+		color: var(--theme);
+		/* fill: ; */
 		p::after {
 			content: '...';
 		}

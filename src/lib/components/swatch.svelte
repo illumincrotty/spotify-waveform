@@ -1,13 +1,5 @@
 <script lang="ts">
-	export let names = [
-		'#00A485',
-		'#6397AE',
-		'#8B86D6',
-		'#AB6DFF',
-		'#d166c7',
-		'#e86190',
-		'#F65D5A',
-	];
+	export let names = ['#83c5be', '#ffa1dd', '#ce8964', '#5497a7'];
 </script>
 
 <ul class="unlist switcher pad">

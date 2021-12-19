@@ -1,6 +1,6 @@
 <!-- https://random-word-api.herokuapp.com/word?number=10 -->
 <script lang="ts">
-	import AddComponent from '$lib/components/addComponent.svelte';
+	import AddComponent from '$lib/components/buttonPlus.svelte';
 	import Page from '$lib/components/page.svelte';
 	import { onMount } from 'svelte';
 	import { getRandomWord } from '$lib/getRandomWord';
