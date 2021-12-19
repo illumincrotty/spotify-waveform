@@ -51,11 +51,8 @@
 <Page title="Top Spotify Info">
 	{#if mounted}
 		{#if spotify}
-			<div class="box switcher" style="--gap: 5ch">
-				<section
-					class="stack center-i"
-					style="align-items: flex-start;"
-				>
+			<div class="box flexy" style="--gap: 2ch">
+				<section class="stack" style="align-items: flex-start;">
 					<Dropdown
 						name="Top Tracks"
 						id="top-tracks"
@@ -95,10 +92,7 @@
 						{/await}
 					{/if}
 				</section>
-				<section
-					class="stack center-i"
-					style="align-items: flex-start;"
-				>
+				<section class="stack " style="align-items: flex-start;">
 					<Dropdown
 						name="Top Artists"
 						id="top-artists"
@@ -155,19 +149,11 @@
 		font-size: 0.8em;
 		white-space: nowrap;
 	}
-	/* #top {
+	.flexy {
 		display: flex;
-		flex-wrap: wrap;
 		flex-direction: row;
-		gap: 1.5em;
+		flex-wrap: wrap;
+		gap: var(--gap);
 		justify-content: space-evenly;
-
-		& > * {
-			flex: 1;
-			width: clamp(max-content;
-			min-width: max-content;
-			max-width: 12em;
-		}
-		grid-auto-cols: minmax(15rem, auto);
-	} */
+	}
 </style>

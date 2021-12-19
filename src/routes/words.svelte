@@ -30,27 +30,24 @@
 <svelte:head><title>Spotify Waveforms</title></svelte:head>
 
 <svelte:body />
-<Page title="Random Words" gap="4em">
+<Page title="Random Words">
 	<!-- <div class="stack" style="--gap: 5em"> -->
-	<ul class="centered">
+	<ul class="unlist center-i stack">
 		{#each words as word}
 			<li>
 				{word}
 			</li>
 		{/each}
+		<div id="add_button" class="center">
+			<AddComponent on:click={handleClick} />
+		</div>
 	</ul>
 
-	<div id="add_button">
-		<AddComponent on:click={handleClick} />
-	</div>
 	<!-- </div> -->
 </Page>
 
 <style lang="postcss">
-	ul {
-		width: fit-content;
-		& > li {
-			width: min-content;
-		}
+	#add_button {
+		margin-top: 2ch;
 	}
 </style>
