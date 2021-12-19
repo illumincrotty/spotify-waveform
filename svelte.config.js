@@ -1,6 +1,5 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
-import fs from 'node:fs';
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 
@@ -15,11 +14,13 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		target: 'body',
-		paths: { base: dev ? '' : '/spotify-waveform' },
+		paths: {
+			base: dev ? '' : '/spotify-waveform',
+		},
+
 		appDir: 'internal',
 		vite: {},
 	},
-	compilerOptions: {},
 };
 
 export default config;

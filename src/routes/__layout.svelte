@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { base } from '$app/paths';
+
 	import Header from '$lib/components/header.svelte';
 	export const title = 'Example';
 	let normalize: HTMLLinkElement;
@@ -9,6 +11,8 @@
 </script>
 
 <svelte:head>
+	<link rel="icon" href="{base}/favicon.png" />
+	<link rel="icon" href="{base}/favicon.svg" type="image/svg+xml" />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
 	<link
@@ -20,8 +24,8 @@
 
 <Header
 	links={[
-		{ href: '/quotes', label: 'Random Quote Generator' },
-		{ href: '/words', label: 'Random Word Generator' },
+		{ href: 'quotes', label: 'Random Quote Generator' },
+		{ href: 'words', label: 'Random Word Generator' },
 	]}
 />
 <slot>

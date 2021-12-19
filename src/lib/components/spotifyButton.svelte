@@ -3,10 +3,10 @@
 	import { authorize } from '$lib/authentication';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { assets } from '$app/paths';
+	import { base } from '$app/paths';
 
 	let authorization: Awaited<ReturnType<typeof authorize>>;
-	export let url = `${assets}/tools`;
+	export let url = `${base}/tools`;
 
 	onMount(() => {
 		authorize().then((auth) => {

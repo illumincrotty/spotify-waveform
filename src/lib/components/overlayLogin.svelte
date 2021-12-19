@@ -1,8 +1,7 @@
 <script lang="ts">
 	import SpotifyButton from './spotifyButton.svelte';
 	import Overlay from './overlay.svelte';
-	import { assets } from '$app/paths';
-	export let url = `${assets}/generator`;
+	export let url = `tools/generator/`;
 </script>
 
 <template>

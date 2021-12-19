@@ -2,7 +2,7 @@
 	import { createSpotifyConnection } from '$lib/api';
 	import { fade } from 'svelte/transition';
 	import { cubicInOut } from 'svelte/easing';
-	import { assets } from '$app/paths';
+	import { assets, base } from '$app/paths';
 	import { onMount } from 'svelte';
 
 	import type { pkceToken } from 'tokens';
@@ -75,11 +75,14 @@
 							<ul class="unlist">
 								{#each tracks.items as track}
 									<li>
-										<a href={track.external_urls.spotify}
+										<a
+											rel="external"
+											href={track.external_urls.spotify}
 											>{track.name}</a
 										>
 										by
 										<a
+											rel="external"
 											href={track.artists[0].external_urls
 												.spotify}
 											>{track.artists[0].name}</a
@@ -121,7 +124,9 @@
 											easing: cubicInOut,
 										}}
 									>
-										<a href={artist.external_urls.spotify}
+										<a
+											rel="external"
+											href={artist.external_urls.spotify}
 											>{artist.name}</a
 										>
 									</li>
@@ -134,7 +139,7 @@
 				</section>
 			</div>
 		{:else}
-			<OverlayLogin url={`${assets}/generator`} />
+			<OverlayLogin url={`tools/generator/`} />
 		{/if}
 	{:else}
 		<OverlayLoading />
