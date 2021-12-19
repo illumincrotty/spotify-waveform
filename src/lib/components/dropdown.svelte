@@ -86,30 +86,31 @@
 </script>
 
 <template>
-	<label for={id} id="{id}-label" class="ds-label"> {name} - </label>
-	<div
-		class="ds-main ds-select"
-		{id}
-		on:click|stopPropagation|preventDefault={() => {
-			highlightIndex = -1;
-			menuOpen = !menuOpen;
-		}}
-		on:blur|capture|preventDefault|stopPropagation={onBlur}
-		on:keydown={onKeyDown}
-		class:open={menuOpen}
-	>
-		<span
-			aria-controls="listbox"
-			aria-haspopup="listbox"
-			role="combobox"
-			tabindex="0"
-			class="ds-input"
-			aria-activedescendant="{id}-option-{highlightIndex >= 0
-				? highlightIndex
-				: activeIndex}"
+	<div>
+		<label for={id} id="{id}-label" class="ds-label"> {name} - </label>
+		<div
+			class="ds-main ds-select"
+			{id}
+			on:click|stopPropagation|preventDefault={() => {
+				highlightIndex = -1;
+				menuOpen = !menuOpen;
+			}}
+			on:blur|capture|preventDefault|stopPropagation={onBlur}
+			on:keydown={onKeyDown}
+			class:open={menuOpen}
 		>
-			{activeIndex !== -1 ? options[activeIndex].label : placeHolder}
-			<!-- <svg
+			<span
+				aria-controls="listbox"
+				aria-haspopup="listbox"
+				role="combobox"
+				tabindex="0"
+				class="ds-input"
+				aria-activedescendant="{id}-option-{highlightIndex >= 0
+					? highlightIndex
+					: activeIndex}"
+			>
+				{activeIndex !== -1 ? options[activeIndex].label : placeHolder}
+				<!-- <svg
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 448 512"
 			class="svelte-c8tyih"
@@ -117,38 +118,39 @@
 				d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"
 			/></svg
 		> -->
-		</span>
-		<div
-			role="listbox"
-			tabindex="-1"
-			class="ds-menu"
-			class:open={menuOpen}
-			id="{id}-menu"
-			aria-expanded={menuOpen}
-			on:mousedown={() => {
-				ignoreBlur = true;
-			}}
-			on:mouseup={() => {
-				ignoreBlur = false;
-			}}
-		>
-			{#each options as option, index}
-				<div
-					value={option.value}
-					aria-selected="true"
-					role="option"
-					class="ds-option"
-					class:option-current={highlightIndex === index}
-					id="{id}-option-{index}"
-					on:click={() => {
-						if (activeIndex !== index) {
-							activeIndex = index;
-						}
-					}}
-				>
-					{option.label}
-				</div>
-			{/each}
+			</span>
+			<div
+				role="listbox"
+				tabindex="-1"
+				class="ds-menu"
+				class:open={menuOpen}
+				id="{id}-menu"
+				aria-expanded={menuOpen}
+				on:mousedown={() => {
+					ignoreBlur = true;
+				}}
+				on:mouseup={() => {
+					ignoreBlur = false;
+				}}
+			>
+				{#each options as option, index}
+					<div
+						value={option.value}
+						aria-selected="true"
+						role="option"
+						class="ds-option"
+						class:option-current={highlightIndex === index}
+						id="{id}-option-{index}"
+						on:click={() => {
+							if (activeIndex !== index) {
+								activeIndex = index;
+							}
+						}}
+					>
+						{option.label}
+					</div>
+				{/each}
+			</div>
 		</div>
 	</div>
 </template>

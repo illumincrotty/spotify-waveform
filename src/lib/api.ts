@@ -1,4 +1,4 @@
-import type { pkceToken, grantToken } from 'tokens';
+import type { pkceToken } from 'tokens';
 type timeOptions = 'long' | 'medium' | 'short';
 
 type query = Record<string, number | string | string[]>;
@@ -57,11 +57,6 @@ const queryStringify = <T extends query>(options?: T) => {
 
 const BASE_URL = 'https://api.spotify.com/v1';
 
-// const users = {
-// 	me: async (): Promise<SpotifyApi.CurrentUsersProfileResponse> =>
-// 		easyFetch('/me'),
-// };
-
 type easyFetchOptions<_options extends query> = {
 	route: string;
 	options?: _options;
@@ -69,8 +64,7 @@ type easyFetchOptions<_options extends query> = {
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const createSpotifyConnection = (token: pkceToken | grantToken) => {
-	console.log(token.access_token);
+const createSpotifyConnection = (token: pkceToken) => {
 	const head = new Headers({
 		Authorization: `Bearer ${token.access_token}`,
 	});

@@ -34,5 +34,5 @@
 		"src/**/*.ts",
 		"src/**/*.svelte"
 	],
-	"exclude": ["node_modules"]
+	"exclude": ["node_modules", ".storage/dropdown.ts"]
 }

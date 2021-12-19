@@ -8,7 +8,6 @@ declare module 'svelte-typewriter' {
 		loopRandom: boolean | number;
 		cursor: boolean | string;
 		delay: number;
-		dispatch: (type: string, detail?: any) => void;
 	}
 
 	export default class TypewriterElement extends SvelteComponentTyped<
@@ -17,10 +16,6 @@ declare module 'svelte-typewriter' {
 }
 
 declare module 'tokens' {
-	export type grantToken = {
-		access_token: string;
-		expires_at: number;
-	};
 	export type pkceToken = {
 		access_token: string;
 		expires_at: number;

@@ -1,0 +1,109 @@
+:root {
+	--measure: 70ch;
+	--padding: 1ch;
+}
+
+.pad {
+	padding: var(--padding);
+}
+
+/* Box
+  -----------------------------------------------------------------------*/
+.box {
+	display: block;
+	padding: var(--padding);
+	border-width: var(--border-thick);
+	border: var(--border-thick) solid;
+}
+
+/* The Stack
+-----------------------------------------------------------------------*/
+.stack {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	--gap: 1.5rem;
+	& > * + * {
+		margin-top: var(--gap);
+	}
+}
+
+/* The Center
+-----------------------------------------------------------------------*/
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: var(--measure);
+
+	/* ↓ Gutters (i.e. 1em) */
+	/* padding-left: 1em;
+    padding-right: 1em; */
+}
+
+.center-i {
+	display: flex;
+
+	/* max-width: var(--measure); */
+	margin-left: auto;
+	margin-right: auto;
+
+	flex-direction: column;
+	align-items: center;
+}
+
+/* The Cluster
+-----------------------------------------------------------------------*/
+.cluster {
+	--gap: 1rem;
+	overflow: hidden;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
+	gap: var(--gap);
+}
+
+/* The Sidebar
+-----------------------------------------------------------------------*/
+
+/* ↓ targets the intermediary wrapper */
+
+.sidebar {
+	overflow: hidden;
+	--gap: 1em;
+	--side-width: 15rem;
+	--content-min: 50%;
+
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--gap);
+}
+
+.sidebar > * {
+	flex-basis: var(--side-width);
+	flex-grow: 1;
+}
+
+/* ↓ if is a right sidebar (side: right) -> :first-child */
+.sidebar > :last-child {
+	/* ↓ grow from nothing */
+	flex-basis: 0;
+	flex-grow: 999;
+	min-width: calc(var(--content-min) - var(--gap));
+}
+
+/* The Switcher
+-----------------------------------------------------------------------*/
+.switcher {
+	display: flex;
+	flex-wrap: wrap;
+	--gap: 1rem;
+	--threshold: 30rem;
+	--basis: calc(var(--threshold) - 100%);
+	gap: var(--gap);
+	& > * {
+		flex-grow: 1;
+		flex-basis: calc(var(--basis) * 999);
+	}
+}

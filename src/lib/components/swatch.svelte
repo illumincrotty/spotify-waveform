@@ -10,9 +10,9 @@
 	];
 </script>
 
-<ul>
+<ul class="unlist switcher pad">
 	{#each names as color, index}
-		<li style="background: {color}">
+		<li class="pad dark" style="--bg: {color};">
 			{names[index].toUpperCase()}
 		</li>
 	{/each}
@@ -20,6 +20,14 @@
 
 <style lang="postcss">
 	ul {
+		text-align: center;
+		li {
+			background: var(--bg);
+			--padding: 0.25rem;
+		}
+	}
+
+	/* ul {
 		list-style: none;
 		display: flex;
 		flex-direction: row;
@@ -33,11 +41,10 @@
 			aspect-ratio: 2;
 			flex: 2 2;
 
-			/* height: 4em; */
 			min-width: min-content;
 			height: 2em;
 			color: var(--dark);
 			text-align: center;
 		}
-	}
+	} */
 </style>

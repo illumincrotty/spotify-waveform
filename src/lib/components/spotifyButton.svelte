@@ -1,67 +1,39 @@
 <!-- Component logic -->
 <script lang="ts">
-	import { authorize } from '$lib/authPkce';
+	import { authorize } from '$lib/authentication';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { assets } from '$app/paths';
 
 	let authorization: Awaited<ReturnType<typeof authorize>>;
-	export let pkce = true;
+	export let url = `${assets}/tools`;
 
 	onMount(() => {
-		authorize(pkce).then((auth) => {
+		authorize().then((auth) => {
 			authorization = auth;
 		});
 	});
 
 	const messageHandler = (event) => {
-		console.log('window message');
-		console.log(event);
 		if (typeof event.data === 'string') {
 			const authParameters = new URLSearchParams(event.data as string);
-			if (pkce) {
-				// PKCE Flow
-				if (authorization.verifyState(authParameters.get('state'))) {
-					authorization
-						.message(authParameters.get('code'))
-						.then((json) => {
-							// Complete Login
-							const token = {
-								access_token: json.access_token,
-								refresh_token: json.refresh_token,
-								expires_at:
-									Date.now() + 1000 * +json.expires_in,
-							};
-							console.log(token);
-							sessionStorage.setItem(
-								'token_set',
-								JSON.stringify(token)
-							);
-							goto(`${assets}/generator`);
-						});
-				} else {
-					console.error('State is not verifiable');
-				}
-			} else {
-				// Implicit Grant Flow
 
-				if (
-					authorization.verifyState(authParameters.get('state')) &&
-					authParameters.get('access_token')
-				) {
-					// console.log(new Date(token.expires_at).toTimeString());
-
-					sessionStorage.setItem(
-						'token_set',
-						JSON.stringify({
-							access_token: authParameters.get('access_token'),
-							expires_at:
-								Date.now() +
-								1000 * +authParameters.get('expires_in'),
-						})
+			if (authParameters.get('state') && authParameters.get('code')) {
+				authorization
+					.message(
+						authParameters.get('state'),
+						authParameters.get('code')
+					)
+					.then(
+						() => {
+							goto(url);
+						},
+						() => {
+							true;
+						}
 					);
-					goto(`${assets}/generator`);
-				}
+			} else {
+				true;
 			}
 		}
 	};

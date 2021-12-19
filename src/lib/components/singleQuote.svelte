@@ -14,8 +14,6 @@
 	}
 
 	let promise = getRandomQuote();
-
-	// onMount(() => {});
 </script>
 
 <template>

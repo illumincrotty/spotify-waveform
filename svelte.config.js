@@ -17,9 +17,7 @@ const config = {
 		target: 'body',
 		paths: { base: dev ? '' : '/spotify-waveform' },
 		appDir: 'internal',
-		vite: {
-			server: {},
-		},
+		vite: {},
 	},
 	compilerOptions: {},
 };

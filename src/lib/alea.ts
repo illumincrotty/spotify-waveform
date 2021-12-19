@@ -174,4 +174,4 @@ export const aleaFactory = (seed = `${Date.now()}`): aleaType => {
 	return aleaObject;
 };
 
-export const alea = aleaFactory().random;
+export const alea = (): number => aleaFactory().random();

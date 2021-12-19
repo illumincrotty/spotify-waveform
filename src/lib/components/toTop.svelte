@@ -2,14 +2,30 @@
 	const clickHandler = () => {
 		toTop();
 		clicked = true;
+		press = true;
 	};
 	const toTop = () => {
 		scrollTo({ top: 0, behavior: 'smooth' });
 	};
 	let clicked = false;
+	let press = false;
 </script>
 
-<button on:click={clickHandler} class="svg-button" class:clicked>
+<button
+	on:click={clickHandler}
+	on:mousedown={(e) => {
+		press = true;
+	}}
+	on:blur={() => {
+		press = false;
+	}}
+	on:mouseout={() => {
+		press = false;
+	}}
+	class="svg-button"
+	class:clicked
+	aria-pressed={press}
+>
 	<svg
 		viewBox="0 0 24 24"
 		xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +40,7 @@
 </button>
 
 <style>
-	@import './svgButton.postcss';
+	@import '../style/svgButton.postcss';
 	button {
 		position: fixed;
 		bottom: 3em;
