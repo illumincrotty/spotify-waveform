@@ -6,6 +6,8 @@ import type { pkceToken } from 'tokens';
 
 const mode = process.env.NODE_ENV;
 const development = mode === 'development';
+
+const CLIENT_ID = '9f38f4f91f784811b42898766ee7211a';
 interface authBase {
 	client_id: string;
 	response_type: string;
@@ -40,7 +42,7 @@ export const authorize = async (): Promise<{
 	const state = randomBase64StringGenerator(64);
 
 	const authConfig: authCodePKCE = {
-		client_id: import.meta.env.VITE_CLIENT_ID,
+		client_id: CLIENT_ID,
 		redirect_uri: `${
 			development
 				? `${window.location.protocol}//${
@@ -80,7 +82,7 @@ export const authorize = async (): Promise<{
 						grant_type: 'authorization_code',
 						code: code,
 						redirect_uri: authConfig.redirect_uri,
-						client_id: import.meta.env.VITE_CLIENT_ID,
+						client_id: CLIENT_ID,
 						code_verifier: code_verifier,
 					}),
 				}
@@ -125,7 +127,7 @@ export const refreshToken = async (): Promise<boolean> => {
 			body: new URLSearchParams({
 				grant_type: 'refresh_token',
 				refresh_token: token.refresh_token,
-				client_id: import.meta.env.VITE_CLIENT_ID,
+				client_id: CLIENT_ID,
 			}),
 		});
 
