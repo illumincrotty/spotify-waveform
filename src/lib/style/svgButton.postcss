@@ -15,14 +15,15 @@
 	&:focus-visible {
 		background-color: var(--text);
 		color: var(--bg);
+		fill: var(--bg);
 		outline: none;
 	}
 
 	&:active,
 	&[aria-pressed="true"] {
 		background-color: var(--text);
-		border: 0.25em solid var(--t1);
-		color: var(--t1);
+		border: 0.25em solid var(--theme);
+		color: var(--theme);
 	}
 
 	& > svg {

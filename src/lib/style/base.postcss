@@ -14,27 +14,31 @@
 
 	--dark: #24272b;
 	--dark-overlay: #000000a0;
-	--light: #fcddf2;
+	--light: #d7e9ff;
 	--light-overlay: #ffffff40;
 
 	/* --green: #00a485; */
 	/* --purple: #ab6dff; */
 	/* --red: #f65d5a; */
+	/* --t1: var(--green);
+	--t2: var(#6397ae);
+	--t3: var(#8b86d6);
+	--t4: var(--purple);
+	--t5: #d166c7;
+	--t6: #e86190;
+	--t7: var(--red); */
 
 	--mint: #83c5be;
 	--strawberry: #ffa1dd;
 	--fall: #ce8964;
 	--ocean: #5497a7;
 
-	--theme: var(--mint);
+	--theme: var(--fall);
 
-	--t1: var(--mint, --green);
-	--t2: var(--strawberry, #6397ae);
-	--t3: var(--fall, #8b86d6);
-	--t4: var(--ocean, --purple);
-	--t5: #d166c7;
-	--t6: #e86190;
-	--t7: var(--red);
+	--t1: var(--mint);
+	--t2: var(--strawberry);
+	--t3: var(--fall);
+	--t4: var(--ocean);
 
 	--text: var(--light);
 	--bg: var(--dark);
@@ -113,10 +117,12 @@
 nav {
 	white-space: nowrap;
 	align-items: center;
+	font-size: var(--font-s);
 }
 
 svg {
-	fill: currentColor;
+	background: unset;
+	/* fill: var(--theme); */
 }
 
 a {
@@ -125,20 +131,24 @@ a {
 	text-decoration: underline solid var(--theme) 0.1rem;
 
 	text-decoration-skip-ink: none;
-	transition: all 0.2s;
+	transition: all 0.4s;
 
-	&:hover {
+	&:hover,
+	&:focus-visible {
 		outline: none;
 		background: var(--theme);
 		color: var(--dark);
-		text-decoration-color: var(--text);
+		text-decoration: none;
+		/* text-decoration-color: var(--bg); */
 	}
 
-	&:active,
-	&:focus-visible {
+	&:active {
 		text-decoration-color: var(--theme);
 		color: var(--bg);
 		background: var(--text);
+		text-decoration: none;
+
+		/* text-decoration-color: var(--bg); */
 	}
 }
 
@@ -172,11 +182,11 @@ header {
 	padding-left: var(--padding);
 	margin-left: auto;
 	margin-right: auto;
-	max-width: var(--measure);
 	width: 100%;
 }
 main {
 	width: 100%;
+	max-width: var(--measure);
 }
 
 p {
@@ -189,7 +199,7 @@ h1 {
 }
 
 button {
-	border-radius: 1em;
+	border-radius: 2rem;
 	font: inherit;
 	color: inherit;
 	display: block;
