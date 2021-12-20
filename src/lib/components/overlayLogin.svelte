@@ -1,14 +1,13 @@
 <script lang="ts">
 	import SpotifyButton from './spotifyButton.svelte';
 	import Overlay from './overlay.svelte';
-	export let url = `tools/generator/`;
 </script>
 
 <template>
 	<Overlay>
 		<div class="box">
 			<p>You need to connect spotify to access this feature</p>
-			<SpotifyButton {url} />
+			<SpotifyButton />
 		</div>
 	</Overlay>
 </template>

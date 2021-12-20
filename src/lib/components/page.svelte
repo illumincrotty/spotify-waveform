@@ -59,4 +59,7 @@
 	header {
 		padding: 2ch;
 	}
+	footer {
+		padding: 3ch;
+	}
 </style>
