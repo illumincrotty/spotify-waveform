@@ -10,8 +10,10 @@
 	import { base } from '$app/paths';
 
 	onMount(() => {
-		if ($token) {
-			goto('data', { replaceState: true });
+		if ($token !== 'empty') {
+			console.log('already exists');
+			console.log($token);
+			// goto('/data', { replaceState: true });
 		}
 		asyncMount();
 	});
@@ -38,7 +40,9 @@
 					expires_at: Date.now() + 1000 * +json.expires_in,
 				};
 
-				goto('data', { replaceState: true });
+				console.log('Good');
+				console.log($token);
+				// goto('/data', { replaceState: true });
 			} else {
 				goto('');
 			}
