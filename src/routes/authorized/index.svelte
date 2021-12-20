@@ -34,7 +34,7 @@
 	}): void => {
 		// console.log(`${status}: ${error}`);
 
-		const acutal_redirect = redirect ?? `${base}/`;
+		const acutal_redirect = redirect ?? `${base}/#${status}=${error}`;
 		// console.log(acutal_redirect);
 		goto(acutal_redirect);
 	};
@@ -43,6 +43,7 @@
 		const search = new URLSearchParams(window.location.search);
 		const code = search.get('code');
 		const state = search.get('state');
+
 		if (!code)
 			return failure({
 				status: 302,
@@ -55,6 +56,7 @@
 			});
 
 		const response = await verify(code, state);
+
 		if (response.ok) {
 			const json = await response.json();
 			if (!json?.access_token)
@@ -68,21 +70,21 @@
 				failure({ status: 412, error: 'Missing Expiration' });
 
 			// return { status: 412, error: 'Missing Expiration' };
-			token.set({
+			$token = {
 				access_token: json.access_token,
 				refresh_token: json.refresh_token,
 				expires_at: Date.now() + 1000 * +json.expires_in,
-			});
+			};
 
 			console.log('Debug: 200');
 			console.log($token);
-			goto(`${base}/data`);
+			await goto(`${base}/data`);
 		} else {
 			console.log('1');
 			failure({ status: 404, error: 'response not ok' });
 		}
 
-		failure({ status: 404, error: 'Unknown Error' });
+		// failure({ status: 404, error: 'Unknown Error' });
 	};
 </script>
 

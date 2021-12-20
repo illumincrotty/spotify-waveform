@@ -5,10 +5,11 @@
 	import { onMount } from 'svelte';
 	import { token } from '$lib/storeSession';
 	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
 
 	onMount(() => {
 		$token = 'empty';
-		goto('/');
+		goto(`${base}`);
 	});
 </script>
 

@@ -6,7 +6,7 @@
 	console.log($page.path);
 </script>
 
-<header id="page-top" role="banner" class="pad">
+<header id="page-top" role="banner" class="center">
 	<nav class="switcher">
 		<div style="flex-grow: 3">
 			<a
