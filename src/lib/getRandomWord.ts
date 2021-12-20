@@ -5,7 +5,6 @@ const getRandomWord = async (count = 1): Promise<string[]> => {
 
 	if (response.ok) {
 		const wordArray = (await response.json()) as string[];
-		console.log(wordArray);
 		return wordArray;
 	} else {
 		throw new Error(await response.json());
