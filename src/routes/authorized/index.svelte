@@ -34,19 +34,20 @@
 				// return { status: 412, error: 'Missing Refresh Token' };
 				if (!json?.expires_in) goto('');
 				// return { status: 412, error: 'Missing Expiration' };
-				$token = {
+				token.set({
 					access_token: json.access_token,
 					refresh_token: json.refresh_token,
 					expires_at: Date.now() + 1000 * +json.expires_in,
-				};
+				});
 
 				console.log('Good');
 				console.log($token);
-				// goto('/data', { replaceState: true });
+				goto('data', { replaceState: true });
 			} else {
 				goto('');
 			}
 		}
+		goto('');
 	};
 </script>
 
