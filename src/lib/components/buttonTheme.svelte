@@ -12,7 +12,7 @@
 	on:blur={() => (press = false)}
 	on:mouseout={() => (press = false)}
 	class="svgo-button"
-	aria-expanded={press}
+	aria-pressed={press}
 >
 	<svg
 		viewBox="0 0 24 24"
@@ -37,19 +37,20 @@
 		border-radius: 50%;
 		transition: 0.2s ease-out;
 		color: var(--text);
+		fill: currentColor;
 
 		&:hover,
 		&:focus-visible {
-			background-color: var(--text);
-			color: var(--bg);
+			background-color: var(--theme);
+			/* color: var(--theme); */
 			outline: none;
 		}
 
 		&:active {
 			/* background-color: var(--text); */
 			/* border: 0.25em solid var(--t1); */
-			border: 0.2em solid var(--theme);
-			color: var(--t1);
+			border: 0.2em solid var(--text);
+			/* color: var(--t1); */
 		}
 
 		& > svg {

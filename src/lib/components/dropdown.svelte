@@ -181,7 +181,7 @@
 		/* cursor: pointer; */
 		cursor: context-menu;
 	}
-	.ds-main::after {
+	.ds-input::after {
 		content: '';
 		position: absolute;
 		width: 100%;
@@ -192,16 +192,17 @@
 		transition: border-bottom-width 0.2s, background-color 0.2s;
 	}
 
-	.ds-main:hover,
-	.ds-main:focus-visible,
-	.ds-main:focus-within,
-	.ds-main:active,
-	.ds-main:focus,
-	.ds-main:target {
-		background-color: hsla(0, 100%, 100%, 0.1);
+	.ds-input:hover,
+	.ds-input:focus-visible,
+	.ds-input:focus-within,
+	.ds-input:active,
+	.ds-input:focus,
+	.ds-input:target {
+		background-color: var(--text);
+		color: var(--bg);
 
 		&::after {
-			border-bottom-width: 0.2em;
+			border-bottom: none;
 		}
 	}
 
@@ -238,17 +239,19 @@
 
 	.ds-option {
 		padding: 0.2em 0.5em;
+		background-color: var(--bg);
 	}
 
 	.ds-option:hover,
 	.ds-option:focus,
 	.ds-option:target,
 	.ds-option.option-current {
-		background-color: rgb(255 255 255 / 10%);
+		background-color: var(--overlay);
+		color: var(--bg);
 	}
 
 	.ds-option[aria-selected='true'] {
-		color: inherit;
+		/* color: inherit; */
 		/* text-decoration: underline; */
 	}
 </style>

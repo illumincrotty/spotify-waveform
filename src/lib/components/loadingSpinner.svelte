@@ -33,9 +33,9 @@
 		z-index: 5;
 		margin-left: auto;
 		margin-right: auto;
+		stroke: var(--theme);
 
 		& .path {
-			stroke: var(--t1);
 			stroke-linecap: round;
 		}
 		.bg {

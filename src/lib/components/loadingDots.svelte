@@ -25,6 +25,8 @@
 	.loader {
 		margin-left: auto;
 		margin-right: auto;
+		fill: var(--theme);
+
 		--duration: 0.8s;
 		--delay: calc(var(--duration) * 0.1);
 

@@ -22,6 +22,8 @@
 	.loader {
 		margin-left: auto;
 		margin-right: auto;
+		fill: var(--theme);
+
 		--duration: 1.5s;
 		--delay: calc(var(--duration) / 9);
 		& path {
