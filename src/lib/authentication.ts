@@ -1,11 +1,14 @@
 import { randomBase64StringGenerator, bytesToBase64 } from './stateGen';
 import { base } from '$app/paths';
 import type { pkceToken } from 'tokens';
-
-// import * as base64url from 'https://deno.land/std@0.97.0/encoding/base64url.ts';
+import { goto } from '$app/navigation';
 
 const mode = process.env.NODE_ENV;
 const development = mode === 'development';
+
+const redirectURL = `${
+	development ? 'https://localhost:3000' : 'https://illumincrotty.github.io'
+}${base}/authorized`;
 
 const CLIENT_ID = '9f38f4f91f784811b42898766ee7211a';
 interface authBase {
@@ -34,22 +37,16 @@ const generateCodeChallenge = async (
 	return bytesToBase64(new Uint8Array(hashBuffer));
 };
 
-export const authorize = async (): Promise<{
-	login: () => void;
-	message: (state_returned: string, code: string) => Promise<void>;
-}> => {
+export const login = async (): Promise<void> => {
 	const code_verifier = randomBase64StringGenerator(64);
 	const state = randomBase64StringGenerator(64);
 
+	sessionStorage.setItem('code_verifier', code_verifier);
+	sessionStorage.setItem('state', state);
+
 	const authConfig: authCodePKCE = {
 		client_id: CLIENT_ID,
-		redirect_uri: `${
-			development
-				? `${window.location.protocol}//${
-						window.location.hostname
-				  }${`:${window.location.port}`}`
-				: 'https://illumincrotty.github.io'
-		}${base}/authorized`, // My URL
+		redirect_uri: redirectURL, // My URL
 		state: `${state}`,
 		scope: 'user-read-private user-top-read',
 		response_type: 'code',
@@ -58,67 +55,41 @@ export const authorize = async (): Promise<{
 		code_challenge: await generateCodeChallenge(code_verifier),
 	};
 
-	const login = () => {
-		popupCenter(
-			`https://accounts.spotify.com/authorize/?${new URLSearchParams({
-				...authConfig,
-			}).toString()}`,
-			'Spotify Login',
-			500,
-			700
-		);
-	};
-
-	const message = async (
-		state_returned: string,
-		code: string
-	): Promise<void> => {
-		if (state === state_returned) {
-			const response = await fetch(
-				'https://accounts.spotify.com/api/token',
-				{
-					method: 'POST',
-					body: new URLSearchParams({
-						grant_type: 'authorization_code',
-						code: code,
-						redirect_uri: authConfig.redirect_uri,
-						client_id: CLIENT_ID,
-						code_verifier: code_verifier,
-					}),
-				}
-			);
-			if (response.ok) {
-				const json = (await response.json()) as {
-					access_token: string;
-					token_type: 'Bearer';
-					expires_in: 3600;
-					refresh_token: string;
-					scope: string;
-				};
-				console.log(json);
-				const token = {
-					access_token: json.access_token,
-					refresh_token: json.refresh_token,
-					expires_at: Date.now() + 1000 * +json.expires_in,
-				};
-				sessionStorage.setItem('token_set', JSON.stringify(token));
-				return Promise.resolve();
-			} else {
-				console.error(response);
-			}
-		}
-		return Promise.reject();
-	};
-
-	return { login, message };
+	return void goto(
+		`https://accounts.spotify.com/authorize/?${new URLSearchParams({
+			...authConfig,
+		}).toString()}`
+	);
 };
 
+export const verify = (
+	code: string,
+	state: string,
+	fetchFunction: typeof fetch = fetch
+): Promise<Response> => {
+	const realState = sessionStorage.getItem('state');
+	const code_verify = sessionStorage.getItem('code_verifier');
+
+	if (!code_verify) throw new Error('No Code Verifier in session');
+	if (!realState) throw new Error('No State in session');
+	if (realState !== state) throw new Error('State mismatch');
+
+	return fetchFunction('https://accounts.spotify.com/api/token', {
+		method: 'POST',
+		body: new URLSearchParams({
+			grant_type: 'authorization_code',
+			code: code,
+			redirect_uri: redirectURL,
+			client_id: CLIENT_ID,
+			code_verifier: code_verify,
+		}),
+	});
+};
 export const refreshToken = async (): Promise<boolean> => {
 	const tokenStore = sessionStorage.getItem('token_set');
 	if (tokenStore) {
 		const token = JSON.parse(tokenStore) as pkceToken;
 
-		// console.log(token.expires_at, Date.now());
 		if (token.expires_at >= Date.now()) return false;
 
 		const response = await fetch('https://accounts.spotify.com/api/token', {
@@ -131,8 +102,6 @@ export const refreshToken = async (): Promise<boolean> => {
 			}),
 		});
 
-		console.log(response);
-		console.log(response);
 		if (response.ok) {
 			const json = (await response.json()) as {
 				access_token: string;
@@ -140,7 +109,7 @@ export const refreshToken = async (): Promise<boolean> => {
 				expires_in: 3600;
 				scope: string;
 			};
-			console.log(json);
+
 			const token_refreshed = {
 				access_token: json.access_token,
 				refresh_token: token.refresh_token,
