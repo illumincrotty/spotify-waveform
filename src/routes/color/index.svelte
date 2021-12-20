@@ -4,5 +4,5 @@
 </script>
 
 <Page title="Color">
-	<Swatch names={['#83C5BE', '#ffa1dd', '#CE8964', '#5497a7', '#22262d']} />
+	<Swatch names={['#83b9a9', '#B6A6DD', '#c9a97d', '#88b2dc', '#c9eafc']} />
 </Page>
