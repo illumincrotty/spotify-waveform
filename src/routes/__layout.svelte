@@ -2,12 +2,14 @@
 	import { base } from '$app/paths';
 
 	import Header from '$lib/components/header.svelte';
+	import { token } from '$lib/storeSession';
 	export const title = 'Example';
-	let normalize: HTMLLinkElement;
-	function nornmalizeLoaded() {
-		normalize.rel = 'stylesheet';
+
+	let links = [{ href: 'random', label: 'Other' }];
+
+	if ($token !== 'empty') {
+		links = [{ href: 'data', label: 'Data' }, ...links];
 	}
-	let y = 0;
 </script>
 
 <svelte:head>
@@ -20,19 +22,13 @@
 		rel="stylesheet"
 	/>
 </svelte:head>
-<svelte:window bind:scrollY={y} />
 
-<Header
-	links={[
-		{ href: 'quotes', label: 'Random Quote Generator' },
-		{ href: 'words', label: 'Random Word Generator' },
-	]}
-/>
+<Header {links} />
 <slot>
 	<!-- <main class="stack center-i" id="page-main" /> -->
 </slot>
 
-<style lang="postcss" global>
+<style lang="postcss">
 	@import '$lib/style/cssReset.postcss';
 	@import '$lib/style/el.postcss';
 	@import '$lib/style/base.postcss';

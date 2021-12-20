@@ -1,13 +1,10 @@
 <script lang="ts">
-	import { assets, base } from '$app/paths';
+	import { base } from '$app/paths';
 
 	import Header from '$lib/components/header.svelte';
+	import OverlayLogin from '$lib/components/overlayLogin.svelte';
+	import { token } from '$lib/storeSession';
 	export const title = 'Example';
-	let normalize: HTMLLinkElement;
-	function nornmalizeLoaded() {
-		normalize.rel = 'stylesheet';
-	}
-	let y = 0;
 </script>
 
 <svelte:head>
@@ -20,9 +17,18 @@
 		rel="stylesheet"
 	/>
 </svelte:head>
-<svelte:window bind:scrollY={y} />
 
-<Header links={[{ href: 'tools/generator', label: 'Top Data' }]} />
+<Header
+	links={[
+		{ href: '', label: 'Home' },
+		{ href: 'data', label: 'Data' },
+		{ href: 'data/top', label: 'Top Data' },
+	]}
+/>
+
+{#if $token === 'empty'}
+	<OverlayLogin />
+{/if}
 <slot>
 	<!-- <main class="stack center-i" id="page-main" /> -->
 </slot>

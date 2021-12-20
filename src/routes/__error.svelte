@@ -11,6 +11,8 @@
 </script>
 
 <script lang="ts">
+	import { base } from '$app/paths';
+
 	import Page from '$lib/components/page.svelte';
 
 	export let status;
@@ -19,6 +21,8 @@
 
 <Page title="ERROR: {status}">
 	<div>{error.message}</div>
+	<br />
+	<a href="{base}/">Return to Homepage</a>
 </Page>
 
 <style>
