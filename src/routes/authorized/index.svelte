@@ -19,8 +19,9 @@
 	});
 
 	const asyncMount = async () => {
-		const code = $page.query.get('code');
-		const state = $page.query.get('state');
+		const search = new URLSearchParams(window.location.search);
+		const code = search.get('code');
+		const state = search.get('state');
 		if (!code) return { status: 302, redirect: `${base}/` };
 		if (!state) return { status: 302, redirect: `${base}/` };
 
