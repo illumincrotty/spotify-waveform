@@ -2,6 +2,7 @@ import { randomBase64StringGenerator, bytesToBase64 } from './stateGen';
 import { base } from '$app/paths';
 import type { pkceToken } from 'tokens';
 import { goto } from '$app/navigation';
+import { token } from '$lib/storeSession';
 
 const mode = process.env.NODE_ENV;
 const development = mode === 'development';
@@ -85,43 +86,34 @@ export const verify = (
 		}),
 	});
 };
-export const refreshToken = async (): Promise<boolean> => {
-	const tokenStore = sessionStorage.getItem('token_set');
-	if (tokenStore) {
-		const token = JSON.parse(tokenStore) as pkceToken;
+export const refreshToken = async (
+	token: pkceToken
+): Promise<false | pkceToken> => {
+	if (token.expires_at >= Date.now()) return token;
 
-		if (token.expires_at >= Date.now()) return false;
+	const response = await fetch('https://accounts.spotify.com/api/token', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+		body: new URLSearchParams({
+			grant_type: 'refresh_token',
+			refresh_token: token.refresh_token,
+			client_id: CLIENT_ID,
+		}),
+	});
 
-		const response = await fetch('https://accounts.spotify.com/api/token', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: new URLSearchParams({
-				grant_type: 'refresh_token',
-				refresh_token: token.refresh_token,
-				client_id: CLIENT_ID,
-			}),
-		});
+	if (response.ok) {
+		const json = (await response.json()) as {
+			access_token: string;
+			token_type: 'Bearer';
+			expires_in: 3600;
+			scope: string;
+		};
 
-		if (response.ok) {
-			const json = (await response.json()) as {
-				access_token: string;
-				token_type: 'Bearer';
-				expires_in: 3600;
-				scope: string;
-			};
-
-			const token_refreshed = {
-				access_token: json.access_token,
-				refresh_token: token.refresh_token,
-				expires_at: Date.now() + 1000 * +json.expires_in,
-			} as pkceToken;
-			sessionStorage.setItem(
-				'token_set',
-				JSON.stringify(token_refreshed)
-			);
-			return true;
-		}
-		return false;
+		return {
+			access_token: json.access_token,
+			refresh_token: token.refresh_token,
+			expires_at: Date.now() + 1000 * +json.expires_in,
+		};
 	}
 	return false;
 };

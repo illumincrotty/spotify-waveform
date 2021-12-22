@@ -19,3 +19,8 @@
 import { writable } from 'svelte-local-storage-store';
 import type { pkceToken } from 'tokens';
 export const token = writable('token', 'empty' as pkceToken | 'empty');
+export const colorPreference = writable(
+	'preference',
+	'empty' as 'light' | 'dark' | 'empty'
+);
+export const theme = writable('theme', 'empty' as 1 | 2 | 3 | 4 | 'empty');

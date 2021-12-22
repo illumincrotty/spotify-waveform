@@ -178,8 +178,8 @@
 		text-decoration: solid underline 0.1em; */
 		/* border-bottom: solid var(--text) 0.1em; */
 
-		/* cursor: pointer; */
-		cursor: context-menu;
+		cursor: pointer;
+		/* cursor: context-menu; */
 	}
 	.ds-input::after {
 		content: '';
@@ -246,8 +246,8 @@
 	.ds-option:focus,
 	.ds-option:target,
 	.ds-option.option-current {
-		background-color: var(--overlay);
-		color: var(--bg);
+		background-color: var(--theme);
+		color: var(--dark);
 	}
 
 	.ds-option[aria-selected='true'] {

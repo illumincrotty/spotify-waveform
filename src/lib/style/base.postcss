@@ -50,8 +50,7 @@
 	--overlay: var(--light-overlay);
 	--overlay-anti: var(--dark-overlay);
 
-	--font-ratio: 1.618;
-	--font-ratio-2: 1.2;
+	--font-ratio: 1.25;
 
 	/* --font-m: calc(0.8em + 0.5vmin); */
 
@@ -63,14 +62,15 @@
 			(var(--font-maximum-size) - var(--font-minimum-size)) *
 			((100vw - 320px) / (1280 - 300))
 	);
-	/* --font-l: calc(var(--font-m) * var(--font-ratio)); */
-	--font-xl: calc(var(--font-m) * var(--font-ratio) * var(--font-ratio));
+	--font-l: calc(var(--font-m) * var(--font-ratio));
+	--font-xl: calc(var(--font-l) * var(--font-ratio));
+	--font-2xl: calc(var(--font-xl) * var(--font-ratio));
 	/* --font-2xl: calc(
 		var(--font-m) * var(--font-ratio) * var(--font-ratio) *
 			var(--font-ratio)
 	); */
 
-	--font-s: calc(var(--font-m) / var(--font-ratio-2));
+	--font-s: calc(var(--font-m) / var(--font-ratio));
 	/* --font-xs: calc(var(--font-s) / var(--font-ratio-2)); */
 
 	background-color: var(--bg);
@@ -78,7 +78,7 @@
 	fill: var(--text);
 	font-family: "Atkinson Hyperlegible", sans-serif;
 
-	transition: background 0.1s, color 0.1s;
+	transition: background 0.5s, color 0.5s;
 
 	@media (prefers-color-scheme: dark) {
 		--text: var(--light);
@@ -121,13 +121,12 @@
 
 nav {
 	white-space: nowrap;
-	align-items: center;
+	align-items: end;
 	font-size: var(--font-s);
 }
 
 svg {
 	background: unset;
-	/* fill: var(--theme); */
 }
 
 a {
@@ -199,8 +198,12 @@ p {
 }
 
 h1 {
-	font-size: var(--font-xl);
+	font-size: var(--font-2xl);
 	text-align: center;
+}
+
+h2 {
+	font-size: var(--font-xl);
 }
 
 button {

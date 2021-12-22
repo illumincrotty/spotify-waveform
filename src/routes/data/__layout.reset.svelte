@@ -1,10 +1,36 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+
 	import { base } from '$app/paths';
+	import { refreshToken } from '$lib/authentication';
 
 	import Header from '$lib/components/header.svelte';
 	import OverlayLogin from '$lib/components/overlayLogin.svelte';
 	import { token } from '$lib/storeSession';
+	import { onMount } from 'svelte';
+	import type { pkceToken } from 'tokens';
 	export const title = 'Example';
+
+	let mounted = false;
+
+	onMount(() => {
+		if ($token !== 'empty') {
+			asyncMount($token);
+		}
+		mounted = true;
+	});
+
+	const asyncMount = async (input: pkceToken) => {
+		if (input.expires_at < Date.now()) {
+			const freshToken = await refreshToken(input);
+			if (freshToken) {
+				$token = freshToken;
+			} else {
+				$token = 'empty';
+				goto(`${base}`);
+			}
+		}
+	};
 </script>
 
 <svelte:head>
@@ -26,7 +52,7 @@
 	]}
 />
 
-{#if $token === 'empty'}
+{#if mounted && $token === 'empty'}
 	<OverlayLogin />
 {/if}
 <slot>

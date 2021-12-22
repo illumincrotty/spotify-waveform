@@ -5,7 +5,7 @@
 
 <template>
 	<Overlay>
-		<div class="box">
+		<div class="box stack">
 			<p>You need to connect spotify to access this feature</p>
 			<SpotifyButton />
 		</div>
@@ -23,8 +23,8 @@
 		width: clamp(16rem, 33%, 50%);
 		padding: 1em;
 
-		background-color: var(--text);
-		color: var(--bg);
+		background-color: var(--bg);
+		color: var(--text);
 
 		word-break: normal;
 

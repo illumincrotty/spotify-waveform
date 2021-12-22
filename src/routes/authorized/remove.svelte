@@ -9,7 +9,7 @@
 
 	onMount(() => {
 		$token = 'empty';
-		goto(`${base}`);
+		goto(`${base}/`);
 	});
 </script>
 
