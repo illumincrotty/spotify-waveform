@@ -21,6 +21,8 @@
 	import type { pkceToken } from 'tokens';
 	import WavyBarChart from '$lib/components/wavyBarChart.svelte';
 	import { page } from '$app/stores';
+	import OverlayLoading from '$lib/components/overlayLoading.svelte';
+	import { goto } from '$app/navigation';
 
 	export let trackID = '';
 	let ready = false;
@@ -38,8 +40,13 @@
 
 	onMount(() => {
 		if (trackID === '') {
-			console.debug($page.url);
-			trackID = $page.url.hash;
+			const search = new URLSearchParams(window.location.search);
+			if (search.has('id')) {
+				console.debug(search.get('id'));
+				trackID = search.get('id');
+			} else {
+				history.back();
+			}
 		}
 		console.debug(`id: ${trackID}`);
 
@@ -61,9 +68,9 @@
 		trackAnalysisPromise = spotify.audioAnalysis(trackID);
 		let trackAnalysis = await spotify.audioAnalysis(trackID);
 
-		const trueMax = Math.min(
-			...trackAnalysis.segments.map((segment) => segment.loudness_max)
-		);
+		// const trueMax = Math.min(
+		// 	...trackAnalysis.segments.map((segment) => segment.loudness_max)
+		// );
 
 		let volumeNormalized = trackAnalysis.segments.map((segment) => {
 			return {
@@ -95,9 +102,6 @@
 
 		console.log(volumeNormalized);
 		console.log(timeNormalized);
-		// spotify.audioFeatures(trackID).then((trackData) => {
-		// 	console.log(trackData);
-		// });
 	};
 	const theme = {
 		'scheme': 'google',
@@ -122,11 +126,14 @@
 	};
 </script>
 
-<Page title={trackName}>
-	{#if maxLoudness}
-		<WavyBarChart data={maxLoudness} />
-	{/if}
-	<!-- {#if ready}
+{#if trackID === ''}
+	<OverlayLoading />
+{:else}
+	<Page title={trackName}>
+		{#if maxLoudness}
+			<WavyBarChart data={maxLoudness} />
+		{/if}
+		<!-- {#if ready}
 		{#if trackPromise}
 			{#await trackPromise}
 				<div>Loading...</div>
@@ -151,8 +158,9 @@
 			{/await}
 		{/if}
 	{/if} -->
-	<!-- <slot /> -->
-</Page>
+		<!-- <slot /> -->
+	</Page>
+{/if}
 
 <style>
 	:global(ul.svelte-tree-view:not(#\9)) {

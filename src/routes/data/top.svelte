@@ -70,7 +70,7 @@
 								<li>
 									<a
 										rel="external"
-										href="{base}/data/track#id={track.id}"
+										href="{base}/data/track?id={track.id}"
 										>{track.name}</a
 									>
 									by
