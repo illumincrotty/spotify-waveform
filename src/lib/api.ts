@@ -39,6 +39,91 @@ export type time_range = {
 	time_range?: `${timeOptions}_term`;
 };
 
+interface AudioAnalysisResponse {
+	meta: {
+		analyzer_version: string;
+		platform: string;
+		detailed_status: string;
+		status_code: number;
+		timestamp: number;
+		analysis_time: number;
+		input_process: string;
+	};
+
+	track: {
+		num_samples: number;
+		duration: number;
+		sample_md5: string;
+		offset_seconds: number;
+		window_seconds: number;
+		analysis_sample_rate: number;
+		analysis_channels: number;
+		end_of_fade_in: number;
+		start_of_fade_out: number;
+		loudness: number;
+		tempo: number;
+		tempo_confidence: number;
+		time_signature: number;
+		time_signature_confidence: number;
+		key: number;
+		key_confidence: number;
+		mode: number;
+		mode_confidence: number;
+		codestring: string;
+		code_version: number;
+		echoprintstring: string;
+		echoprint_version: number;
+		synchstring: string;
+		synch_version: number;
+		rhythmstring: string;
+		rhythm_version: number;
+	};
+
+	bar: {
+		start: number;
+		duration: number;
+		confidence: number;
+	};
+
+	beats: {
+		start: number;
+		duration: number;
+		confidence: number;
+	}[];
+
+	sections: {
+		start: number;
+		duration: number;
+		confidence: number;
+		loudness: number;
+		tempo: number;
+		tempo_confidence: number;
+		key: number;
+		key_confidence: number;
+		mode: number;
+		mode_confidence: number;
+		time_signature: number;
+		time_signature_confidence: number;
+	}[];
+
+	segments: {
+		start: number;
+		duration: number;
+		confidence: number;
+		loudness_start: number;
+		loudness_max: number;
+		loudness_max_time: number;
+		loudness_end: number;
+		pitches: number[];
+		timbre: number[];
+	}[];
+	tatums: {
+		start: number;
+		duration: number;
+		confidence: number;
+	}[];
+}
+
 const queryStringify = <T extends query>(options?: T) => {
 	return options
 		? `?${Object.entries(options)
@@ -189,7 +274,7 @@ const createSpotifyConnection = (token: pkceToken) => {
 		 * @returns a user profile
 		 */
 		track: async (id: string): Promise<SpotifyApi.SingleTrackResponse> =>
-			easyFetch({ route: `/track/${id}` }),
+			easyFetch({ route: `/tracks/${id}` }),
 
 		/**
 		 * Get Spotify catalog information for multiple tracks based on their Spotify IDs.
@@ -212,6 +297,25 @@ const createSpotifyConnection = (token: pkceToken) => {
 			options: idList & pagingOptions
 		): Promise<SpotifyApi.UsersSavedTracksResponse> =>
 			easyFetch({ route: `/me/tracks`, options: options }),
+		/**
+		 * Get audio feature information for a single track identified by its unique Spotify ID.
+		 *
+		 * @param id - The Spotify ID for the track.
+		 * @returns Audio features for one track
+		 */
+		audioFeatures: async (
+			id: string
+		): Promise<SpotifyApi.AudioFeaturesResponse> =>
+			easyFetch({ route: `/audio-features/${id}` }),
+
+		/**
+		 * Get audio feature information for a single track identified by its unique Spotify ID.
+		 *
+		 * @param id - Get a low-level audio analysis for a track in the Spotify catalog. The audio analysis describes the track’s structure and musical content, including rhythm, pitch, and timbre.
+		 * @returns Audio analysis for one track
+		 */
+		audioAnalysis: async (id: string): Promise<AudioAnalysisResponse> =>
+			easyFetch({ route: `/audio-analysis/${id}` }),
 	};
 
 	return { ...user, ...tracks };

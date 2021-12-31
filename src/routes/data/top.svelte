@@ -2,7 +2,7 @@
 	import { createSpotifyConnection } from '$lib/api';
 	import { fade } from 'svelte/transition';
 	import { cubicInOut } from 'svelte/easing';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 
 	import Page from '$lib/components/page.svelte';
 	import Dropdown from '$lib/components/dropdown.svelte';
@@ -10,6 +10,7 @@
 	import OverlayLogin from '$lib/components/overlayLogin.svelte';
 	import { token } from '$lib/storeSession';
 	import type { pkceToken } from 'tokens';
+	import { base } from '$app/paths';
 
 	let spotify: ReturnType<typeof createSpotifyConnection>;
 	let artistPromise =
@@ -21,10 +22,11 @@
 		if ($token !== 'empty') {
 			spotifySetup($token);
 		}
-		window.setTimeout(() => {
+		tick().then(() => {
 			mounted = true;
-		}, 100);
+		});
 	});
+
 	const spotifySetup = (token: pkceToken) => {
 		spotify = createSpotifyConnection(token);
 
@@ -67,7 +69,7 @@
 								<li>
 									<a
 										rel="external"
-										href={track.external_urls.spotify}
+										href="{base}/data/track/{track.id}"
 										>{track.name}</a
 									>
 									by
