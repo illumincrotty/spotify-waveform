@@ -3,7 +3,6 @@
 	import { page } from '$app/stores';
 	import ButtonTheme from './buttonTheme.svelte';
 	export let links: { href: string; label: string }[] = [];
-	console.log($page.path);
 </script>
 
 <header id="page-top" role="banner" class="center">
@@ -19,15 +18,15 @@
 		</div>
 		<div style="flex-grow: 40;" />
 		{#each links as link}
-			{#if $page.path !== `/${link.href}`}
-				<div>
+			{#if $page.url.pathname !== `/${link.href}`}
+				<div class="shadow-pop">
 					<a sveltekit:prefetch href={`${base}/${link.href}`}
 						>{link.label}</a
 					>
 				</div>
 			{/if}
 		{/each}
-		<div>
+		<div class="shadow-pop">
 			<ButtonTheme />
 		</div>
 	</nav>
@@ -37,7 +36,7 @@
 	#link-to-base {
 		background: fixed;
 		&:hover,
-		&:focus-within {
+		&:focus-visible {
 			outline: 0.2em solid var(--theme);
 		}
 
@@ -45,7 +44,8 @@
 			outline-color: var(--text);
 		}
 	}
-	div {
-		pointer-events: painted;
+
+	a {
+		text-decoration: none;
 	}
 </style>

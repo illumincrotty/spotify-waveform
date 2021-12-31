@@ -4,11 +4,7 @@
 </script>
 
 <template>
-	<div
-		class="overlay"
-		in:transition={{ duration: 500 }}
-		out:transition={{ duration: 500 }}
-	>
+	<div class="overlay" out:transition={{ duration: 500 }}>
 		<slot />
 	</div>
 </template>

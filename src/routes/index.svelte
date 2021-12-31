@@ -2,6 +2,7 @@
 	import Page from '$lib/components/page.svelte';
 	import SpotifyButton from '$lib/components/spotifyButton.svelte';
 	import Swatch from '$lib/components/swatch.svelte';
+	import { token } from '$lib/storeSession';
 </script>
 
 <svelte:head><title>Spotify Waveforms</title></svelte:head>
@@ -23,8 +24,9 @@
 		voluptate, officia blanditiis recusandae aliquid eaque fuga ipsa
 		consequatur hic iure numquam sapiente tempore.
 	</p>
-
-	<SpotifyButton />
+	{#if $token === 'empty'}
+		<SpotifyButton />
+	{/if}
 </Page>
 
 <style lang="postcss">

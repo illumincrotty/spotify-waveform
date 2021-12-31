@@ -1,16 +1,43 @@
 <script lang="ts">
+	import { onMount, tick } from 'svelte';
 	import SpotifyButton from './spotifyButton.svelte';
 	import Overlay from './overlay.svelte';
+
+	let loginButton: SpotifyButton;
+
+	onMount(() => {
+		tick().then(() => {
+			loginButton.focus();
+		});
+	});
+
+	const onKeyDown = (ev: KeyboardEvent) => {
+		console.debug(ev.key);
+
+		if (ev.key !== 'Tab') return;
+		loginButton.focus();
+
+		ev.preventDefault();
+	};
 </script>
 
-<template>
-	<Overlay>
-		<div class="box stack">
-			<p>You need to connect spotify to access this feature</p>
-			<SpotifyButton />
-		</div>
-	</Overlay>
-</template>
+<svelte:window on:keydown={onKeyDown} />
+
+<Overlay>
+	<div
+		class="box stack"
+		role="dialog"
+		aria-labelledby="login_title"
+		aria-describedby="login_description"
+		aria-modal="true"
+	>
+		<h2 id="login_title">Unauthorized</h2>
+		<p id="login_description">
+			You need to connect spotify to access this feature
+		</p>
+		<SpotifyButton bind:this={loginButton} />
+	</div>
+</Overlay>
 
 <style lang="postcss">
 	.box {
