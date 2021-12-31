@@ -47,30 +47,31 @@
 
 		
 
-		<link rel="modulepreload" href="/spotify-waveform/internal/start-38014ff7.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/vendor-cdbb4087.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/singletons-12a22614.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/paths-28a87002.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/pages/authorized/__layout.reset.svelte-c6d51721.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/storeSession-c8eb93f7.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/pages/authorized/index.svelte-83606ee5.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/loader-6cbed9a5.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/page-64d29f08.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/navigation-51f4a605.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/authentication-ae42fe99.js">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/start-464e9d0a.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/vendor-9fae2b11.css">
-		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/__layout.svelte-b7558569.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/__layout.svelte-64e5cac0.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/loadingSpinner.svelte_svelte_type_style_lang-23d9a461.css">
-		<link rel="stylesheet" href="/spotify-waveform/internal/assets/page-fb4d06c3.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/page-de2deb9b.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/button-d9d34c85.css">
+		<link rel="modulepreload" href="/spotify-waveform/internal/start-fc598e0a.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/vendor-4237203b.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/singletons-12a22614.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/paths-28a87002.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/authorized/__layout.reset.svelte-ccbedfad.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/storeSession-fce0342a.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/authorized/index.svelte-589119c3.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/loader-559b9f27.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/page-d2feb634.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/button-7043fb29.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/navigation-51f4a605.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/authentication-89c7005c.js">
 
 		<script type="module">
-			import { start } from "/spotify-waveform/internal/start-38014ff7.js";
+			import { start } from "/spotify-waveform/internal/start-fc598e0a.js";
 			start({
 				target: document.querySelector("body"),
-				paths: {"base":"/spotify-waveform","assets":""},
+				paths: {"base":"/spotify-waveform","assets":"/spotify-waveform"},
 				session: {},
-				host: location.host,
 				route: true,
 				spa: false,
 				trailing_slash: "never",
@@ -78,17 +79,17 @@
 					status: 200,
 					error: null,
 					nodes: [
-						import("/spotify-waveform/internal/pages/authorized/__layout.reset.svelte-c6d51721.js"),
-						import("/spotify-waveform/internal/pages/authorized/index.svelte-83606ee5.js")
+						import("/spotify-waveform/internal/pages/authorized/__layout.reset.svelte-ccbedfad.js"),
+						import("/spotify-waveform/internal/pages/authorized/index.svelte-589119c3.js")
 					],
-					page: {
-						host: location.host, // TODO this is redundant
-						path: "\u002Fauthorized",
-						query: new URLSearchParams(""),
-						params: {}
-					}
+					url: new URL("sveltekit://prerender/authorized"),
+					params: {}
 				}
 			});
+		</script><script>
+			if ('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('/service-worker.js');
+			}
 		</script>
 	</head>
 
@@ -108,8 +109,5 @@
 </footer>
 
 
-
-			
-		
 	</body>
 </html>
