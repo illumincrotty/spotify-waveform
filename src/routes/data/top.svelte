@@ -11,6 +11,7 @@
 	import { token } from '$lib/storeSession';
 	import type { pkceToken } from 'tokens';
 	import { base } from '$app/paths';
+	import Track from './track.svelte';
 
 	let spotify: ReturnType<typeof createSpotifyConnection>;
 	let artistPromise =
@@ -69,7 +70,7 @@
 								<li>
 									<a
 										rel="external"
-										href="{base}/data/track/{track.id}"
+										href="{base}/data/track#id={track.id}"
 										>{track.name}</a
 									>
 									by

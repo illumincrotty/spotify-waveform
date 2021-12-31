@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<!-- <script lang="ts" context="module">
 	import { browser } from '$app/env';
 	import type { Load } from '@sveltejs/kit';
 
@@ -9,8 +9,7 @@
 
 		return {};
 	};
-</script>
-
+</script> -->
 <script lang="ts">
 	// import { page } from '$app/stores';
 	import Page from '$lib/components/page.svelte';
@@ -20,8 +19,8 @@
 	import { token } from '$lib/storeSession';
 	import { createSpotifyConnection } from '$lib/api';
 	import type { pkceToken } from 'tokens';
-	import { each } from 'svelte/internal';
 	import WavyBarChart from '$lib/components/wavyBarChart.svelte';
+	import { page } from '$app/stores';
 
 	export let trackID = '';
 	let ready = false;
@@ -38,6 +37,10 @@
 	// let trackAnalysis: Awaited<ReturnType<typeof spotify['audioAnalysis']>>;
 
 	onMount(() => {
+		if (trackID === '') {
+			console.debug($page.url);
+			trackID = $page.url.hash;
+		}
 		console.debug(`id: ${trackID}`);
 
 		if ($token !== 'empty') {
