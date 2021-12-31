@@ -1,32 +1,12 @@
 <script lang="ts">
-	let press = false;
+	import Button from './button.svelte';
 </script>
 
-<button
+<Button
+	buttonLabel="Add Additional Content"
+	svgLabel="plus"
 	on:click
-	on:click={() => {
-		press = true;
-		window.setTimeout(() => {
-			press = false;
-		}, 100);
-	}}
-	on:mousedown={() => {
-		press = true;
-	}}
-	on:blur={() => (press = false)}
-	on:mouseout={() => (press = false)}
-	class="svg-button"
-	aria-pressed={press}
-	aria-label="Add Additional Content"
+	circle={true}
 >
-	<svg
-		xmlns="http://www.w3.org/2000/svg"
-		viewBox="0 0 24 24"
-		aria-label="Plus"
-		><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" /></svg
-	>
-</button>
-
-<style>
-	@import '../style/svgButton.postcss';
-</style>
+	<path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" />
+</Button>
