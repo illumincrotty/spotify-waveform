@@ -264,3 +264,23 @@ a:focus-visible {
     color: unset;
     border: none;
 } */
+
+.svg-circle {
+	aspect-ratio: 1;
+	border-radius: 50%;
+	vertical-align: middle;
+	border: 0.25rem solid var(--text);
+	padding: 0.25rem;
+}
+
+.shadow-pop {
+	transition: transform 0.3s;
+	outline: none;
+	/* animation: shadow-pop-out 0.3s cubic-bezier(0.47, 0, 0.745, 0.715); */
+	&:hover,
+	&:focus-visible,
+	&:active {
+		transform: translateY(-0.25em);
+		/* animation: shadow-pop-in 0.3s cubic-bezier(0.47, 0, 0.745, 0.715) both; */
+	}
+}

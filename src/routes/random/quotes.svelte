@@ -26,7 +26,7 @@
 	{#each { length: x } as _}
 		<SingleQuote />
 	{/each}
-	<div id="add_button">
+	<div class="center-i">
 		<AddComponent on:click={handleClick} />
 	</div>
 </Page>
