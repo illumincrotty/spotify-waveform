@@ -12,8 +12,7 @@
 
 <script lang="ts">
 	import { base } from '$app/paths';
-
-	import Page from '$lib/components/page.svelte';
+	import Page from '$lib/components/layout/page.svelte';
 
 	export let status;
 	export let error: Error;

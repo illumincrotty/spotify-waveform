@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
-	import ButtonTheme from './buttonTheme.svelte';
+	import ButtonTheme from '$lib/components/button/buttonTheme.svelte';
 	export let links: { href: string; label: string }[] = [];
 </script>
 

@@ -1,11 +1,10 @@
 <script lang="ts">
-	import Loader from '$lib/components/loader.svelte';
-	import Page from '$lib/components/page.svelte';
-
 	import { onMount } from 'svelte';
 	import { token } from '$lib/storeSession';
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
+	import Page from '$lib/components/layout/page.svelte';
+	import Loader from '$lib/components/loading/loader.svelte';
 
 	onMount(() => {
 		$token = 'empty';

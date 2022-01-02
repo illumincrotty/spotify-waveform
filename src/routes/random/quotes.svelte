@@ -1,7 +1,7 @@
 <script lang="ts">
-	import AddComponent from '$lib/components/buttonPlus.svelte';
-	import Page from '$lib/components/page.svelte';
-	import SingleQuote from '$lib/components/singleQuote.svelte';
+	import Page from '$lib/components/layout/page.svelte';
+	import AddButton from '$lib/components/button/buttonPlus.svelte';
+	import SingleQuote from '$lib/components/random/singleQuote.svelte';
 	import { onMount } from 'svelte';
 
 	let button: HTMLElement | undefined;
@@ -27,6 +27,6 @@
 		<SingleQuote />
 	{/each}
 	<div class="center-i">
-		<AddComponent on:click={handleClick} />
+		<AddButton on:click={handleClick} />
 	</div>
 </Page>

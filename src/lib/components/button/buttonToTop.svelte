@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Button from './button.svelte';
+	import Button from './buttonBase.svelte';
 
 	const clickHandler = () => {
 		scrollTo({ top: 0, behavior: 'smooth' });
@@ -24,5 +24,6 @@
 		position: fixed;
 		bottom: 3rem;
 		right: 3rem;
+		background-color: transparent;
 	}
 </style>

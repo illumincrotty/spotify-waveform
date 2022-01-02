@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let data: number[] = [];
 	export let label = 'Chart';
-	const width = 4,
+	export let width = 4,
 		space = 1,
 		mod = 1,
 		height = 100;
@@ -10,7 +10,7 @@
 <svg
 	xmlns="http://www.w3.org/2000/svg"
 	viewBox="0 0 {Math.ceil(
-		(data.length / mod) * (width + space) - space
+		(data.length / mod) * (width + space) - space + 2
 	)} {height}"
 	fill-rule="evenodd"
 	clip-rule="evenodd"
@@ -21,11 +21,11 @@
 	{#each data as value, index}
 		{#if index % mod === 0}
 			<rect
-				x={(index / mod) * (width + space)}
-				y={height / 2 - (height * value) / 2}
+				x={1 + (index / mod) * (width + space)}
+				y={height / 2 - Math.max(height * value, width) / 2}
 				{width}
-				height={height * value}
-				rx="2"
+				height={Math.max(height * value, width)}
+				rx={width / 2}
 			/>
 		{/if}
 	{/each}

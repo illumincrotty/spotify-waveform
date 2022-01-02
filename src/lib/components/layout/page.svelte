@@ -1,6 +1,6 @@
 <script lang="ts">
-	import TopButton from '$lib/components/buttonToTop.svelte';
-	import Swatch from './swatch.svelte';
+	import TopButton from '$lib/components/button/buttonToTop.svelte';
+	import Swatch from '$lib/components/random/swatch.svelte';
 	export let title = 'Placeholder';
 	let normalize: HTMLLinkElement;
 	function nornmalizeLoaded() {

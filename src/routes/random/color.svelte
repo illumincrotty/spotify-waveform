@@ -1,6 +1,6 @@
 <script>
-	import Page from '$lib/components/page.svelte';
-	import Swatch from '$lib/components/swatch.svelte';
+	import Page from '$lib/components/layout/page.svelte';
+	import Swatch from '$lib/components/random/swatch.svelte';
 </script>
 
 <Page title="Color">

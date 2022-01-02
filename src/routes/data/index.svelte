@@ -1,6 +1,5 @@
 <script lang="ts">
-	import Loader from '$lib/components/loader.svelte';
-	import Page from '$lib/components/page.svelte';
+	import Page from '$lib/components/layout/page.svelte';
 </script>
 
 <Page title="Data">

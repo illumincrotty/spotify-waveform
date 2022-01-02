@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { browser } from '$app/env';
 	import { base } from '$app/paths';
 
-	import Header from '$lib/components/header.svelte';
-	import { colorPreference, token } from '$lib/storeSession';
+	import Header from '$lib/components/layout/header.svelte';
+	import { token } from '$lib/storeSession';
 	export const title = 'Example';
 
 	let links = [{ href: 'random', label: 'Other' }];

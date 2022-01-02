@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Button from './button.svelte';
+	import Button from './buttonBase.svelte';
 
 	let press = false;
 </script>
@@ -7,7 +7,6 @@
 <Button
 	buttonLabel="Toggle Theme"
 	svgLabel="Light Bulb"
-	width="1.75em"
 	on:click={() => {
 		document.documentElement.classList.toggle('theme-flip');
 	}}

@@ -11,20 +11,20 @@
 	};
 </script> -->
 <script lang="ts">
-	// import { page } from '$app/stores';
-	import Page from '$lib/components/page.svelte';
-	import TreeView from 'svelte-tree-view/TreeView.svelte';
+	import type { pkceToken } from 'tokens';
 
 	import { onMount, tick } from 'svelte';
 	import { token } from '$lib/storeSession';
-	import { createSpotifyConnection } from '$lib/api';
-	import type { pkceToken } from 'tokens';
-	import WavyBarChart from '$lib/components/wavyBarChart.svelte';
-	import { page } from '$app/stores';
-	import OverlayLoading from '$lib/components/overlayLoading.svelte';
-	import { goto } from '$app/navigation';
+	import { createSpotifyConnection } from '$lib/script/api';
+
+	import Page from '$lib/components/layout/page.svelte';
+	import OverlayLoading from '$lib/components/overlay/overlayLoading.svelte';
+	import WaveChart from '$lib/components/chart/chartCenteredBar.svelte';
+
+	import TreeView from 'svelte-tree-view/TreeView.svelte';
 
 	export let trackID = '';
+
 	let ready = false;
 	let spotify: ReturnType<typeof createSpotifyConnection>;
 	let trackPromise: ReturnType<typeof spotify['track']> = undefined;
@@ -131,7 +131,7 @@
 {:else}
 	<Page title={trackName}>
 		{#if maxLoudness}
-			<WavyBarChart data={maxLoudness} />
+			<WaveChart data={maxLoudness} />
 		{/if}
 		<!-- {#if ready}
 		{#if trackPromise}

@@ -1,9 +1,6 @@
 <script lang="ts">
-	import LoadingBoxes from '$lib/components/loadingBoxes.svelte';
-
-	import OverlayLoading from '$lib/components/overlayLoading.svelte';
-
-	import Page from '$lib/components/page.svelte';
+	import Page from '$lib/components/layout/page.svelte';
+	import OverlayLoading from '$lib/components/overlay/overlayLoading.svelte';
 </script>
 
 <svelte:head><title>Spotify Waveforms</title></svelte:head>
@@ -11,7 +8,6 @@
 <svelte:body />
 <Page title="Loading">
 	<OverlayLoading />
-	<!-- <LoadingBoxes /> -->
 	<div slot="footer" />
 </Page>
 

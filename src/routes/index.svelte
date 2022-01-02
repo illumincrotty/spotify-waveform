@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Page from '$lib/components/page.svelte';
-	import SpotifyButton from '$lib/components/spotifyButton.svelte';
-	import Swatch from '$lib/components/swatch.svelte';
+	import Page from '$lib/components/layout/page.svelte';
+	import SpotifyButton from '$lib/components/button/spotifyButton.svelte';
+	import Swatch from '$lib/components/random/swatch.svelte';
 	import { token } from '$lib/storeSession';
 </script>
 

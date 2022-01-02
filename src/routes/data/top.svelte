@@ -1,17 +1,14 @@
 <script lang="ts">
-	import { createSpotifyConnection } from '$lib/api';
+	import { createSpotifyConnection } from '$lib/script/api';
 	import { fade } from 'svelte/transition';
 	import { cubicInOut } from 'svelte/easing';
 	import { onMount, tick } from 'svelte';
 
-	import Page from '$lib/components/page.svelte';
-	import Dropdown from '$lib/components/dropdown.svelte';
-
-	import OverlayLogin from '$lib/components/overlayLogin.svelte';
 	import { token } from '$lib/storeSession';
 	import type { pkceToken } from 'tokens';
 	import { base } from '$app/paths';
-	import Track from './track.svelte';
+	import Page from '$lib/components/layout/page.svelte';
+	import Dropdown from '$lib/components/button/dropdown.svelte';
 
 	let spotify: ReturnType<typeof createSpotifyConnection>;
 	let artistPromise =

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
-	import SpotifyButton from './spotifyButton.svelte';
+	import SpotifyButton from '$lib/components/button/spotifyButton.svelte';
+
 	import Overlay from './overlay.svelte';
 
 	let loginButton: SpotifyButton;

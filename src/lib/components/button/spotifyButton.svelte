@@ -1,6 +1,6 @@
 <!-- Component logic -->
 <script lang="ts">
-	import { login } from '$lib/authentication';
+	import { login } from '$lib/script/authentication';
 
 	let button: HTMLButtonElement;
 

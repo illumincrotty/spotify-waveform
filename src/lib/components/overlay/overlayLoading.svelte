@@ -1,6 +1,7 @@
 <script lang="ts">
-	import Loader, { loadingSymbol } from './loader.svelte';
-
+	import Loader, {
+		loadingSymbol,
+	} from '$lib/components/loading/loader.svelte';
 	import Overlay from './overlay.svelte';
 
 	export let symbol: loadingSymbol = undefined;

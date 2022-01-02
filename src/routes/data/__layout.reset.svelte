@@ -2,10 +2,10 @@
 	import { goto } from '$app/navigation';
 
 	import { base } from '$app/paths';
-	import { refreshToken } from '$lib/authentication';
+	import { refreshToken } from '$lib/script/authentication';
 
-	import Header from '$lib/components/header.svelte';
-	import OverlayLogin from '$lib/components/overlayLogin.svelte';
+	import Header from '$lib/components/layout/header.svelte';
+	import OverlayLogin from '$lib/components/overlay/overlayLogin.svelte';
 	import { token } from '$lib/storeSession';
 	import { onMount } from 'svelte';
 	import type { pkceToken } from 'tokens';

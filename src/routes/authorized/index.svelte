@@ -1,7 +1,4 @@
 <script lang="ts">
-	import Loader from '$lib/components/loader.svelte';
-	import Page from '$lib/components/page.svelte';
-
 	// Framework Utilities
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
@@ -11,7 +8,9 @@
 	import { token } from '$lib/storeSession';
 
 	// Functions
-	import { verify } from '$lib/authentication';
+	import { verify } from '$lib/script/authentication';
+	import Page from '$lib/components/layout/page.svelte';
+	import Loader from '$lib/components/loading/loader.svelte';
 
 	onMount(() => {
 		if ($token !== 'empty') {
