@@ -1,6 +1,6 @@
 :root {
 	--measure: 70ch;
-	--padding: 2ch;
+	--padding: 1.2rem;
 }
 
 .pad {
@@ -74,11 +74,10 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: var(--gap);
-}
-
-.sidebar > * {
-	flex-basis: var(--side-width);
-	flex-grow: 1;
+	& > * {
+		flex-basis: var(--side-width);
+		flex-grow: 1;
+	}
 }
 
 /* ↓ if is a right sidebar (side: right) -> :first-child */
@@ -102,4 +101,20 @@
 		flex-grow: 1;
 		flex-basis: calc(var(--basis) * 999);
 	}
+}
+
+/* The Reel
+-----------------------------------------------------------------------*/
+
+.reel {
+	--gap: 1.5rem;
+	display: flex;
+	overflow-x: auto;
+	/* overflow-y: hidden; */
+	gap: var(--gap);
+}
+.reel > :global(img) {
+	height: 100%;
+	flex-basis: auto;
+	width: auto;
 }

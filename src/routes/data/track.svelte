@@ -1,31 +1,18 @@
-<!-- <script lang="ts" context="module">
-	import { browser } from '$app/env';
-	import type { Load } from '@sveltejs/kit';
-
-	export const load: Load = ({ params, fetch, session, stuff }) => {
-		if (browser) {
-			return { props: { trackID: params.slug } };
-		}
-
-		return {};
-	};
-</script> -->
 <script lang="ts">
-	import type { pkceToken } from 'tokens';
-
-	import { onMount, tick } from 'svelte';
+	import { onMount } from 'svelte';
 	import { token } from '$lib/storeSession';
 	import { createSpotifyConnection } from '$lib/script/api';
 
 	import Page from '$lib/components/layout/page.svelte';
 	import OverlayLoading from '$lib/components/overlay/overlayLoading.svelte';
 	import WaveChart from '$lib/components/chart/chartCenteredBar.svelte';
-
-	import TreeView from 'svelte-tree-view/TreeView.svelte';
+	import { processAudioAnalysis } from '$lib/script/trackAnalysis';
+	import JsonView from '$lib/components/random/jsonView.svelte';
+	import Loader from '$lib/components/loading/loader.svelte';
+	import SpotifyCodeSvg from '$lib/components/spotifyCodeSVG.svelte';
 
 	export let trackID = '';
 
-	let ready = false;
 	let spotify: ReturnType<typeof createSpotifyConnection>;
 	let trackPromise: ReturnType<typeof spotify['track']> = undefined;
 	let trackAnalysisPromise: ReturnType<typeof spotify['audioAnalysis']> =
@@ -35,7 +22,7 @@
 
 	let maxLoudness: number[] = undefined;
 
-	let trackName = 'Track Name';
+	let trackName = 'PlaceHolder';
 	// let trackAnalysis: Awaited<ReturnType<typeof spotify['audioAnalysis']>>;
 
 	onMount(() => {
@@ -50,121 +37,68 @@
 		}
 		console.debug(`id: ${trackID}`);
 
-		if ($token !== 'empty') {
-			spotifySetup($token);
+		if ($token !== 'empty' && token.valid()) {
+			spotify = createSpotifyConnection($token);
+			spotify.track(trackID).then((trackDetails) => {
+				trackName = `${trackDetails.name} by ${trackDetails.artists[0].name}`;
+			});
+			void asyncMount();
 		}
-		tick().then(() => {
-			ready = true;
-		});
 	});
 
-	const spotifySetup = async (token: pkceToken) => {
-		spotify = createSpotifyConnection(token);
-		const trackDetails = await spotify.track(trackID);
-		trackName = `${trackDetails.name} by ${trackDetails.artists[0].name}`;
-
+	const asyncMount = async () => {
 		trackPromise = spotify.track(trackID);
 		trackFeaturesPromise = spotify.audioFeatures(trackID);
 		trackAnalysisPromise = spotify.audioAnalysis(trackID);
-		let trackAnalysis = await spotify.audioAnalysis(trackID);
 
-		// const trueMax = Math.min(
-		// 	...trackAnalysis.segments.map((segment) => segment.loudness_max)
-		// );
-
-		let volumeNormalized = trackAnalysis.segments.map((segment) => {
-			return {
-				time: segment.start,
-				duration: segment.duration,
-				loud:
-					1 - Math.min(Math.max(segment.loudness_max, -35), 0) / -35,
-			};
-		});
-
-		maxLoudness = volumeNormalized.map((value) => value.loud);
-
-		const timeNormalized: number[] = [];
-		let current = 0;
-		console.log(`Duration: ${trackAnalysis.track.duration}`);
-		for (let i = 0; i < 100; i++) {
-			const desired = (trackAnalysis.track.duration / 100) * i;
-			console.log(desired);
-			while (
-				volumeNormalized.length - 1 > current &&
-				volumeNormalized[current + 1].time <= desired
-			) {
-				current += 1;
-			}
-			timeNormalized.push(volumeNormalized[current].loud);
-		}
-
-		maxLoudness = timeNormalized;
-
-		console.log(volumeNormalized);
-		console.log(timeNormalized);
-	};
-	const theme = {
-		'scheme': 'google',
-		'author': 'seth wright (http://sethawright.com)',
-		'base00': 'var(--bg)',
-		'base01': '#282a2e',
-		'base02': '#373b41',
-		'base03': '#969896',
-		'base04': '#b4b7b4',
-		'base05': '#c5c8c6',
-		'base06': '#e0e0e0',
-		'base07': '#ffffff',
-		'base08': 'var(--t3)',
-		'base09': 'var(--t4)',
-		'base0A': '#FBA922',
-		'base0B': 'var(--t1)',
-		'base0C': 'var(--t3)',
-		'base0D': 'var(--t3)',
-		'base0E': 'var(--t4)',
-		'base0F': '#3971ED',
-		'tree-view-font-size': '3rem',
+		maxLoudness = processAudioAnalysis(
+			await spotify.audioAnalysis(trackID)
+		);
 	};
 </script>
 
-{#if trackID === ''}
+{#if trackID === '' || trackName === 'PlaceHolder'}
 	<OverlayLoading />
 {:else}
 	<Page title={trackName}>
+		<h2>Spotify Code</h2>
+		<SpotifyCodeSvg uri="track:{trackID}" />
+
 		{#if maxLoudness}
+			<hr />
+
+			<h2>Track Waveform</h2>
+
 			<WaveChart data={maxLoudness} />
 		{/if}
-		<!-- {#if ready}
+
+		<hr />
 		{#if trackPromise}
+			<h2>Track Details</h2>
 			{#await trackPromise}
-				<div>Loading...</div>
-			{:then trackInfo}
-				<TreeView {theme} data={trackInfo} />
+				<Loader />
+			{:then features}
+				<JsonView data={features} />
 			{/await}
+			<hr />
 		{/if}
-		<br />
 		{#if trackFeaturesPromise}
+			<h2>Track Features</h2>
 			{#await trackFeaturesPromise}
-				<div>Loading...</div>
-			{:then trackInfo}
-				<TreeView {theme} data={trackInfo} />
+				<Loader />
+			{:then features}
+				<JsonView data={features} />
 			{/await}
+			<hr />
 		{/if}
-		<br />
 		{#if trackAnalysisPromise}
+			<h2>Track Analysis</h2>
+
 			{#await trackAnalysisPromise}
-				<div>Loading...</div>
-			{:then trackInfo}
-				<TreeView {theme} data={trackInfo} />
+				<Loader />
+			{:then analysis}
+				<JsonView data={analysis} />
 			{/await}
 		{/if}
-	{/if} -->
-		<!-- <slot /> -->
 	</Page>
 {/if}
-
-<style>
-	:global(ul.svelte-tree-view:not(#\9)) {
-		--tree-view-font-size: 1em;
-		max-width: var(--measure);
-	}
-</style>

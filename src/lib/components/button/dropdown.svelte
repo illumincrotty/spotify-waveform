@@ -86,7 +86,7 @@
 </script>
 
 <template>
-	<div>
+	<h2 class="dropdown">
 		<label for={id} id="{id}-label" class="ds-label"> {name} - </label>
 		<div
 			class="ds-main ds-select"
@@ -152,7 +152,7 @@
 				{/each}
 			</div>
 		</div>
-	</div>
+	</h2>
 </template>
 
 <style lang="postcss">
@@ -161,6 +161,9 @@
 		width: 0.8em;
 		stroke: var(--text);
 	} */
+	.dropdown {
+		font-size: var(--font-m);
+	}
 	.ds-main *,
 	.ds-main *::before,
 	.ds-main *::after {

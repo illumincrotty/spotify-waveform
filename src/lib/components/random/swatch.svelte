@@ -4,7 +4,7 @@
 
 <ul class="unlist switcher pad">
 	{#each names as color, index}
-		<li class="pad dark" style="--bg: {color};">
+		<li class="pad dark shadow-pop" style="--bg: {color};">
 			{names[index].toUpperCase()}
 		</li>
 	{/each}

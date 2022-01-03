@@ -1,12 +1,14 @@
 <script lang="ts">
 	import Button from './buttonBase.svelte';
 
+	export let visible = false;
+
 	const clickHandler = () => {
-		scrollTo({ top: 0, behavior: 'smooth' });
+		scrollTo({ top: 0 });
 	};
 </script>
 
-<div>
+<div style="visibility: {visible ? 'visible' : 'hidden'};">
 	<Button
 		on:click={clickHandler}
 		buttonLabel="To Top"

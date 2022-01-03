@@ -7,7 +7,7 @@
 	import Loader from '$lib/components/loading/loader.svelte';
 
 	onMount(() => {
-		$token = 'empty';
+		token.clear();
 		goto(`${base}/`);
 	});
 </script>

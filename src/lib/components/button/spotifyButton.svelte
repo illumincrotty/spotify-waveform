@@ -14,6 +14,7 @@
 		void login();
 	}}
 	bind:this={button}
+	class="shadow-pop"
 >
 	Login to <svg
 		xmlns="http://www.w3.org/2000/svg"
@@ -35,19 +36,20 @@
 		position: relative;
 
 		padding: 0.5rem 1rem;
-		border-radius: 5rem;
 		background-color: #191414;
 		color: #1db954;
 		fill: #1db954;
-		transition: outline-width 0.25s;
+		border: 0.2em solid var(--bg);
 
 		margin-left: auto;
 		margin-right: auto;
 
+		transition: all 0.3s;
+
 		&:hover,
 		&:focus-visible,
 		&:active {
-			outline: 0.2em #1db954 solid;
+			border: 0.2em #1db954 solid;
 		}
 		&:active::after {
 			position: absolute;
@@ -57,7 +59,6 @@
 			height: 100%;
 			top: 0;
 			left: 0;
-			border-radius: 1em;
 			background-color: rgba(255, 255, 255, 0.2);
 			pointer-events: none;
 		}

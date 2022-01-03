@@ -13,9 +13,9 @@
 	/* #F65D5A --*/
 
 	--dark: #2d2f33;
-	--dark-overlay: #000000a0;
+	--dark-overlay: rgb(0, 0, 0, 10%);
 	--light: #c9eafc;
-	--light-overlay: #ffffff40;
+	--light-overlay: rgb(255, 255, 255, 10%);
 
 	/* --green: #00a485; */
 	/* --purple: #ab6dff; */
@@ -48,7 +48,7 @@
 	--text: var(--light);
 	--bg: var(--dark);
 	--overlay: var(--light-overlay);
-	--overlay-anti: var(--dark-overlay);
+	--anti-overlay: var(--dark-overlay);
 
 	--font-ratio: 1.25;
 
@@ -84,12 +84,12 @@
 		--text: var(--light);
 		--bg: var(--dark);
 		--overlay: var(--light-overlay);
-		--overlay-anti: var(--dark-overlay);
+		--anti-overlay: var(--dark-overlay);
 		&.theme-flip {
 			--text: var(--dark);
 			--bg: var(--light);
 			--overlay: var(--dark-overlay);
-			--overlay-anti: var(--light-overlay);
+			--anti-overlay: var(--light-overlay);
 		}
 	}
 
@@ -97,13 +97,13 @@
 		--text: var(--dark);
 		--bg: var(--light);
 		--overlay: var(--dark-overlay);
-		--overlay-anti: var(--light-overlay);
+		--anti-overlay: var(--light-overlay);
 
 		&.theme-flip {
 			--text: var(--light);
 			--bg: var(--dark);
 			--overlay: var(--light-overlay);
-			--overlay-anti: var(--dark-overlay);
+			--anti-overlay: var(--dark-overlay);
 		}
 	}
 	@media (prefers-reduced-motion: reduce) {
@@ -129,7 +129,7 @@ svg {
 	background: unset;
 }
 
-a {
+a:not([role="link"]) {
 	color: currentColor;
 	background: none;
 	text-decoration: underline solid var(--theme) 0.1rem;
@@ -205,11 +205,23 @@ h2 {
 }
 
 button {
-	border-radius: 2rem;
 	font: inherit;
 	color: inherit;
 	display: block;
-	border: 0.2em solid var(--theme);
+	border: 0.2rem solid var(--theme);
+	cursor: pointer;
+
+	&:hover,
+	&:focus-within {
+		background: var(--theme);
+		color: var(--dark);
+	}
+
+	&:active {
+		color: var(--bg);
+		background: var(--text);
+		border-color: var(--text);
+	}
 }
 
 /* header {

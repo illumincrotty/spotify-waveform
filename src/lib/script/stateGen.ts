@@ -1,5 +1,5 @@
 const randomBytes = (length = 32): Uint8Array =>
-	crypto.getRandomValues(new Uint8Array(length));
+	globalThis.crypto.getRandomValues(new Uint8Array(length));
 
 const randomStringGenerator = (length = 32, validChars?: string): string =>
 	randomBytesToString(randomBytes(length), validChars);

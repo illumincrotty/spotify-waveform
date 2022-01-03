@@ -8,29 +8,30 @@
 	import OverlayLogin from '$lib/components/overlay/overlayLogin.svelte';
 	import { token } from '$lib/storeSession';
 	import { onMount } from 'svelte';
-	import type { pkceToken } from 'tokens';
 	export const title = 'Example';
 
 	let mounted = false;
 
 	onMount(() => {
 		if ($token !== 'empty') {
-			asyncMount($token);
+			if (!token.valid()) {
+				token.refresh();
+			}
 		}
 		mounted = true;
 	});
 
-	const asyncMount = async (input: pkceToken) => {
-		if (input.expires_at < Date.now()) {
-			const freshToken = await refreshToken(input);
-			if (freshToken) {
-				$token = freshToken;
-			} else {
-				$token = 'empty';
-				goto(`${base}`);
-			}
-		}
-	};
+	// const asyncMount = async (input: pkceToken) => {
+	// 	if (input.expires_at < Date.now()) {
+	// 		const freshToken = await refreshToken(input);
+	// 		if (freshToken) {
+	// 			$token = freshToken;
+	// 		} else {
+	// 			$token = 'empty';
+	// 			goto(`${base}`);
+	// 		}
+	// 	}
+	// };
 </script>
 
 <svelte:head>
@@ -48,6 +49,7 @@
 	links={[
 		{ href: '', label: 'Home' },
 		{ href: 'data', label: 'Data' },
+		{ href: 'data/search', label: 'Search' },
 		{ href: 'data/top', label: 'Top Data' },
 	]}
 />

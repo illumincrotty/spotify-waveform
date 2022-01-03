@@ -39,90 +39,38 @@ export type time_range = {
 	time_range?: `${timeOptions}_term`;
 };
 
-interface AudioAnalysisResponse {
-	meta: {
-		analyzer_version: string;
-		platform: string;
-		detailed_status: string;
-		status_code: number;
-		timestamp: number;
-		analysis_time: number;
-		input_process: string;
-	};
+type mediaOptions =
+	| 'album'
+	| 'artist'
+	| 'playlist'
+	| 'track'
+	| 'show'
+	| 'episode';
 
-	track: {
-		num_samples: number;
-		duration: number;
-		sample_md5: string;
-		offset_seconds: number;
-		window_seconds: number;
-		analysis_sample_rate: number;
-		analysis_channels: number;
-		end_of_fade_in: number;
-		start_of_fade_out: number;
-		loudness: number;
-		tempo: number;
-		tempo_confidence: number;
-		time_signature: number;
-		time_signature_confidence: number;
-		key: number;
-		key_confidence: number;
-		mode: number;
-		mode_confidence: number;
-		codestring: string;
-		code_version: number;
-		echoprintstring: string;
-		echoprint_version: number;
-		synchstring: string;
-		synch_version: number;
-		rhythmstring: string;
-		rhythm_version: number;
-	};
+export type searchOptions = {
+	/**
+	 * Your search query.
+	 *
+	 * You can narrow down your search using field filters. The available filters are album, artist, track, year, upc, tag:hipster, tag:new, isrc, and genre. Each field filter only applies to certain result types.
+	 * The artist filter can be used while searching albums, artists or tracks.
+	 * The album and year filters can be used while searching albums or tracks. You can filter on a single year or a range (e.g. 1955-1960).
+	 * The genre filter can be use while searching tracks and artists.
+	 * The isrc and track filters can be used while searching tracks.
+	 * The upc, tag:new and tag:hipster filters can only be used while searching albums. The tag:new filter will return albums released in the past two weeks and tag:hipster can be used to return only albums with the lowest 10% popularity.
+	 *
+	 * You can also use the NOT operator to exclude keywords from your search.
+	 *
+	 * @example "remaster%20track:Doxy+artist:Miles%20Davis"
+	 */
+	q: string;
 
-	bar: {
-		start: number;
-		duration: number;
-		confidence: number;
-	};
-
-	beats: {
-		start: number;
-		duration: number;
-		confidence: number;
-	}[];
-
-	sections: {
-		start: number;
-		duration: number;
-		confidence: number;
-		loudness: number;
-		tempo: number;
-		tempo_confidence: number;
-		key: number;
-		key_confidence: number;
-		mode: number;
-		mode_confidence: number;
-		time_signature: number;
-		time_signature_confidence: number;
-	}[];
-
-	segments: {
-		start: number;
-		duration: number;
-		confidence: number;
-		loudness_start: number;
-		loudness_max: number;
-		loudness_max_time: number;
-		loudness_end: number;
-		pitches: number[];
-		timbre: number[];
-	}[];
-	tatums: {
-		start: number;
-		duration: number;
-		confidence: number;
-	}[];
-}
+	/**
+	 * A comma-separated list of item types to search across. Search results include hits from all the specified item types.
+	 *
+	 * For example: q=name:abacab&type=album,track returns both albums and tracks with "abacab" included in their name.
+	 */
+	type: mediaOptions[];
+};
 
 const queryStringify = <T extends query>(options?: T) => {
 	return options
@@ -150,10 +98,6 @@ type easyFetchOptions<_options extends query> = {
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const createSpotifyConnection = (token: pkceToken) => {
-	const head = new Headers({
-		Authorization: `Bearer ${token.access_token}`,
-	});
-
 	const easyFetch = async <returnValue, T extends query>(
 		options: easyFetchOptions<T>
 	): Promise<returnValue> => {
@@ -161,10 +105,14 @@ const createSpotifyConnection = (token: pkceToken) => {
 			`${BASE_URL}${options.route}${queryStringify(options.options)}`,
 			{
 				method: `${options?.method ?? 'GET'}`,
-				headers: head,
+				headers: { Authorization: `Bearer ${token.access_token}` },
 			}
 		);
-		return response.json() as unknown as returnValue;
+		if (response.ok) {
+			return response.json() as unknown as returnValue;
+		} else if (response.status === 401) {
+			token;
+		}
 	};
 
 	type idList = {
@@ -314,11 +262,26 @@ const createSpotifyConnection = (token: pkceToken) => {
 		 * @param id - Get a low-level audio analysis for a track in the Spotify catalog. The audio analysis describes the track’s structure and musical content, including rhythm, pitch, and timbre.
 		 * @returns Audio analysis for one track
 		 */
-		audioAnalysis: async (id: string): Promise<AudioAnalysisResponse> =>
+		audioAnalysis: async (
+			id: string
+		): Promise<SpotifyApi.AudioAnalysisResponse> =>
 			easyFetch({ route: `/audio-analysis/${id}` }),
 	};
 
-	return { ...user, ...tracks };
+	const search = {
+		/**
+		 * Get Spotify catalog information about albums, artists, playlists, tracks, shows or episodes that match a keyword string.		 *
+		 *
+		 * @param options - Your search query
+		 * @returns Audio features for one track
+		 */
+		search: async (
+			options: searchOptions & pagingOptions
+		): Promise<SpotifyApi.SearchResponse> =>
+			easyFetch({ route: `/search`, options }),
+	};
+
+	return { ...user, ...tracks, ...search };
 };
 
 export { createSpotifyConnection };

@@ -89,6 +89,7 @@ export const verify = (
 export const refreshToken = async (
 	token: pkceToken
 ): Promise<false | pkceToken> => {
+	console.debug('refreshing');
 	if (token.expires_at >= Date.now()) return token;
 
 	const response = await fetch('https://accounts.spotify.com/api/token', {
@@ -112,7 +113,7 @@ export const refreshToken = async (
 		return {
 			access_token: json.access_token,
 			refresh_token: token.refresh_token,
-			expires_at: Date.now() + 1000 * +json.expires_in,
+			expires_at: Date.now() + 1000 * json.expires_in,
 		};
 	}
 	return false;

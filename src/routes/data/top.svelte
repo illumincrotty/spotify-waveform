@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { createSpotifyConnection } from '$lib/script/api';
-	import { fade } from 'svelte/transition';
-	import { cubicInOut } from 'svelte/easing';
 	import { onMount, tick } from 'svelte';
 
 	import { token } from '$lib/storeSession';
 	import type { pkceToken } from 'tokens';
-	import { base } from '$app/paths';
 	import Page from '$lib/components/layout/page.svelte';
 	import Dropdown from '$lib/components/button/dropdown.svelte';
+	import TrackBlock from '$lib/components/layout/trackBlock.svelte';
+	import BlockStack from '$lib/components/layout/blockStack.svelte';
+	import ArtistBlock from '$lib/components/layout/artistBlock.svelte';
 
 	let spotify: ReturnType<typeof createSpotifyConnection>;
 	let artistPromise =
@@ -18,7 +18,7 @@
 
 	onMount(() => {
 		if ($token !== 'empty') {
-			spotifySetup($token);
+			if (token.valid()) spotifySetup($token);
 		}
 		tick().then(() => {
 			mounted = true;
@@ -41,7 +41,7 @@
 
 <Page title="Top Spotify Info">
 	{#if mounted}
-		<div class="box flexy" style="--gap: 2ch">
+		<div class="box switcher" style="--gap: 2ch">
 			<section class="stack" style="align-items: flex-start;">
 				<Dropdown
 					name="Top Tracks"
@@ -62,23 +62,10 @@
 					{#await trackPromise}
 						<div>Loading...</div>
 					{:then tracks}
-						<ul class="unlist">
-							{#each tracks.items as track}
-								<li>
-									<a
-										rel="external"
-										href="{base}/data/track?id={track.id}"
-										>{track.name}</a
-									>
-									by
-									<a
-										rel="external"
-										href={track.artists[0].external_urls
-											.spotify}>{track.artists[0].name}</a
-									>
-								</li>
-							{/each}
-						</ul>
+						<BlockStack
+							component={TrackBlock}
+							items={tracks.items}
+						/>
 					{:catch}
 						<div>Failure</div>
 					{/await}
@@ -104,23 +91,10 @@
 					{#await artistPromise}
 						<div>Loading...</div>
 					{:then artists}
-						<ul class="unlist">
-							{#each artists.items as artist}
-								<li
-									transition:fade={{
-										delay: 0,
-										duration: 500,
-										easing: cubicInOut,
-									}}
-								>
-									<a
-										rel="external"
-										href={artist.external_urls.spotify}
-										>{artist.name}</a
-									>
-								</li>
-							{/each}
-						</ul>
+						<BlockStack
+							component={ArtistBlock}
+							items={artists.items}
+						/>
 					{:catch}
 						<div>Failure</div>
 					{/await}
@@ -131,17 +105,4 @@
 </Page>
 
 <style lang="postcss">
-	ul {
-		line-height: 1.8;
-	}
-	li {
-		font-size: 0.8em;
-	}
-	.flexy {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		gap: var(--gap);
-		justify-content: space-evenly;
-	}
 </style>

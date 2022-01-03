@@ -24,9 +24,12 @@
 	<title>{title}</title>
 </svelte:head>
 <svelte:window bind:scrollY={y} />
-<header class="dark contrast">
-	<h1 class="stack">{title}</h1>
-</header>
+
+<slot name="header">
+	<header class="dark contrast">
+		<h1 class="stack">{title}</h1>
+	</header>
+</slot>
 
 <main class="center stack pad" id="page-main">
 	<slot>
@@ -47,9 +50,7 @@
 			nihil.
 		</p>
 	</slot>
-	{#if y > 50}
-		<TopButton />
-	{/if}
+	<TopButton visible={y > 50} />
 </main>
 <footer>
 	<slot name="footer" />

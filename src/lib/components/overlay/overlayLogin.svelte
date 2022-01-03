@@ -13,7 +13,7 @@
 	});
 
 	const onKeyDown = (ev: KeyboardEvent) => {
-		console.debug(ev.key);
+		// console.debug(ev.key);
 
 		if (ev.key !== 'Tab') return;
 		loginButton.focus();
