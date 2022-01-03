@@ -49,25 +49,25 @@
 
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/start-464e9d0a.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/vendor-3ca814c7.css">
-		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/__layout.svelte-4523da95.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/__layout.svelte-8cbc18f7.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/header-8894a03d.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/buttonBase-d060fecd.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/random/quotes.svelte-545189db.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/page-fdd566ba.css">
-		<link rel="modulepreload" href="/spotify-waveform/internal/start-ec965440.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/vendor-7791b14a.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/start-9bcf7381.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/vendor-1c0fa305.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/singletons-12a22614.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/paths-28a87002.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/pages/__layout.svelte-d1d0300d.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/header-a4ad0e00.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/buttonBase-968700bd.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/storeSession-26f31574.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/pages/random/quotes.svelte-fc92c5e9.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/page-9c97327a.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/buttonPlus-df845286.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/__layout.svelte-63380967.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/header-a8242c12.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/buttonBase-e15f0122.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/storeSession-aba39d8a.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/random/quotes.svelte-e53c450f.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/page-24b96d7d.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/buttonPlus-e8578c69.js">
 
 		<script type="module">
-			import { start } from "/spotify-waveform/internal/start-ec965440.js";
+			import { start } from "/spotify-waveform/internal/start-9bcf7381.js";
 			start({
 				target: document.querySelector("body"),
 				paths: {"base":"/spotify-waveform","assets":"/spotify-waveform"},
@@ -79,17 +79,13 @@
 					status: 200,
 					error: null,
 					nodes: [
-						import("/spotify-waveform/internal/pages/__layout.svelte-d1d0300d.js"),
-						import("/spotify-waveform/internal/pages/random/quotes.svelte-fc92c5e9.js")
+						import("/spotify-waveform/internal/pages/__layout.svelte-63380967.js"),
+						import("/spotify-waveform/internal/pages/random/quotes.svelte-e53c450f.js")
 					],
-					url: new URL("sveltekit://prerender/random/quotes"),
+					url: new URL("http://prerender/random/quotes"),
 					params: {}
 				}
 			});
-		</script><script>
-			if ('serviceWorker' in navigator) {
-				navigator.serviceWorker.register('/service-worker.js');
-			}
 		</script>
 	</head>
 
@@ -115,12 +111,16 @@
 
 
 
-<header class="dark contrast svelte-1ai6tko"><h1 class="stack">Quotes</h1></header>
+
+	<header class="dark contrast svelte-1ai6tko"><h1 class="stack">Quotes</h1></header>
+
 
 <main class="center stack pad" id="page-main">
 	<div class="center-i"><button aria-pressed="false" aria-label="Add Additional Content" class="svg-button svelte-1up1ez0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" aria-label="plus" style="width:2em" class="svelte-1up1ez0 svg-circle"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"></path></svg>
 </button></div>
-	</main>
+	<div style="visibility: hidden;" class="svelte-1s9tm7b"><button aria-pressed="false" aria-label="To Top" class="svg-button svelte-1up1ez0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" aria-label="arrow up" style="width:2em" class="svelte-1up1ez0 svg-circle"><path d="M12.929.545A1.09 1.09 0 0011.043.54l-9.53 16.361a1.088 1.088 0 00.942 1.639h18.989a1.09 1.09 0 00.944-1.637L12.928.544z"></path></svg>
+</button>
+</div></main>
 <footer class="svelte-1ai6tko">
 </footer>
 

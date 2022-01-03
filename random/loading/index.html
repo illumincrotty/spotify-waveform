@@ -49,29 +49,29 @@
 
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/start-464e9d0a.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/vendor-3ca814c7.css">
-		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/__layout.svelte-4523da95.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/__layout.svelte-8cbc18f7.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/header-8894a03d.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/buttonBase-d060fecd.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/page-fdd566ba.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/overlayLoading-25b8aabf.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/loader-5f48fc3c.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/overlay-4561f837.css">
-		<link rel="modulepreload" href="/spotify-waveform/internal/start-ec965440.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/vendor-7791b14a.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/start-9bcf7381.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/vendor-1c0fa305.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/singletons-12a22614.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/paths-28a87002.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/pages/__layout.svelte-d1d0300d.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/header-a4ad0e00.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/buttonBase-968700bd.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/storeSession-26f31574.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/pages/random/loading.svelte-8702c157.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/page-9c97327a.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/overlayLoading-a2c42172.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/loader-ca43e76f.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/overlay-6dd64090.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/__layout.svelte-63380967.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/header-a8242c12.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/buttonBase-e15f0122.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/storeSession-aba39d8a.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/random/loading.svelte-46708ef9.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/page-24b96d7d.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/overlayLoading-82a4e248.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/loader-d17496a3.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/overlay-dd8139e1.js">
 
 		<script type="module">
-			import { start } from "/spotify-waveform/internal/start-ec965440.js";
+			import { start } from "/spotify-waveform/internal/start-9bcf7381.js";
 			start({
 				target: document.querySelector("body"),
 				paths: {"base":"/spotify-waveform","assets":"/spotify-waveform"},
@@ -83,17 +83,13 @@
 					status: 200,
 					error: null,
 					nodes: [
-						import("/spotify-waveform/internal/pages/__layout.svelte-d1d0300d.js"),
-						import("/spotify-waveform/internal/pages/random/loading.svelte-8702c157.js")
+						import("/spotify-waveform/internal/pages/__layout.svelte-63380967.js"),
+						import("/spotify-waveform/internal/pages/random/loading.svelte-46708ef9.js")
 					],
-					url: new URL("sveltekit://prerender/random/loading"),
+					url: new URL("http://prerender/random/loading"),
 					params: {}
 				}
 			});
-		</script><script>
-			if ('serviceWorker' in navigator) {
-				navigator.serviceWorker.register('/service-worker.js');
-			}
 		</script>
 	</head>
 
@@ -119,11 +115,16 @@
 
 
 
-<header class="dark contrast svelte-1ai6tko"><h1 class="stack">Loading</h1></header>
+
+
+	<header class="dark contrast svelte-1ai6tko"><h1 class="stack">Loading</h1></header>
+
 
 <main class="center stack pad" id="page-main"><div class="overlay svelte-jk6jwt"><section class="svelte-1bkbffv"><div><div style="max-width: 10rem"><svg class="spinner svelte-41e5fg" viewBox="0 0 50 50" style="margin: calc(-.5*10rem 0 0 calc(-.5*10rem; width: 10rem; height: 10rem;"><circle class="path bg svelte-41e5fg" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle><circle class="path rotate svelte-41e5fg" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg></div></div></section>
 	</div>
-	</main>
+	<div style="visibility: hidden;" class="svelte-1s9tm7b"><button aria-pressed="false" aria-label="To Top" class="svg-button svelte-1up1ez0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" aria-label="arrow up" style="width:2em" class="svelte-1up1ez0 svg-circle"><path d="M12.929.545A1.09 1.09 0 0011.043.54l-9.53 16.361a1.088 1.088 0 00.942 1.639h18.989a1.09 1.09 0 00.944-1.637L12.928.544z"></path></svg>
+</button>
+</div></main>
 <footer class="svelte-1ai6tko"><div slot="footer"></div>
 </footer>
 
