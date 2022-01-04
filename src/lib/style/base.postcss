@@ -294,3 +294,34 @@ a:focus-visible {
 		/* animation: shadow-pop-in 0.3s cubic-bezier(0.47, 0, 0.745, 0.715) both; */
 	}
 }
+
+.card {
+	display: flex;
+	background: var(--overlay);
+	padding: calc(var(--padding) / 2);
+	align-items: center;
+
+	min-height: 3rem;
+
+	/* aspect-ratio: 1; */
+	text-decoration: none;
+	gap: var(--padding);
+	color: var(--text);
+
+	&:hover,
+	&:focus-visible {
+		outline: 0.2rem solid var(--theme);
+	}
+
+	label {
+		background-color: transparent;
+		display: block;
+		pointer-events: none;
+	}
+
+	img {
+		aspect-ratio: 1;
+		object-fit: scale-down;
+		max-width: 3rem;
+	}
+}

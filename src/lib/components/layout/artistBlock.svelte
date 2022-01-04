@@ -20,18 +20,3 @@
 		{data.name}
 	</label>
 </Block>
-
-<style lang="postcss">
-	label {
-		background-color: transparent;
-		display: block;
-		pointer-events: none;
-	}
-
-	img {
-		aspect-ratio: 1;
-		object-fit: scale-down;
-		border-radius: 50%;
-		max-width: 3rem;
-	}
-</style>
