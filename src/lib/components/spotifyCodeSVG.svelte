@@ -46,5 +46,6 @@
 		fill: var(--bg);
 		padding: var(--padding);
 		width: 100%;
+		box-shadow: var(--shadow-elevation-medium);
 	}
 </style>
