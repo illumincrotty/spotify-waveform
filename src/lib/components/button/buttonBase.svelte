@@ -64,7 +64,6 @@
 			vertical-align: middle;
 			padding: 0.25em;
 			background-color: var(--bg);
-			border-radius: 50%;
 			transition: fill 0.3s, background-color 0.3s;
 		}
 	}
