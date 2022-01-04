@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { base } from '$app/paths';
+	import Base from '$lib/components/layout/base.svelte';
 
 	import Header from '$lib/components/layout/header.svelte';
 	import { token } from '$lib/storeSession';
@@ -24,12 +25,9 @@
 </svelte:head>
 
 <Header {links} />
-<slot>
-	<!-- <main class="stack center-i" id="page-main" /> -->
-</slot>
 
-<style lang="postcss">
-	@import '$lib/style/cssReset.postcss';
-	@import '$lib/style/el.postcss';
-	@import '$lib/style/base.postcss';
-</style>
+<Base>
+	<slot>
+		<!-- <main class="stack center-i" id="page-main" /> -->
+	</slot>
+</Base>

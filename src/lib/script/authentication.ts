@@ -42,8 +42,8 @@ export const login = async (): Promise<void> => {
 	const code_verifier = randomBase64StringGenerator(64);
 	const state = randomBase64StringGenerator(64);
 
-	sessionStorage.setItem('code_verifier', code_verifier);
-	sessionStorage.setItem('state', state);
+	localStorage.setItem('code_verifier', code_verifier);
+	localStorage.setItem('state', state);
 
 	const authConfig: authCodePKCE = {
 		client_id: CLIENT_ID,
@@ -68,8 +68,8 @@ export const verify = (
 	state: string,
 	fetchFunction: typeof fetch = fetch
 ): Promise<Response> => {
-	const realState = sessionStorage.getItem('state');
-	const code_verify = sessionStorage.getItem('code_verifier');
+	const realState = localStorage.getItem('state');
+	const code_verify = localStorage.getItem('code_verifier');
 
 	if (!code_verify) throw new Error('No Code Verifier in session');
 	if (!realState) throw new Error('No State in session');
@@ -87,17 +87,17 @@ export const verify = (
 	});
 };
 export const refreshToken = async (
-	token: pkceToken
+	inputToken: pkceToken
 ): Promise<false | pkceToken> => {
 	console.debug('refreshing');
-	if (token.expires_at >= Date.now()) return token;
+	if (inputToken.expires_at >= Date.now()) return inputToken;
 
 	const response = await fetch('https://accounts.spotify.com/api/token', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		body: new URLSearchParams({
 			grant_type: 'refresh_token',
-			refresh_token: token.refresh_token,
+			refresh_token: inputToken.refresh_token,
 			client_id: CLIENT_ID,
 		}),
 	});
@@ -110,9 +110,15 @@ export const refreshToken = async (
 			scope: string;
 		};
 
+		token.set({
+			access_token: json.access_token,
+			refresh_token: inputToken.refresh_token,
+			expires_at: Date.now() + 1000 * json.expires_in,
+		});
+
 		return {
 			access_token: json.access_token,
-			refresh_token: token.refresh_token,
+			refresh_token: inputToken.refresh_token,
 			expires_at: Date.now() + 1000 * json.expires_in,
 		};
 	}

@@ -5,15 +5,15 @@ export const writablePersistent = <T>(
 	valueInput: T,
 	storage: 'local' | 'session' = 'local'
 ) => {
-	let value = valueInput;
+	let value: T;
 	if (browser) {
 		const check =
 			storage === 'local'
 				? localStorage.getItem(key)
 				: sessionStorage.getItem(key);
-		if (check) {
-			value = JSON.parse(check) as T;
-		}
+		value = check ? (JSON.parse(check) as T) : valueInput;
+	} else {
+		value = valueInput;
 	}
 
 	const subs: Set<(input: T) => unknown> = new Set();

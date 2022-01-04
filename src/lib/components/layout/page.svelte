@@ -1,11 +1,9 @@
 <script lang="ts">
 	import TopButton from '$lib/components/button/buttonToTop.svelte';
 	import Swatch from '$lib/components/random/swatch.svelte';
+	import { themeFlip, themeNumber } from '$lib/storeSession';
+	import { onMount } from 'svelte';
 	export let title = 'Placeholder';
-	let normalize: HTMLLinkElement;
-	function nornmalizeLoaded() {
-		normalize.rel = 'stylesheet';
-	}
 	let y = 0;
 </script>
 

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
+	import ButtonMode from '$lib/components/button/buttonLightModeDarkMode.svelte';
 	import ButtonTheme from '$lib/components/button/buttonTheme.svelte';
 	export let links: { href: string; label: string }[] = [];
 </script>
@@ -17,6 +18,11 @@
 			</a>
 		</div>
 		<div style="flex-grow: 40;" />
+		{#if $page.url.pathname !== `/`}
+			<div class="shadow-pop">
+				<a sveltekit:prefetch href={`${base}/`}>Home</a>
+			</div>
+		{/if}
 		{#each links as link}
 			{#if $page.url.pathname !== `/${link.href}`}
 				<div class="shadow-pop">
@@ -26,6 +32,9 @@
 				</div>
 			{/if}
 		{/each}
+		<div class="shadow-pop">
+			<ButtonMode />
+		</div>
 		<div class="shadow-pop">
 			<ButtonTheme />
 		</div>

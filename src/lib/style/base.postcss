@@ -8,10 +8,13 @@
 	/* #e86190 */
 	/* #F65D5A --*/
 
-	--dark: #2d2f33;
-	--dark-overlay: rgb(0, 0, 0, 10%);
-	--light: #c9eafc;
-	--light-overlay: rgb(255, 255, 255, 10%);
+	--dark-components: 45 47 51;
+	--light-components: 201 234 252;
+
+	--dark: rgb(var(--dark-components));
+	--dark-overlay: rgb(var(--dark-components) / 0.2);
+	--light: rgb(var(--light-components));
+	--light-overlay: rgb(var(--light-components) / 0.1);
 
 	/* --green: #00a485; */
 	/* --purple: #ab6dff; */
@@ -29,14 +32,26 @@
 	/* --fall: #ce8964; */
 	/* --ocean: #5497a7; */
 
-	--pepper-mint: #83b9a9;
-	--grape: #b6a6dd;
-	--straw: #c9a97d;
-	--birdie: #88b2dc;
+	/* --pepper-mint: #83b9a9; */
+	/* --grape: #b6a6dd; */
+	/* --straw: #c9a97d; */
+	/* --birdie: #88b2dc; */
 
-	--theme: var(--pepper-mint);
+	--pepper-mint-components: 131 185 169;
+	--grape-components: 182 166 221;
+	--straw-components: 201 169 125;
+	--birdie-components: 136 178 220;
 
-	--t1: var(--pepper-mint);
+	--theme-1-components: var(--pepper-mint-components);
+	--theme-2-components: var(--grape-components);
+	--theme-3-components: var(--straw-components);
+	--theme-4-components: var(--birdie-components);
+	--current-theme: 1;
+
+	--theme-components: var(--theme-1-components);
+	--theme: rgb(var(--theme-components));
+
+	--t1: rgb(var(--pepper-mint-components));
 	--t2: var(--grape);
 	--t3: var(--straw);
 	--t4: var(--birdie);
@@ -88,6 +103,9 @@
 
 	transition: background 0.5s, color 0.5s;
 
+	--invert: 0%;
+	filter: invert(var(--invert));
+
 	@media (prefers-color-scheme: dark) {
 		--text: var(--light);
 		--bg: var(--dark);
@@ -135,6 +153,11 @@ nav {
 
 svg {
 	background: unset;
+	filter: none;
+}
+img {
+	filter: none;
+	filter: invert(var(--invert));
 }
 
 a:not([role="link"]) {

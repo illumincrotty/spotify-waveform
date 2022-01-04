@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { base } from '$app/paths';
+	import Base from '$lib/components/layout/base.svelte';
 </script>
 
 <svelte:head>
@@ -13,10 +14,6 @@
 	/>
 </svelte:head>
 
-<slot />
-
-<style lang="postcss">
-	@import '$lib/style/cssReset.postcss';
-	@import '$lib/style/el.postcss';
-	@import '$lib/style/base.postcss';
-</style>
+<Base>
+	<slot />
+</Base>

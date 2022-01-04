@@ -1,13 +1,11 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-
 	import { base } from '$app/paths';
-	import { refreshToken } from '$lib/script/authentication';
 
 	import Header from '$lib/components/layout/header.svelte';
 	import OverlayLogin from '$lib/components/overlay/overlayLogin.svelte';
 	import { token } from '$lib/storeSession';
 	import { onMount } from 'svelte';
+	import Base from '$lib/components/layout/base.svelte';
 	export const title = 'Example';
 
 	let mounted = false;
@@ -47,19 +45,19 @@
 
 <Header
 	links={[
-		{ href: '', label: 'Home' },
 		{ href: 'data', label: 'Data' },
 		{ href: 'data/search', label: 'Search' },
 		{ href: 'data/top', label: 'Top Data' },
 	]}
 />
-
-{#if mounted && $token === 'empty'}
-	<OverlayLogin />
-{/if}
-<slot>
-	<!-- <main class="stack center-i" id="page-main" /> -->
-</slot>
+<Base>
+	{#if mounted && $token === 'empty'}
+		<OverlayLogin />
+	{/if}
+	<slot>
+		<!-- <main class="stack center-i" id="page-main" /> -->
+	</slot>
+</Base>
 
 <style lang="postcss" global>
 	@import '$lib/style/cssReset.postcss';

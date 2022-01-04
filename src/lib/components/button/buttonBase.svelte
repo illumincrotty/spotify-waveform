@@ -44,18 +44,21 @@
 		border: none;
 		background-color: transparent;
 		padding: 0;
+		color: var(--text);
+		transition: color 0.3s, fill 0.3s, background-color 0.3s;
 
 		&:focus-visible,
 		&:hover {
 			outline: none;
+			color: var(--dark);
+
 			svg {
 				background-color: var(--theme);
-				fill: var(--dark);
 			}
 		}
 		&:active {
+			color: var(--bg);
 			svg {
-				fill: var(--bg);
 				background-color: var(--text);
 			}
 		}
@@ -64,7 +67,8 @@
 			vertical-align: middle;
 			padding: 0.25em;
 			background-color: var(--bg);
-			transition: fill 0.3s, background-color 0.3s;
+			transition: inherit;
+			fill: currentColor;
 		}
 	}
 </style>
