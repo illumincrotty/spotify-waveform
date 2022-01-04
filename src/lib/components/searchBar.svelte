@@ -102,11 +102,10 @@
 		/* background: var(--theme); */
 		background-color: var(--overlay);
 		/* color: var(--anti-overlay); */
-
+		width: 0%;
 		border: 0.1em solid var(--bg);
 		border-bottom-color: var(--text);
-		min-width: 9em;
-		width: 50%;
+		min-width: 18em;
 		transition: all 0.1s, width 0.3s ease-in-out;
 		text-align: center;
 
@@ -138,6 +137,8 @@
 		text-align: center;
 		width: 100%;
 		color: inherit;
+		padding-left: 2em;
+		padding-right: 2em;
 		&:focus {
 			outline: none;
 		}

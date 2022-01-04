@@ -5,7 +5,7 @@
 	import ArtistBlock from '$lib/components/layout/artistBlock.svelte';
 	import TrackBlock from '$lib/components/layout/trackBlock.svelte';
 
-	import Search from '$lib/components/search.svelte';
+	import SearchBar from '$lib/components/searchBar.svelte';
 
 	import { createSpotifyConnection } from '$lib/script/api';
 
@@ -48,7 +48,7 @@
 </script>
 
 <Page title="Search">
-	<Search
+	<SearchBar
 		slot="header"
 		id="spotify-search"
 		label="Spotify Search"
