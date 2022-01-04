@@ -59,6 +59,7 @@
 <style>
 	header {
 		padding: 2ch;
+		box-shadow: var(--shadow-elevation-high);
 	}
 	footer {
 		padding: 3ch;

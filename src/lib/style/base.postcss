@@ -1,8 +1,4 @@
 :root {
-	/* width: 100%; */
-	/* height: max(100%, max-content); */
-	/* scroll-behavior: smooth; */
-
 	/* colors */
 	/* #00A485 --*/
 	/* #6397AE */
@@ -20,13 +16,13 @@
 	/* --green: #00a485; */
 	/* --purple: #ab6dff; */
 	/* --red: #f65d5a; */
-	/* --t1: var(--green);
-	--t2: var(#6397ae);
-	--t3: var(#8b86d6);
-	--t4: var(--purple);
-	--t5: #d166c7;
-	--t6: #e86190;
-	--t7: var(--red); */
+	/* --t1: var(--green); */
+	/* --t2: var(#6397ae); */
+	/* --t3: var(#8b86d6); */
+	/* --t4: var(--purple); */
+	/* --t5: #d166c7; */
+	/* --t6: #e86190; */
+	/* --t7: var(--red); */
 
 	/* --mint: #83c5be; */
 	/* --strawberry: #ffa1dd; */
@@ -50,10 +46,10 @@
 	--overlay: var(--light-overlay);
 	--anti-overlay: var(--dark-overlay);
 
-	--font-ratio: 1.25;
-
 	/* --font-m: calc(0.8em + 0.5vmin); */
 
+	/* Font Stuff */
+	--font-ratio: 1.25;
 	--font-minimum-size: 16;
 	--font-maximum-size: 21;
 	--font-minimum-size-pixels: calc(var(--font-minimum-size) * 1px);
@@ -65,13 +61,25 @@
 	--font-l: calc(var(--font-m) * var(--font-ratio));
 	--font-xl: calc(var(--font-l) * var(--font-ratio));
 	--font-2xl: calc(var(--font-xl) * var(--font-ratio));
-	/* --font-2xl: calc(
-		var(--font-m) * var(--font-ratio) * var(--font-ratio) *
-			var(--font-ratio)
-	); */
 
 	--font-s: calc(var(--font-m) / var(--font-ratio));
 	/* --font-xs: calc(var(--font-s) / var(--font-ratio-2)); */
+
+	/* Box Shadow items
+	* from https://www.joshwcomeau.com/shadow-palette/
+	*/
+	--shadow-color: 0deg 0% 0%;
+	--shadow-elevation-low: 0px 0.2px 0.3px hsl(var(--shadow-color) / 0.04),
+		0px 0.8px 1.1px -0.8px hsl(var(--shadow-color) / 0.14);
+	--shadow-elevation-medium: 0px 0.2px 0.3px hsl(var(--shadow-color) / 0.04),
+		0px 1.3px 1.8px -0.4px hsl(var(--shadow-color) / 0.1),
+		0px 4.1px 5.7px -0.8px hsl(var(--shadow-color) / 0.16);
+	--shadow-elevation-high: 0px 0.2px 0.3px hsl(var(--shadow-color) / 0.04),
+		0px 2.3px 3.2px -0.2px hsl(var(--shadow-color) / 0.06),
+		0px 4.3px 5.9px -0.3px hsl(var(--shadow-color) / 0.09),
+		0px 7.2px 9.9px -0.5px hsl(var(--shadow-color) / 0.12),
+		0px 11.8px 16.3px -0.6px hsl(var(--shadow-color) / 0.15),
+		0.1px 19.1px 26.4px -0.8px hsl(var(--shadow-color) / 0.17);
 
 	background-color: var(--bg);
 	color: var(--text);
@@ -189,6 +197,7 @@ header {
 main {
 	width: 100%;
 	max-width: var(--measure);
+	background: transparent;
 }
 
 p {
@@ -307,6 +316,7 @@ a:focus-visible {
 	text-decoration: none;
 	gap: var(--padding);
 	color: var(--text);
+	box-shadow: var(--shadow-elevation-medium);
 
 	&:hover,
 	&:focus-visible {
@@ -319,9 +329,13 @@ a:focus-visible {
 		pointer-events: none;
 	}
 
-	img {
+	img,
+	svg {
 		aspect-ratio: 1;
 		object-fit: scale-down;
-		max-width: 3rem;
+		max-width: 4rem;
+		box-shadow: var(--shadow-elevation-medium);
+		background: var(--overlay);
+		fill: var(--dark);
 	}
 }

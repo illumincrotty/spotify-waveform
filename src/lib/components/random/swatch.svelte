@@ -16,6 +16,7 @@
 		li {
 			background: var(--bg);
 			--padding: 0.25rem;
+			box-shadow: var(--shadow-elevation-medium);
 		}
 	}
 

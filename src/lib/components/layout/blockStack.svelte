@@ -5,9 +5,7 @@
 	export let limit = 0;
 	export let limitButton = false;
 
-	export let id = Array.from({ length: 10 })
-		.map(() => Math.random().toString(32))
-		.join();
+	export let id = (Math.random() * 10).toString(32);
 
 	export let component;
 	export let items = [];
@@ -61,5 +59,8 @@
 		flex-direction: column;
 		gap: calc(var(--padding) / 2);
 		flex-wrap: wrap;
+	}
+	button {
+		box-shadow: var(--shadow-elevation-medium);
 	}
 </style>
