@@ -1,8 +1,6 @@
 <script lang="ts">
 	import TopButton from '$lib/components/button/buttonToTop.svelte';
 	import Swatch from '$lib/components/random/swatch.svelte';
-	import { themeFlip, themeNumber } from '$lib/storeSession';
-	import { onMount } from 'svelte';
 	export let title = 'Placeholder';
 	let y = 0;
 </script>
@@ -29,7 +27,7 @@
 	</header>
 </slot>
 
-<main class="center stack pad" id="page-main">
+<main class="stack">
 	<slot>
 		<h2>Theme Colors</h2>
 		<Swatch />
@@ -48,15 +46,18 @@
 			nihil.
 		</p>
 	</slot>
-	<TopButton visible={y > 50} />
 </main>
 <footer>
 	<slot name="footer" />
 </footer>
+<TopButton visible={y > 50} />
 
 <style>
 	header {
-		padding: 2ch;
+		width: 100%;
+		padding: 2ch 0;
+		margin-left: 0;
+		margin-right: 0;
 		box-shadow: var(--shadow-elevation-high);
 	}
 	footer {
