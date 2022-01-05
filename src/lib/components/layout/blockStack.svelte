@@ -14,7 +14,7 @@
 {#key items}
 	<ol
 		class="unlist"
-		style="gap:--2rem"
+		style="gap:--2rem;"
 		aria-expanded={limit === 0}
 		in:blurDesaturate={{
 			duration: transitionDuration,
