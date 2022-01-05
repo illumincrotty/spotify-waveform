@@ -10,7 +10,6 @@
 				<img
 					src={artist.images[0].url}
 					alt="Picture of {artist.name}"
-					width="80px"
 				/>
 			{/if}
 			<a rel="external" href={artist.external_urls.spotify}
@@ -21,9 +20,6 @@
 </ul>
 
 <style>
-	ul {
-		line-height: 1.8;
-	}
 	li {
 		font-size: var(--font-s);
 	}

@@ -7,8 +7,10 @@
 <Block href={data.external_urls.spotify} id={data.uri}>
 	{#if data.images.length > 0}
 		<img
-			srcset={data.images.map((img) => img.url).join(', ')}
+			src={data.images[data.images.length - 1].url}
 			alt="Picture of {data.name}"
+			width="64"
+			height="64"
 		/>
 	{:else}
 		<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
