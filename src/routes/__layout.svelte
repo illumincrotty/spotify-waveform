@@ -24,9 +24,9 @@
 	/>
 </svelte:head>
 
-<Header {links} />
-
 <Base>
+	<Header {links} />
+
 	<slot>
 		<!-- <main class="stack center-i" id="page-main" /> -->
 	</slot>

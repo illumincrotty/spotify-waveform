@@ -6,13 +6,11 @@
 	<div class="stack center-i">
 		<ul class="pad unlist">
 			<li class="box"><a href="data/top">Top Tracks and Artists</a></li>
-			<li class="box center-i">More to come...</li>
+			<li class="box"><a href="data/search">Search</a></li>
+			<li class="box"><a href="data/track">Track Details</a></li>
 		</ul>
 	</div>
 </Page>
 
 <style lang="postcss">
-	li {
-		line-height: 1.8;
-	}
 </style>

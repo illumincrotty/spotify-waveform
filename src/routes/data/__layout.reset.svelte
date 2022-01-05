@@ -43,14 +43,14 @@
 	/>
 </svelte:head>
 
-<Header
-	links={[
-		{ href: 'data', label: 'Data' },
-		{ href: 'data/search', label: 'Search' },
-		{ href: 'data/top', label: 'Top Data' },
-	]}
-/>
 <Base>
+	<Header
+		links={[
+			{ href: 'data', label: 'Data' },
+			{ href: 'data/search', label: 'Search' },
+			{ href: 'data/top', label: 'Top Data' },
+		]}
+	/>
 	{#if mounted && $token === 'empty'}
 		<OverlayLogin />
 	{/if}

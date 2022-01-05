@@ -41,7 +41,7 @@
 
 <Page title="Top Spotify Info">
 	{#if mounted}
-		<div class="box switcher" style="--gap: 2ch">
+		<div class="switcher" style="--gap: 2ch">
 			<section class="stack" style="align-items: flex-start;">
 				<Dropdown
 					name="Top Tracks"
@@ -60,7 +60,7 @@
 				/>
 				{#if trackPromise instanceof Promise}
 					{#await trackPromise}
-						<div>Loading...</div>
+						<div class="placeholder-fullscreen">Loading...</div>
 					{:then tracks}
 						<BlockStack
 							component={TrackBlock}
@@ -69,6 +69,8 @@
 					{:catch}
 						<div>Failure</div>
 					{/await}
+				{:else}
+					<div class="placeholder-fullscreen">Loading...</div>
 				{/if}
 			</section>
 			<section class="stack " style="align-items: flex-start;">
@@ -89,7 +91,7 @@
 				/>
 				{#if artistPromise instanceof Promise}
 					{#await artistPromise}
-						<div>Loading...</div>
+						<div class="placeholder-fullscreen">Loading...</div>
 					{:then artists}
 						<BlockStack
 							component={ArtistBlock}
@@ -98,6 +100,8 @@
 					{:catch}
 						<div>Failure</div>
 					{/await}
+				{:else}
+					<div class="placeholder-fullscreen">Loading...</div>
 				{/if}
 			</section>
 		</div>
@@ -105,4 +109,7 @@
 </Page>
 
 <style lang="postcss">
+	.placeholder-fullscreen {
+		height: 100vh;
+	}
 </style>
