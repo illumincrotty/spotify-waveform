@@ -39,7 +39,7 @@ export type time_range = {
 	time_range?: `${timeOptions}_term`;
 };
 
-type mediaOptions =
+export type mediaOptions =
 	| 'album'
 	| 'artist'
 	| 'playlist'
