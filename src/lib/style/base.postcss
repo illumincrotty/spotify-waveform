@@ -12,7 +12,7 @@
 	--light-components: 201 234 252;
 
 	--dark: rgb(var(--dark-components));
-	--dark-overlay: rgb(var(--dark-components) / 0.2);
+	--dark-overlay: rgb(var(--dark-components) / 0.3);
 	--light: rgb(var(--light-components));
 	--light-overlay: rgb(var(--light-components) / 0.1);
 
@@ -103,9 +103,6 @@
 
 	transition: background 0.5s, color 0.5s;
 
-	--invert: 0%;
-	filter: invert(var(--invert));
-
 	@media (prefers-color-scheme: dark) {
 		--text: var(--light);
 		--bg: var(--dark);
@@ -160,7 +157,7 @@ img {
 	filter: invert(var(--invert));
 }
 
-a:not([role="link"]) {
+a {
 	color: currentColor;
 	background: none;
 	text-decoration: underline solid var(--theme) 0.1rem;
@@ -212,19 +209,18 @@ body {
 header {
 	/* margin: 1rem calc((100% - var(--measure)) / 2); */
 	/* background-color: var(--overlay); */
-	padding: var(--padding);
 	/* margin-left: auto;
 	margin-right: auto; */
 	width: 100%;
+	padding: 0 var(--padding);
 }
 main {
 	width: 100%;
 	max-width: var(--measure);
 	background: transparent;
-}
-
-p {
-	line-height: 1.8;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0 var(--padding);
 }
 
 h1 {
@@ -306,6 +302,10 @@ a:focus-visible {
     color: unset;
     border: none;
 } */
+p,
+li {
+	line-height: 1.8;
+}
 
 .svg-circle {
 	aspect-ratio: 1;
@@ -316,13 +316,14 @@ a:focus-visible {
 }
 
 .shadow-pop {
-	transition: transform 0.3s;
+	transition: all 0.3s;
 	outline: none;
 	/* animation: shadow-pop-out 0.3s cubic-bezier(0.47, 0, 0.745, 0.715); */
 	&:hover,
 	&:focus-visible,
 	&:active {
 		transform: translateY(-0.25em);
+
 		/* animation: shadow-pop-in 0.3s cubic-bezier(0.47, 0, 0.745, 0.715) both; */
 	}
 }
