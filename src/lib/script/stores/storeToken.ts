@@ -11,7 +11,8 @@ export const storeToken = () => {
 	const refresh = async () => {
 		return updateAsync(async (input) => {
 			if (input === 'empty') return input;
-			return (await refreshToken(input)) || 'empty';
+			const fresh = await refreshToken(input);
+			return fresh ? fresh : 'empty';
 		});
 	};
 
