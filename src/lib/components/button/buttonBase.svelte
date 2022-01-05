@@ -1,9 +1,12 @@
 <script lang="ts">
+	import { join } from 'path/posix';
+
 	let press = false;
 	export let buttonLabel: string;
 	export let svgLabel: string;
 	export let width = '2em';
 	export let circle = false;
+	export let classes = [];
 </script>
 
 <button
@@ -15,7 +18,7 @@
 	on:mouseout={() => (press = false)}
 	aria-pressed={press}
 	aria-label={buttonLabel}
-	class="svg-button"
+	class="svg-button {classes.join(' ')}"
 >
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
@@ -42,10 +45,12 @@
 <style lang="postcss">
 	.svg-button {
 		border: none;
-		background-color: transparent;
 		padding: 0;
+		background: none;
 		color: var(--text);
-		transition: color 0.3s, fill 0.3s, background-color 0.3s;
+		transition: all 0.3s;
+		aspect-ratio: 1;
+		height: 100%;
 
 		&:focus-visible,
 		&:hover {
@@ -64,9 +69,10 @@
 		}
 		svg {
 			width: 2rem;
+			aspect-ratio: 1;
 			vertical-align: middle;
 			padding: 0.25em;
-			background-color: var(--bg);
+			background-color: transparent;
 			transition: inherit;
 			fill: currentColor;
 		}

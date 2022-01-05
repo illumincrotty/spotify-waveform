@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { themeNumber } from '$lib/storeSession';
-
 	import Button from './buttonBase.svelte';
+
+	export let classes = [];
 </script>
 
 <Button
 	buttonLabel="Toggle Theme"
 	svgLabel="Palette icon"
+	{classes}
 	on:click={() => {
 		const compStyle = window.getComputedStyle(document.documentElement);
 		const current = +compStyle.getPropertyValue('--current-theme') ?? 1;
@@ -21,6 +23,7 @@
 			'--theme-components',
 			`var(--theme-${next}-components)`
 		);
+
 		// document.documentElement. .getPropertyValue('--my-variable-name'); // #999999
 	}}
 >

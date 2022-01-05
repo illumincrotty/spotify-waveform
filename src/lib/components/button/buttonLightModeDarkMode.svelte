@@ -2,13 +2,13 @@
 	import { themeFlip } from '$lib/storeSession';
 
 	import Button from './buttonBase.svelte';
-
-	let press = false;
+	export let classes = [];
 </script>
 
 <Button
 	buttonLabel="Toggle light mode or dark mode"
 	svgLabel="Light Bulb"
+	{classes}
 	on:click={() => {
 		// const compStyle = window.getComputedStyle(document.documentElement);
 		// console.log(compStyle.getPropertyValue('--invert'));
