@@ -16,9 +16,6 @@
 </ul>
 
 <style>
-	ul {
-		line-height: 1.8;
-	}
 	li {
 		font-size: var(--font-s);
 	}
