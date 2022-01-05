@@ -10,6 +10,8 @@
 	import JsonView from '$lib/components/random/jsonView.svelte';
 	import Loader from '$lib/components/loading/loader.svelte';
 	import SpotifyCodeSvg from '$lib/components/spotifyCodeSVG.svelte';
+	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
 
 	export let trackID = '';
 
@@ -22,7 +24,7 @@
 
 	let maxLoudness: number[] = undefined;
 
-	let trackName = 'PlaceHolder';
+	let trackName = '';
 	// let trackAnalysis: Awaited<ReturnType<typeof spotify['audioAnalysis']>>;
 
 	onMount(() => {
@@ -32,7 +34,7 @@
 				console.debug(search.get('id'));
 				trackID = search.get('id');
 			} else {
-				history.back();
+				goto(`${base}/data/search?categories=track`);
 			}
 		}
 		console.debug(`id: ${trackID}`);
@@ -57,22 +59,19 @@
 	};
 </script>
 
-{#if trackID === '' || trackName === 'PlaceHolder'}
-	<OverlayLoading />
-{:else}
-	<Page title={trackName}>
+<Page title={trackName || 'Track Analysis'}>
+	{#if trackID === '' || trackName === ''}
+		<OverlayLoading />
+	{:else}
 		<h2>Spotify Code</h2>
 		<SpotifyCodeSvg uri="track:{trackID}" />
 
 		{#if maxLoudness}
-			<hr />
-
 			<h2>Track Waveform</h2>
 
 			<WaveChart data={maxLoudness} />
 		{/if}
 
-		<hr />
 		{#if trackPromise}
 			<h2>Track Details</h2>
 			{#await trackPromise}
@@ -80,7 +79,6 @@
 			{:then features}
 				<JsonView data={features} />
 			{/await}
-			<hr />
 		{/if}
 		{#if trackFeaturesPromise}
 			<h2>Track Features</h2>
@@ -89,7 +87,6 @@
 			{:then features}
 				<JsonView data={features} />
 			{/await}
-			<hr />
 		{/if}
 		{#if trackAnalysisPromise}
 			<h2>Track Analysis</h2>
@@ -100,5 +97,5 @@
 				<JsonView data={analysis} />
 			{/await}
 		{/if}
-	</Page>
-{/if}
+	{/if}
+</Page>
