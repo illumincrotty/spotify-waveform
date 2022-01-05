@@ -7,10 +7,19 @@
 
 <Block href="{base}/data/track?id={data.id}" id={data.uri}>
 	{#if data.album.images.length > 0}
+		<!-- {#if data.album.images.length > 1}
+			<img
+				src={data.album.images[data.album.images.length - 2].url}
+				alt="Picture of {data.name}"
+			/>
+		{:else} -->
 		<img
-			srcset={data.album.images.map((img) => img.url).join(', ')}
+			src={data.album.images[data.album.images.length - 1].url}
 			alt="Picture of {data.name}"
+			width="64"
+			height="64"
 		/>
+		<!-- {/if} -->
 	{:else}
 		<img
 			src="https://generative-placeholders.glitch.me/image?width=300&height=300&style=123"
