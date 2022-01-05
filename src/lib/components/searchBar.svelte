@@ -6,7 +6,7 @@
 	/**
 	 * Specify the debounce value in milliseconds (ms)
 	 */
-	export let debounce = 0;
+	export let debounce = 500;
 
 	export let label = 'search';
 	export let placeholder = 'Search... ';
@@ -21,23 +21,19 @@
 	 */
 	export let ref: HTMLInputElement = null;
 
-	import { createEventDispatcher, onMount, afterUpdate } from 'svelte';
+	import { createEventDispatcher, afterUpdate } from 'svelte';
 	const dispatch = createEventDispatcher();
 	let prevValue = value;
-	let timeout = undefined;
-	let calling = false;
 
-	function debounceFn(fn) {
-		if (calling) return;
-		calling = true;
-		timeout = setTimeout(() => {
+	let timer = 0;
+
+	const debounceFn = (fn) => {
+		window.clearTimeout(timer);
+		timer = window.setTimeout(() => {
 			fn();
-			calling = false;
 		}, debounce);
-	}
-	onMount(() => {
-		return () => clearTimeout(timeout);
-	});
+	};
+
 	afterUpdate(() => {
 		if (value.length > 0 && value !== prevValue) {
 			if (debounce > 0) {
