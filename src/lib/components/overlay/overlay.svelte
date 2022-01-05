@@ -1,26 +1,31 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	const transition = fade;
 </script>
 
 <template>
-	<div class="overlay" out:transition={{ duration: 500 }}>
+	<div class="fill blur" transition:fade />
+	<div class="fill overlay" transition:fade={{ duration: 500 }}>
 		<slot />
 	</div>
 </template>
 
 <style lang="postcss">
-	.overlay {
+	.fill {
 		position: fixed;
 		top: 0;
 		left: 0;
-		background: var(--overlay);
-		color: var(--light);
-
-		/* opacity: 15%; */
 		width: 100%;
 		height: 100%;
 		margin: 0;
-		z-index: 4;
+	}
+	.overlay {
+		background: transparent;
+		color: var(--light);
+	}
+
+	.blur {
+		background: rgb(var(--overlay-components) / 0.5);
+		/* background: rgb(var(--anti-overlay-components) / 0.8); */
+		backdrop-filter: blur(0.5em);
 	}
 </style>

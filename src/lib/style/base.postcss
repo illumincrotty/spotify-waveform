@@ -16,6 +16,11 @@
 	--light: rgb(var(--light-components));
 	--light-overlay: rgb(var(--light-components) / 0.1);
 
+	--overlay: var(--light-overlay);
+	--overlay-components: var(--light-components);
+	--anti-overlay: var(--dark-overlay);
+	--anti-overlay-components: var(--dark-components);
+
 	/* --green: #00a485; */
 	/* --purple: #ab6dff; */
 	/* --red: #f65d5a; */
@@ -58,8 +63,6 @@
 
 	--text: var(--light);
 	--bg: var(--dark);
-	--overlay: var(--light-overlay);
-	--anti-overlay: var(--dark-overlay);
 
 	/* --font-m: calc(0.8em + 0.5vmin); */
 
@@ -107,12 +110,17 @@
 		--text: var(--light);
 		--bg: var(--dark);
 		--overlay: var(--light-overlay);
+		--overlay-components: var(--light-components);
 		--anti-overlay: var(--dark-overlay);
+		--anti-overlay-components: var(--dark-components);
+
 		&.theme-flip {
 			--text: var(--dark);
 			--bg: var(--light);
 			--overlay: var(--dark-overlay);
+			--overlay-components: var(--dark-components);
 			--anti-overlay: var(--light-overlay);
+			--anti-overlay-components: var(--light-components);
 		}
 	}
 
@@ -120,13 +128,17 @@
 		--text: var(--dark);
 		--bg: var(--light);
 		--overlay: var(--dark-overlay);
+		--overlay-components: var(--dark-components);
 		--anti-overlay: var(--light-overlay);
+		--anti-overlay-components: var(--light-components);
 
 		&.theme-flip {
 			--text: var(--light);
 			--bg: var(--dark);
 			--overlay: var(--light-overlay);
+			--overlay-components: var(--light-components);
 			--anti-overlay: var(--dark-overlay);
+			--anti-overlay-components: var(--dark-components);
 		}
 	}
 	@media (prefers-reduced-motion: reduce) {

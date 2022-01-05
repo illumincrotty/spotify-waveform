@@ -8,7 +8,7 @@
 	import LoadingSpinner from './loadingSpinner.svelte';
 
 	export let size = '10rem';
-	export let symbol: loadingSymbol = 'spinner';
+	export let symbol: loadingSymbol = 'dots';
 </script>
 
 <div style="max-width: {size}">

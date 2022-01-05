@@ -3,7 +3,23 @@
 	export let labelledby: string;
 	export let describedby: string;
 
+	let modalWindow: HTMLElement;
+
 	const onKeyDown = (ev: KeyboardEvent) => {
+		const nodes = modalWindow.querySelectorAll('*');
+		const tabbable = Array.from(nodes).filter(
+			(node) => ((node as HTMLElement)?.tabIndex ?? -1) >= 0
+		) as HTMLElement[];
+
+		let index = tabbable.indexOf(document.activeElement as HTMLElement);
+		if (index === -1 && ev.shiftKey) index = 0;
+
+		index += tabbable.length + (ev.shiftKey ? -1 : 1);
+		index %= tabbable.length;
+
+		tabbable[index].focus();
+		event.preventDefault();
+
 		if (ev.key !== 'Tab') return;
 		ev.preventDefault();
 	};
@@ -15,6 +31,7 @@
 	<div
 		class="middle-box stack"
 		role="dialog"
+		bind:this={modalWindow}
 		aria-labelledby={labelledby}
 		aria-describedby={describedby}
 		aria-modal="true"
@@ -41,5 +58,6 @@
 		display: flex;
 		flex-direction: column;
 		text-align: center;
+		box-shadow: var(--shadow-elevation-high);
 	}
 </style>

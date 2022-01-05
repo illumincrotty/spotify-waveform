@@ -31,6 +31,7 @@
 		--delay: calc(var(--duration) * 0.1);
 
 		& circle {
+			box-shadow: var(--shadow-elevation-high);
 			animation: jump var(--duration) ease-in-out infinite;
 		}
 	}

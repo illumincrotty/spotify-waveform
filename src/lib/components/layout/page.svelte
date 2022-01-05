@@ -58,6 +58,7 @@
 		padding: 2ch 0;
 		margin-left: 0;
 		margin-right: 0;
+		margin-top: 0;
 		box-shadow: var(--shadow-elevation-high);
 	}
 	footer {

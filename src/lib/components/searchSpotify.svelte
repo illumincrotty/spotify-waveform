@@ -1,36 +1,33 @@
 <script lang="ts">
-	import BlockStack from '$lib/components/layout/blockStack.svelte';
-	import ArtistBlock from '$lib/components/layout/artistBlock.svelte';
-	import TrackBlock from '$lib/components/layout/trackBlock.svelte';
-
 	import SearchBar from '$lib/components/searchBar.svelte';
-
-	import { createSpotifyConnection, mediaOptions } from '$lib/script/api';
 
 	import { token } from '$lib/storeSession';
 	import { onMount } from 'svelte';
-	import AlbumBlock from '$lib/components/layout/albumBlock.svelte';
-	import PlaylistBlock from '$lib/components/layout/playlistBlock.svelte';
-	import { slide } from 'svelte/transition';
+
+	import { createSpotifyConnection } from '$lib/script/api';
+	import type { mediaOptions } from '$lib/script/api';
 
 	export let spotify: ReturnType<typeof createSpotifyConnection>;
-	export let categories: mediaOptions[] = [
+	export let categories: Set<mediaOptions> = new Set([
 		'track',
 		'artist',
 		'album',
 		'playlist',
-	];
+	]);
+	export let tracks: SpotifyApi.TrackObjectFull[] = [];
+	export let artists: SpotifyApi.ArtistObjectFull[] = [];
+	export let albums: SpotifyApi.AlbumObjectSimplified[] = [];
+	export let playlists: SpotifyApi.PlaylistObjectSimplified[] = [];
+	export let value = '';
 
-	let value = '',
-		prevSearch = '';
-	let results: SpotifyApi.SearchResponse = undefined;
+	$: categoryArray = Array.from(categories);
 
-	let tracks: SpotifyApi.TrackObjectFull[] = [];
-	let artists: SpotifyApi.ArtistObjectFull[] = [];
-	let albums: SpotifyApi.AlbumObjectSimplified[] = [];
-	let playlists: SpotifyApi.PlaylistObjectSimplified[] = [];
-
-	let debounce = 500;
+	/**
+	 * search value
+	 */
+	let prevSearch = '',
+		debounce = 500,
+		results: SpotifyApi.SearchResponse;
 
 	onMount(() => {
 		if (!spotify && $token !== 'empty' && token.valid()) {
@@ -39,9 +36,9 @@
 		const urlSearch = new URLSearchParams(window.location.search);
 		if (urlSearch.has('categories')) {
 			console.log(urlSearch.get('categories'));
-			categories = urlSearch
-				.get('categories')
-				.split(',') as mediaOptions[];
+			categories = new Set(
+				urlSearch.get('categories').split(',') as mediaOptions[]
+			);
 		}
 	});
 
@@ -50,7 +47,7 @@
 			prevSearch = value;
 			results = await spotify.search({
 				q: value,
-				type: categories,
+				type: categoryArray,
 			});
 
 			tracks = results.tracks.items ?? [];
@@ -69,57 +66,11 @@
 	bind:value
 	{debounce}
 	on:type={handleInput}
+	on:clear={() => {
+		tracks = [];
+		artists = [];
+		albums = [];
+		playlists = [];
+	}}
 	on:submit={handleInput}
 />
-
-{#if tracks.length > 0}
-	<section transition:slide>
-		<h2>Tracks</h2>
-		<BlockStack
-			component={TrackBlock}
-			items={tracks}
-			limit={5}
-			limitButton={true}
-		/>
-	</section>
-	<!-- <TrackListPretty {tracks} limit={limitTracks} limitButton={true} /> -->
-{/if}
-
-{#if artists.length > 0}
-	<section transition:slide>
-		<h2>Artists</h2>
-		<BlockStack
-			component={ArtistBlock}
-			items={artists}
-			limit={5}
-			limitButton={true}
-		/>
-	</section>
-	<!-- <ArtistListPretty {artists} /> -->
-{/if}
-
-{#if albums.length > 0}
-	<section transition:slide>
-		<h2>Albums</h2>
-		<BlockStack
-			component={AlbumBlock}
-			items={albums}
-			limit={5}
-			limitButton={true}
-		/>
-	</section>
-	<!-- <ArtistListPretty {artists} /> -->
-{/if}
-
-{#if playlists.length > 0}
-	<section transition:slide>
-		<h2>Playlists</h2>
-		<BlockStack
-			component={PlaylistBlock}
-			items={playlists}
-			limit={5}
-			limitButton={true}
-		/>
-		<!-- <ArtistListPretty {artists} /> -->
-	</section>
-{/if}

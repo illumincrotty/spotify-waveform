@@ -28,6 +28,7 @@
 		--delay: calc(var(--duration) / 9);
 		& path {
 			animation: stretch var(--duration) linear infinite;
+			box-shadow: var(--shadow-elevation-high);
 		}
 	}
 

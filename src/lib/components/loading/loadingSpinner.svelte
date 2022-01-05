@@ -30,13 +30,13 @@
 <style lang="postcss">
 	.spinner {
 		animation: rotate 2s linear infinite;
-		z-index: 5;
 		margin-left: auto;
 		margin-right: auto;
 		stroke: var(--theme);
 
 		& .path {
 			stroke-linecap: round;
+			box-shadow: var(--shadow-elevation-high);
 		}
 		.bg {
 			opacity: 25%;

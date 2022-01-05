@@ -5,61 +5,26 @@
 	import ButtonTheme from '$lib/components/button/buttonTheme.svelte';
 	import ButtonMenu from '../button/buttonMenu.svelte';
 	export let links: { href: string; label: string }[] = [];
-	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
+	import { tweened } from 'svelte/motion';
+	import { backIn, backInOut, backOut, linear } from 'svelte/easing';
 
 	let menuOpen = false;
 	let classes = ['shadow-pop'];
 
-	onMount(() => (menuOpen = false));
+	let navSize = 0;
+
+	const expandTween = tweened(0, { duration: 800, easing: backOut });
+	const collapseTween = tweened(0, { duration: 800, easing: backIn });
+	const toggleFade = () => {
+		expandTween.update((val) => (val ? 0 : 1));
+		collapseTween.update((val) => (val ? 0 : 1));
+	};
 </script>
 
 <header>
-	<div style="display: flex; gap:var(--gap);">
-		<div id="base-container" style="margin-right: auto;">
-			<a href={`${base}/`} id="link-to-base">
-				<img
-					src={`${base}/favicon.svg`}
-					alt="Logo"
-					width="36"
-					height="36"
-				/>
-			</a>
-		</div>
-
-		<ButtonMode {classes} />
-		<ButtonTheme {classes} />
-		<ButtonMenu bind:open={menuOpen} {classes} />
-	</div>
-
-	{#if menuOpen}
-		<nav>
-			<ul class="unlist" transition:slide={{ duration: 500 }}>
-				<h2>Navigation</h2>
-
-				{#if $page.url.pathname !== `/`}
-					<li class="shadow-pop">
-						<a sveltekit:prefetch href={`${base}/`}>Home</a>
-					</li>
-				{/if}
-				{#each links as link}
-					{#if $page.url.pathname !== `/${link.href}`}
-						<li class="shadow-pop">
-							<a sveltekit:prefetch href={`${base}/${link.href}`}
-								>{link.label}</a
-							>
-						</li>
-					{/if}
-				{/each}
-			</ul>
-		</nav>
-	{/if}
-</header>
-
-<!-- 
-<header id="page-top" role="banner" class="center switcher">
-	<div id="base-container">
-		<a href={`${base}/`} id="link-to-base">
+	<div>
+		<a href={`${base}/`} id="link-to-base" style="margin-right: auto;">
 			<img
 				src={`${base}/favicon.svg`}
 				alt="Logo"
@@ -67,56 +32,133 @@
 				height="36"
 			/>
 		</a>
-	</div>
-	<div style="flex-grow: 40;" />
 
-	<div class="shadow-pop">
-		<ButtonMode />
+		<ButtonMode {classes} />
+		<ButtonTheme {classes} />
+		<ButtonMenu bind:open={menuOpen} {classes} on:click={toggleFade} />
 	</div>
-	<div class="shadow-pop">
-		<ButtonTheme />
-	</div>
-	<div class="shadow-pop">
-		<ButtonMenu />
-	</div>
-</header> -->
+	<nav
+		style="height: {!menuOpen
+			? navSize * $collapseTween
+			: navSize * $expandTween}px;"
+	>
+		<ul class="unlist" transition:slide bind:clientHeight={navSize}>
+			<h2>Navigation</h2>
+
+			{#if $page.url.pathname !== `/`}
+				<li class="shadow-pop">
+					<a
+						sveltekit:prefetch
+						href={`${base}/`}
+						on:click={() => {
+							menuOpen = false;
+						}}>Home</a
+					>
+				</li>
+			{/if}
+			{#each links as link}
+				{#if $page.url.pathname !== `/${link.href}`}
+					<li class="shadow-pop">
+						<a
+							sveltekit:prefetch
+							href={`${base}/${link.href}`}
+							on:click={() => {
+								menuOpen = false;
+							}}
+						>
+							{link.label}
+						</a>
+					</li>
+				{/if}
+			{/each}
+		</ul>
+	</nav>
+</header>
+
 <style lang="postcss">
 	header {
 		max-width: var(--measure);
 		width: 100%;
 		margin: var(--gap) auto 0;
+		background: transparent;
 	}
-	#base-container {
-		line-height: 0;
-		a {
-			display: block;
-			background: unset;
-			margin-right: auto;
-			height: 36px;
-			width: 36px;
+	div {
+		display: flex;
+		gap: var(--gap);
+		align-items: center;
+		margin-bottom: var(--gap);
+	}
+	#link-to-base {
+		transform-origin: 50% 50%;
+		animation-duration: 1s;
+		animation-direction: alternate;
+		will-change: transform;
+		animation-play-state: paused;
+		animation-fill-mode: forwards;
+		&:hover,
+		&:focus-visible {
+			animation-name: wiggle;
+			animation-play-state: running;
+		}
+	}
+	div a {
+		display: block;
+		background: transparent;
+		margin-right: auto;
+		border: 0.1rem solid transparent;
 
-			&:hover,
-			&:focus-visible {
-				outline: 0.2em solid var(--theme);
-			}
+		&:hover,
+		&:focus-visible {
+			border-color: var(--theme);
+		}
 
-			&:active {
-				outline-color: var(--text);
-			}
-			img {
-				margin: none;
-			}
+		&:active {
+		}
+		img {
+			margin: none;
+			width: 2em;
+			height: 2em;
 		}
 	}
 
 	nav {
-		background: transparent;
+		overflow-y: hidden;
 		ul {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			gap: 1em;
 			font-size: 1.25rem;
+			padding: var(--padding);
+			margin-top: 0;
+			padding-top: 0;
+		}
+	}
+
+	@keyframes wiggle {
+		0% {
+			transform: rotate(0deg);
+		}
+		20% {
+			transform: rotate(-15deg);
+		}
+		40% {
+			transform: rotate(15deg);
+		}
+		60% {
+			transform: rotate(-7deg);
+		}
+		80% {
+			transform: rotate(7deg);
+		}
+		90% {
+			transform: rotate(-3deg);
+		}
+		95% {
+			transform: rotate(2deg);
+		}
+		100% {
+			transform: rotate(0deg);
 		}
 	}
 </style>

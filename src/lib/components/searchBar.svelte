@@ -11,6 +11,7 @@
 	export let label = 'search';
 	export let placeholder = 'Search... ';
 	export let fontSize: 's' | 'm' | 'l' | 'xl' | '2xl' = 'xl';
+	export let showMagnifyingGlass = true;
 
 	/**
 	 * `id` for the `input`
@@ -22,6 +23,7 @@
 	export let ref: HTMLInputElement = null;
 
 	import { createEventDispatcher, afterUpdate } from 'svelte';
+	import ButtonPlus from './button/buttonPlus.svelte';
 	const dispatch = createEventDispatcher();
 	let prevValue = value;
 
@@ -45,6 +47,10 @@
 		if (value.length === 0 && prevValue.length > 0) dispatch('clear');
 		prevValue = value;
 	});
+
+	const clear = () => {
+		value = '';
+	};
 </script>
 
 <form
@@ -52,18 +58,20 @@
 	on:submit|preventDefault
 	class="center-i"
 	class:content={value.length > 0}
-	aria-label={label}
 >
 	<label id="{id}-label" for={id}> {label} </label>
-	<svg
-		focusable="false"
-		xmlns="http://www.w3.org/2000/svg"
-		viewBox="0 0 16 16"
-		aria-hidden="true"
-		><path
-			d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
-		/></svg
-	>
+	{#if showMagnifyingGlass}
+		<svg
+			focusable="false"
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 16 16"
+			aria-hidden="true"
+			><path
+				d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
+			/></svg
+		>
+	{/if}
+
 	<input
 		bind:this={ref}
 		name="search"
@@ -80,6 +88,15 @@
 		on:keydown
 		style="font-size: var(--font-{fontSize});"
 	/>
+	{#if value}
+		<ButtonPlus
+			rotate={45}
+			circle={false}
+			buttonLabel="clear input"
+			svgLabel="X"
+			on:click={clear}
+		/>
+	{/if}
 </form>
 
 <style lang="postcss">
@@ -87,10 +104,12 @@
 		max-width: calc(var(--measure) - (var(--padding) * 2));
 		width: 100%;
 		position: relative;
+		flex-direction: row;
 		svg {
 			position: absolute;
-			left: 0.25em;
-			top: 0.25em;
+			left: 0;
+			top: 0;
+			padding: 0.25em;
 
 			height: 2em;
 		}
@@ -144,6 +163,8 @@
 		height: 1px;
 		width: 1px;
 		overflow: hidden;
+		color: var(--text);
+		background: none;
 		clip: rect(1px 1px 1px 1px);
 		clip: rect(1px, 1px, 1px, 1px);
 		white-space: nowrap;

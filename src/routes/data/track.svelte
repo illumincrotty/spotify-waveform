@@ -33,18 +33,17 @@
 			if (search.has('id')) {
 				console.debug(search.get('id'));
 				trackID = search.get('id');
+
+				if ($token !== 'empty' && token.valid()) {
+					spotify = createSpotifyConnection($token);
+					spotify.track(trackID).then((trackDetails) => {
+						trackName = `${trackDetails.name} by ${trackDetails.artists[0].name}`;
+					});
+					void asyncMount();
+				}
 			} else {
 				goto(`${base}/data/search?categories=track`);
 			}
-		}
-		console.debug(`id: ${trackID}`);
-
-		if ($token !== 'empty' && token.valid()) {
-			spotify = createSpotifyConnection($token);
-			spotify.track(trackID).then((trackDetails) => {
-				trackName = `${trackDetails.name} by ${trackDetails.artists[0].name}`;
-			});
-			void asyncMount();
 		}
 	});
 
@@ -60,7 +59,7 @@
 </script>
 
 <Page title={trackName || 'Track Analysis'}>
-	{#if trackID === '' || trackName === ''}
+	{#if (trackID === '' || trackName === '') && spotify}
 		<OverlayLoading />
 	{:else}
 		<h2>Spotify Code</h2>
