@@ -32,7 +32,8 @@
 		"src/**/*.d.ts",
 		"src/**/*.js",
 		"src/**/*.ts",
-		"src/**/*.svelte"
+		"src/**/*.svelte",
+		"src/lib/pancake/utils/ticks.mjs"
 	],
 	"exclude": ["node_modules", ".storage/dropdown.ts"]
 }

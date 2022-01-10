@@ -5,7 +5,7 @@
 
 	import Page from '$lib/components/layout/page.svelte';
 	import OverlayLoading from '$lib/components/overlay/overlayLoading.svelte';
-	import WaveChart from '$lib/components/chart/chartCenteredBar.svelte';
+	import WaveChart from '$lib/components/chart/chartWaveform.svelte';
 	import { processAudioAnalysis } from '$lib/script/trackAnalysis';
 	import JsonView from '$lib/components/random/jsonView.svelte';
 	import Loader from '$lib/components/loading/loader.svelte';

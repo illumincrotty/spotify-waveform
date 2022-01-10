@@ -60,6 +60,7 @@
 		margin-right: 0;
 		margin-top: 0;
 		box-shadow: var(--shadow-elevation-high);
+		--bg: var(--theme);
 	}
 	footer {
 		padding: 3ch;

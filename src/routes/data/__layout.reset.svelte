@@ -39,8 +39,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
 	<link
 		href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap"
-		rel="stylesheet"
-	/>
+		rel="stylesheet" />
 </svelte:head>
 
 <Base>
@@ -49,14 +48,15 @@
 			{ href: 'data', label: 'Data' },
 			{ href: 'data/search', label: 'Search' },
 			{ href: 'data/top', label: 'Top Data' },
-		]}
-	/>
-	{#if mounted && $token === 'empty'}
-		<OverlayLogin />
-	{/if}
+		]} />
+
 	<slot>
 		<!-- <main class="stack center-i" id="page-main" /> -->
 	</slot>
+
+	{#if mounted && $token === 'empty'}
+		<OverlayLogin />
+	{/if}
 </Base>
 
 <style lang="postcss" global>

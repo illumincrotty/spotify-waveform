@@ -11,18 +11,7 @@
 			loginButton.focus();
 		});
 	});
-
-	const onKeyDown = (ev: KeyboardEvent) => {
-		// console.debug(ev.key);
-
-		if (ev.key !== 'Tab') return;
-		loginButton.focus();
-
-		ev.preventDefault();
-	};
 </script>
-
-<svelte:window on:keydown={onKeyDown} />
 
 <OverlayModal labelledby="login_title" describedby="login_description">
 	<h2 id="login_title">Unauthorized</h2>

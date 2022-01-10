@@ -7,6 +7,6 @@
 
 <svelte:body />
 <Page title="Loading">
-	<OverlayLogin />
 	<div slot="footer" />
+	<OverlayLogin />
 </Page>

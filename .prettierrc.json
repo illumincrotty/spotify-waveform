@@ -8,5 +8,9 @@
 	"quoteProps": "consistent",
 	"singleQuote": true,
 	"printWidth": 80,
-	"overrides": [{"files": "*.postcss", "options": {"singleQuote": false}}]
+	"overrides": [
+		{ "files": "*.postcss", "options": { "singleQuote": false } }
+	],
+	"bracketSameLine": true,
+	"svelteSortOrder": "options-scripts-markup-styles"
 }

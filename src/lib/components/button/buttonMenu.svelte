@@ -22,11 +22,12 @@
 	{classes}
 	buttonLabel="open navigation"
 	svgLabel="hamburger menu"
-	circle={false}
->
+	circle={false}>
 	<g class="hamburger" class:is-active={open}>
 		<rect class="hamburger-top" x="0" y="0" height="3" width="24" />
-		<rect class="hamburger-mid" x="0" y="11" height="3" width="24" />
+		{#if !open}
+			<rect class="hamburger-mid" x="0" y="11" height="3" width="24" />
+		{/if}
 		<rect class="hamburger-bot" x="0" y="21" height="3" width="24" />
 	</g>
 
@@ -36,8 +37,8 @@
 <style lang="postcss">
 	.hamburger,
 	.hamburger > * {
-		transition: all;
-		transition-duration: 0.5s;
+		transition: transform;
+		transition-duration: 0.3s;
 		transform-origin: center;
 		transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
 	}

@@ -257,6 +257,17 @@ const createSpotifyConnection = (token: pkceToken) => {
 			easyFetch({ route: `/audio-features/${id}` }),
 
 		/**
+		 * Get audio feature information for a multiple tracks based on their Spotify IDs.
+		 *
+		 * @param ids - The Spotify IDs for the tracks.
+		 * @returns A set of audio features
+		 */
+		audioFeaturesMultiTrack: async (
+			ids: string[]
+		): Promise<SpotifyApi.MultipleAudioFeaturesResponse> =>
+			easyFetch({ route: `/audio-features`, options: { ids: ids } }),
+
+		/**
 		 * Get audio feature information for a single track identified by its unique Spotify ID.
 		 *
 		 * @param id - Get a low-level audio analysis for a track in the Spotify catalog. The audio analysis describes the track’s structure and musical content, including rhythm, pitch, and timbre.

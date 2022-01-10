@@ -1,3 +1,4 @@
+import { browser } from '$app/env';
 import { randomBase64StringGenerator, bytesToBase64 } from './stateGen';
 import { base } from '$app/paths';
 import type { pkceToken } from 'tokens';
@@ -8,7 +9,11 @@ const mode = process.env.NODE_ENV;
 const development = mode === 'development';
 
 const redirectURL = `${
-	development ? 'https://localhost:3000' : 'https://illumincrotty.github.io'
+	development
+		? browser
+			? window?.origin ?? 'https://localhost:3000'
+			: 'https://localhost:3000'
+		: 'https://illumincrotty.github.io'
 }${base}/authorized`;
 
 const CLIENT_ID = '9f38f4f91f784811b42898766ee7211a';

@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { join } from 'path/posix';
-
 	let press = false;
 	export let buttonLabel: string;
 	export let svgLabel: string;
@@ -50,7 +48,6 @@
 		color: var(--text);
 		transition: all 0.3s;
 		aspect-ratio: 1;
-		height: 100%;
 
 		&:focus-visible,
 		&:hover {
@@ -68,7 +65,7 @@
 			}
 		}
 		svg {
-			width: 2rem;
+			min-width: 2rem;
 			aspect-ratio: 1;
 			vertical-align: middle;
 			padding: 0.25em;

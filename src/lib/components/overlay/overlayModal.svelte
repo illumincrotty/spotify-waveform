@@ -18,10 +18,10 @@
 		index %= tabbable.length;
 
 		tabbable[index].focus();
-		event.preventDefault();
-
-		if (ev.key !== 'Tab') return;
 		ev.preventDefault();
+
+		// if (ev.key !== 'Tab') return;
+		// ev.preventDefault();
 	};
 </script>
 
@@ -34,8 +34,7 @@
 		bind:this={modalWindow}
 		aria-labelledby={labelledby}
 		aria-describedby={describedby}
-		aria-modal="true"
-	>
+		aria-modal="true">
 		<slot />
 	</div>
 </Overlay>
@@ -59,5 +58,8 @@
 		flex-direction: column;
 		text-align: center;
 		box-shadow: var(--shadow-elevation-high);
+		position: relative;
+		isolation: isolate;
+		z-index: 12;
 	}
 </style>

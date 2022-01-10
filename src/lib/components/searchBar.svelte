@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { createEventDispatcher, afterUpdate } from 'svelte';
+	import ButtonPlus from './button/buttonPlus.svelte';
+
 	/**
 	 * Specify the input value
 	 */
@@ -22,8 +25,6 @@
 	 */
 	export let ref: HTMLInputElement = null;
 
-	import { createEventDispatcher, afterUpdate } from 'svelte';
-	import ButtonPlus from './button/buttonPlus.svelte';
 	const dispatch = createEventDispatcher();
 	let prevValue = value;
 
@@ -57,8 +58,7 @@
 	role="search"
 	on:submit|preventDefault
 	class="center-i"
-	class:content={value.length > 0}
->
+	class:content={value.length > 0}>
 	<label id="{id}-label" for={id}> {label} </label>
 	{#if showMagnifyingGlass}
 		<svg
@@ -67,9 +67,7 @@
 			viewBox="0 0 16 16"
 			aria-hidden="true"
 			><path
-				d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
-			/></svg
-		>
+				d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z" /></svg>
 	{/if}
 
 	<input
@@ -86,16 +84,14 @@
 		on:focus
 		on:blur
 		on:keydown
-		style="font-size: var(--font-{fontSize});"
-	/>
+		style="font-size: var(--font-{fontSize});" />
 	{#if value}
 		<ButtonPlus
 			rotate={45}
 			circle={false}
 			buttonLabel="clear input"
 			svgLabel="X"
-			on:click={clear}
-		/>
+			on:click={clear} />
 	{/if}
 </form>
 
@@ -111,7 +107,7 @@
 			top: 0;
 			padding: 0.25em;
 
-			height: 2em;
+			height: 100%;
 		}
 
 		/* background: var(--theme); */
@@ -156,6 +152,9 @@
 		padding-right: 2em;
 		&:focus {
 			outline: none;
+		}
+		&::-webkit-search-cancel-button {
+			display: none;
 		}
 	}
 	label {

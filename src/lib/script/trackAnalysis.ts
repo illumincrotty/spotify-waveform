@@ -1,6 +1,6 @@
 import Spline from 'typescript-cubic-spline';
 
-const processAudioAnalysis = (
+export const processAudioAnalysis = (
 	trackAnalysis: SpotifyApi.AudioAnalysisResponse
 ): number[] => {
 	const volumeNormalized = trackAnalysis.segments.map((segment) => {
@@ -42,5 +42,3 @@ const processAudioAnalysis = (
 
 	return timeNormalized;
 };
-
-export { processAudioAnalysis };

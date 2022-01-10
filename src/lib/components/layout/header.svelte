@@ -7,15 +7,15 @@
 	export let links: { href: string; label: string }[] = [];
 	import { slide } from 'svelte/transition';
 	import { tweened } from 'svelte/motion';
-	import { backIn, backInOut, backOut, linear } from 'svelte/easing';
+	import { backIn, backOut } from 'svelte/easing';
 
 	let menuOpen = false;
 	let classes = ['shadow-pop'];
 
 	let navSize = 0;
 
-	const expandTween = tweened(0, { duration: 800, easing: backOut });
-	const collapseTween = tweened(0, { duration: 800, easing: backIn });
+	const expandTween = tweened(0, { duration: 200 });
+	const collapseTween = tweened(0, { duration: 200 });
 	const toggleFade = () => {
 		expandTween.update((val) => (val ? 0 : 1));
 		collapseTween.update((val) => (val ? 0 : 1));
@@ -29,8 +29,7 @@
 				src={`${base}/favicon.svg`}
 				alt="Logo"
 				width="36"
-				height="36"
-			/>
+				height="36" />
 		</a>
 
 		<ButtonMode {classes} />
@@ -38,10 +37,10 @@
 		<ButtonMenu bind:open={menuOpen} {classes} on:click={toggleFade} />
 	</div>
 	<nav
-		style="height: {!menuOpen
-			? navSize * $collapseTween
-			: navSize * $expandTween}px;"
-	>
+		style="height: {Math.max(
+			menuOpen ? navSize * $expandTween : navSize * $collapseTween,
+			1
+		)}px;">
 		<ul class="unlist" transition:slide bind:clientHeight={navSize}>
 			<h2>Navigation</h2>
 
@@ -52,8 +51,8 @@
 						href={`${base}/`}
 						on:click={() => {
 							menuOpen = false;
-						}}>Home</a
-					>
+							toggleFade();
+						}}>Home</a>
 				</li>
 			{/if}
 			{#each links as link}
@@ -64,8 +63,8 @@
 							href={`${base}/${link.href}`}
 							on:click={() => {
 								menuOpen = false;
-							}}
-						>
+								toggleFade();
+							}}>
 							{link.label}
 						</a>
 					</li>

@@ -5,6 +5,7 @@ const dev = mode === 'development';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
+	compilerOptions: {},
 	preprocess: [
 		preprocess({
 			postcss: true,
@@ -12,12 +13,11 @@ const config = {
 		}),
 	],
 	kit: {
-		adapter: adapter(),
+		adapter: adapter({}),
 		target: 'body',
 		paths: {
 			base: dev ? '' : '/spotify-waveform',
 		},
-
 		appDir: 'internal',
 		vite: {},
 	},
