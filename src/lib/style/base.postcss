@@ -52,15 +52,14 @@
 	--theme-2-components: var(--grape-components);
 	--theme-3-components: var(--straw-components);
 	--theme-4-components: var(--birdie-components);
-	--current-theme: 1;
 
 	--theme-components: var(--theme-1-components);
 	--theme: rgb(var(--theme-components));
 
-	/* --t1: rgb(var(--pepper-mint-components));
+	--t1: var(--pepper-mint);
 	--t2: var(--grape);
 	--t3: var(--straw);
-	--t4: var(--birdie); */
+	--t4: var(--birdie);
 
 	--text: var(--light);
 	--bg: var(--dark);
@@ -106,7 +105,7 @@
 	font-family: "Atkinson Hyperlegible", sans-serif;
 
 	transition: background 0.5s, color 0.5s;
-
+	/* 
 	@media (prefers-color-scheme: dark) {
 		--text: var(--light);
 		--bg: var(--dark);
@@ -123,9 +122,9 @@
 			--anti-overlay: var(--light-overlay);
 			--anti-overlay-components: var(--light-components);
 		}
-	}
+	} */
 
-	@media (prefers-color-scheme: light) {
+	/* @media (prefers-color-scheme: light) {
 		--text: var(--dark);
 		--bg: var(--light);
 		--overlay: var(--dark-overlay);
@@ -141,13 +140,58 @@
 			--anti-overlay: var(--dark-overlay);
 			--anti-overlay-components: var(--dark-components);
 		}
-	}
+	} */
 	@media (prefers-reduced-motion: reduce) {
 		scroll-behavior: auto;
 	}
 }
 * {
 	background-color: inherit;
+}
+
+/* Defaults: light */
+:root {
+	color-scheme: light;
+	--text: var(--dark);
+	--bg: var(--light);
+	--overlay: var(--dark-overlay);
+	--overlay-components: var(--dark-components);
+	--anti-overlay: var(--light-overlay);
+	--anti-overlay-components: var(--light-components);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		color-scheme: dark;
+		--text: var(--light);
+		--bg: var(--dark);
+		--overlay: var(--light-overlay);
+		--overlay-components: var(--light-components);
+		--anti-overlay: var(--dark-overlay);
+		--anti-overlay-components: var(--dark-components);
+	}
+}
+
+/* User setting: dark */
+[color-scheme="light"] {
+	color-scheme: light;
+	--text: var(--dark);
+	--bg: var(--light);
+	--overlay: var(--dark-overlay);
+	--overlay-components: var(--dark-components);
+	--anti-overlay: var(--light-overlay);
+	--anti-overlay-components: var(--light-components);
+}
+
+/* User setting: dark */
+[color-scheme="dark"] {
+	color-scheme: dark;
+	--text: var(--light);
+	--bg: var(--dark);
+	--overlay: var(--light-overlay);
+	--overlay-components: var(--light-components);
+	--anti-overlay: var(--dark-overlay);
+	--anti-overlay-components: var(--dark-components);
 }
 
 .dark {

@@ -1,18 +1,17 @@
 <script lang="ts">
-	import { themeFlip, themeNumber } from '$lib/storeSession';
+	import { themeDark, themeNumber } from '$lib/storeSession';
 
 	import { onMount } from 'svelte';
 
 	onMount(() => {
-		document.documentElement.style.setProperty(
-			'--current-theme',
-			`${$themeNumber}`
-		);
+		// document.documentElement.style.setProperty(
+		// 	'--current-theme',
+		// 	`${$themeNumber}`
+		// );
 		document.documentElement.style.setProperty(
 			'--theme-components',
 			`var(--theme-${$themeNumber}-components)`
 		);
-		document.documentElement.classList.toggle('theme-flip', $themeFlip);
 	});
 </script>
 
