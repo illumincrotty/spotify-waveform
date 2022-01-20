@@ -21,6 +21,7 @@
 		undefined;
 	let trackFeaturesPromise: ReturnType<typeof spotify['audioFeatures']> =
 		undefined;
+	let artistPromise: ReturnType<typeof spotify['artist']> = undefined;
 
 	let maxLoudness: number[] = undefined;
 
@@ -51,6 +52,11 @@
 		trackPromise = spotify.track(trackID);
 		trackFeaturesPromise = spotify.audioFeatures(trackID);
 		trackAnalysisPromise = spotify.audioAnalysis(trackID);
+		artistPromise = spotify.artist(
+			await (
+				await trackPromise
+			).artists[0].id
+		);
 
 		maxLoudness = processAudioAnalysis(
 			await spotify.audioAnalysis(trackID)
@@ -94,6 +100,15 @@
 				<Loader />
 			{:then analysis}
 				<JsonView data={analysis} />
+			{/await}
+		{/if}
+		{#if artistPromise}
+			<h2>Artist</h2>
+
+			{#await artistPromise}
+				<Loader />
+			{:then artist}
+				<JsonView data={artist} />
 			{/await}
 		{/if}
 	{/if}

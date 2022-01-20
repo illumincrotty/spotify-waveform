@@ -1,17 +1,20 @@
-<script lang="ts">
-	export let svg: SVGElement = undefined;
-</script>
-
-<template pres>
-	<svg bind:this={svg}>
+<template>
+	<div class="plot">
 		<slot />
-
-		<!--  -->
-	</svg>
+	</div>
 </template>
 
 <style lang="postcss">
+	div {
+		grid-area: center;
+		width: 100%;
+		height: 100%;
+		overflow: visible;
+		isolation: isolate;
+		position: relative;
+	}
 	svg {
+		grid-area: center;
 		pointer-events: none;
 		width: 100%;
 		height: 100%;
@@ -20,5 +23,4 @@
 		position: absolute;
 		left: 0;
 	}
-	/*  */
 </style>

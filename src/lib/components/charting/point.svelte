@@ -1,45 +1,114 @@
 <script lang="ts">
 	import { getContext } from 'svelte-typed-context';
+	import { quintOut } from 'svelte/easing';
+	import { crossfade, fade, slide } from 'svelte/transition';
 	import { chartKey } from './keys';
+	type keys = $$Generic<string | number | symbol>;
+	type values = $$Generic;
 
-	export let data: { x: number; y: number };
+	const [send, receive] = crossfade({
+		duration: (d) => Math.sqrt(d * 200),
 
-	let { xMapping, yMapping, width, height } = getContext(chartKey);
-	let hover = false;
-	let focus = false;
+		fallback(node, _) {
+			const style = getComputedStyle(node);
+			const transform = style.transform === 'none' ? '' : style.transform;
+
+			return {
+				duration: 1000,
+				easing: quintOut,
+				css: (t) => `
+                transform: ${transform};
+					opacity: ${t};
+				`,
+			};
+		},
+	});
+
+	export let data: { x: number; y: number; meta?: Record<keys, values> };
+	export let key: any = 1;
+	export let animation: ReturnType<typeof crossfade> = [send, receive];
+
+	let { xMapping, yMapping } = getContext(chartKey);
+	let timer = -1;
+	let circleHovered = false,
+		circleSelected = false,
+		tooltipHovered = false;
+
+	const circleFocus = () => {
+		circleHovered = true;
+		circleSelected = false;
+		console.log('hover');
+		clearTimeout(timer);
+	};
+	const circleUnfocus = () => {
+		const thisTimer = window.setTimeout(() => {
+			if (timer === thisTimer) {
+				circleHovered = false;
+			}
+		}, 100);
+		timer = thisTimer;
+	};
 </script>
 
 <template>
 	<div
-		class="point"
-		style="left:{$xMapping(data.x)}%; top:{$yMapping(data.y)}%;"
-		on:mouseleave={() => {
-			hover = false;
+		class="circle"
+		tabindex={0}
+		style="left:{$xMapping(data.x)}%; top: {$yMapping(data.y)}%;"
+		class:current={circleHovered || tooltipHovered}
+		on:mouseenter={circleFocus}
+		on:mouseleave={circleUnfocus}
+		on:click={() => {
+			circleSelected = true;
 		}}
+		on:focus={circleFocus}
+		on:blur={() => {
+			circleUnfocus();
+			circleSelected = false;
+		}} />
+	<div
+		style="left:{$xMapping(data.x)}%; top: {$yMapping(data.y)}%;"
+		data-translate={`${$xMapping(data?.x ?? 0) > 50 ? 'l' : 'r'}${
+			$yMapping(data?.y ?? 0) > 50 ? 't' : 'b'
+		}`}
+		class="tooltip"
 		on:mouseenter={() => {
-			hover = true;
+			tooltipHovered = true;
 		}}
-		class:boost={hover || focus}>
-		<div
-			class="circle"
-			tabindex="0"
-			class:hover
-			data-label="({data.x}, {data.y})"
-			on:focus={() => {
-				hover = true;
-				focus = true;
-			}}
-			on:blur={() => {
-				hover = false;
-				focus = false;
-			}}>
+		on:mouseleave={() => {
+			tooltipHovered = false;
+		}}>
+		{#if circleHovered || tooltipHovered || circleSelected}
+			<slot name="tooltip" value={data}>
+				<div class="element-info" transition:fade>
+					<div>
+						X: {data.x}
+					</div>
+					<div>
+						Y: {data.y}
+					</div>
+				</div>
+			</slot>
+		{/if}
+	</div>
+	<!--  -->
+
+	<!-- 
+		<div>Testing</div>
+		{#if circleHovered || tooltipHovered || circleSelected}
 			<div
 				class="tooltip"
-				data-translate={`${$xMapping(data.x) > 50 ? 'l' : 'r'}${
-					$yMapping(data.y) > 50 ? 't' : 'b'
+				on:mouseenter={() => {
+					tooltipHovered = true;
+				}}
+				on:mouseleave={() => {
+					tooltipHovered = false;
+				}}
+				data-translate={`${$xMapping(data?.x ?? 0) > 50 ? 'l' : 'r'}${
+					$yMapping(data?.y ?? 0) > 50 ? 't' : 'b'
 				}`}>
-				<slot name="tooltip" data>
-					<div class="element-info">
+				<slot name="tooltip" {data}>
+					<div class="element-info" transition:fade>
 						<div>
 							X: {data.x}
 						</div>
@@ -49,105 +118,64 @@
 					</div>
 				</slot>
 			</div>
-		</div>
-	</div>
+		{/if}
+	 -->
+	<!-- </div> -->
 </template>
 
 <style lang="postcss">
-	.point {
-		grid-area: center;
-		position: absolute;
-		overflow: visible;
-		z-index: 4;
-
-		transform: translate(-50%, -50%);
-		padding: 5px;
-		width: fit-content;
-		height: fit-content;
-		/* width: 100%;
-		height: 100%; */
-	}
-	.boost {
-		z-index: 6;
-	}
 	.circle {
-		width: 10px;
-		aspect-ratio: 1;
-		background-color: var(--text);
 		border-radius: 50%;
+		position: absolute;
+		pointer-events: all;
 		transition: all 0.3s;
-		.tooltip {
-			visibility: hidden;
-		}
+		width: 10px;
+		height: 10px;
+		background-color: var(--theme);
+		transform: translate(-50%, -50%);
+		z-index: 1;
+		/* transform: translate(-100%, -100%); */
 
 		&:hover,
-		&:focus-visible,
-		&.hover {
-			background-color: var(--theme);
-			transform: scale(200%);
-			.tooltip {
-				visibility: visible;
-			}
+		&:active,
+		&.current {
+			fill: var(--theme);
+			z-index: 2;
+			outline: none;
 		}
 
 		&:focus {
-			background-color: var(--theme);
-			transform: scale(200%);
-			.tooltip {
-				visibility: visible;
-			}
+			fill: var(--theme);
+			z-index: 2;
+			outline: none;
 		}
 	}
 	.tooltip {
 		position: absolute;
-		overflow: visible;
-		pointer-events: visible;
-
-		transform: scale(50%);
-		display: flex;
 		width: max-content;
-		height: max-content;
-
-		&[data-translate='lt'] {
-			transform-origin: right bottom;
-			right: 105%;
-			bottom: 0;
-		}
-		&[data-translate='lb'] {
-			transform-origin: right top;
-			right: 105%;
-			top: 0;
-		}
-		&[data-translate='rt'] {
-			transform-origin: left bottom;
-			left: 105%;
-			bottom: 0;
-		}
-		&[data-translate='rb'] {
-			transform-origin: left top;
-			left: 105%;
-			top: 0;
-		}
+		pointer-events: all;
+		overflow: visible;
+		z-index: 3;
 	}
+
+	[data-translate='lt'] {
+		transform: translate(-100%, -100%);
+	}
+	[data-translate='lb'] {
+		transform: translate(-100%, 0);
+	}
+	[data-translate='rt'] {
+		transform: translate(0, -100%);
+	}
+	[data-translate='rb'] {
+	}
+
 	.element-info {
-		display: block;
-		height: max-content;
+		background-color: var(--bg);
+		border: 0.1rem solid var(--theme);
 		display: flex;
 		flex-direction: column;
-
-		padding: 0.25em;
-		background: var(--bg);
-		outline: 0.1rem solid;
-		align-content: flex-end;
-	}
-	/* .tooltip {
-		isolation: isolate;
-		position: absolute;
-		overflow: visible;
-		height: 20px;
-		transform: translate(-10px, -50%);
-		z-index: 6;
 		width: max-content;
-		background: var(--theme);
-	} */
+		padding: calc(var(--padding) / 2);
+	}
 </style>

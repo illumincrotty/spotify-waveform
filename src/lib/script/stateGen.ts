@@ -25,7 +25,7 @@ const bytesToBase64 = (bytes: Uint8Array): string => {
 		.replace(/\+/g, '-')
 		.replace(/\//g, '_');
 };
-
+export const generateID = () => randomBase64StringGenerator(45);
 export {
 	bytesToBase64,
 	randomBase64StringGenerator,

@@ -64,7 +64,7 @@
 		justify-items: center;
 		text-align: center;
 		gap: 0.5em;
-		contain: layout style size;
+		contain: layout;
 		font-size: var(--font-s);
 	}
 

@@ -24,7 +24,11 @@
 
 <header>
 	<div>
-		<a href={`${base}/`} id="link-to-base" style="margin-right: auto;">
+		<a
+			href={`${base}/`}
+			id="link-to-base"
+			style="margin-right: auto;"
+			class="shadow-pop">
 			<img
 				src={`${base}/favicon.svg`}
 				alt="Logo"
@@ -88,16 +92,8 @@
 		margin-bottom: var(--gap);
 	}
 	#link-to-base {
-		transform-origin: 50% 50%;
-		animation-duration: 1s;
-		animation-direction: alternate;
-		will-change: transform;
-		animation-play-state: paused;
-		animation-fill-mode: forwards;
 		&:hover,
 		&:focus-visible {
-			animation-name: wiggle;
-			animation-play-state: running;
 		}
 	}
 	div a {
@@ -131,33 +127,6 @@
 			padding: var(--padding);
 			margin-top: 0;
 			padding-top: 0;
-		}
-	}
-
-	@keyframes wiggle {
-		0% {
-			transform: rotate(0deg);
-		}
-		20% {
-			transform: rotate(-15deg);
-		}
-		40% {
-			transform: rotate(15deg);
-		}
-		60% {
-			transform: rotate(-7deg);
-		}
-		80% {
-			transform: rotate(7deg);
-		}
-		90% {
-			transform: rotate(-3deg);
-		}
-		95% {
-			transform: rotate(2deg);
-		}
-		100% {
-			transform: rotate(0deg);
 		}
 	}
 </style>

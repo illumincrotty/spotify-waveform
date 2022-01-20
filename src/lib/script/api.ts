@@ -279,6 +279,17 @@ const createSpotifyConnection = (token: pkceToken) => {
 			easyFetch({ route: `/audio-analysis/${id}` }),
 	};
 
+	const artist = {
+		/**
+		 * Get Spotify catalog information for a single artist identified by their unique Spotify ID.
+		 *
+		 * @param id - The Spotify ID of the artist.
+		 * @returns An artist
+		 */
+		artist: async (id: string): Promise<SpotifyApi.ArtistObjectFull> =>
+			easyFetch({ route: `/artists/${id}` }),
+	};
+
 	const search = {
 		/**
 		 * Get Spotify catalog information about albums, artists, playlists, tracks, shows or episodes that match a keyword string.		 *
@@ -292,7 +303,7 @@ const createSpotifyConnection = (token: pkceToken) => {
 			easyFetch({ route: `/search`, options }),
 	};
 
-	return { ...user, ...tracks, ...search };
+	return { ...user, ...tracks, ...artist, ...search };
 };
 
 export { createSpotifyConnection };

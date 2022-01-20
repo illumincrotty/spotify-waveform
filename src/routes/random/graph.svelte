@@ -32,11 +32,11 @@
 	.chart {
 		width: 100%;
 		padding: 1em;
-		max-height: 30em;
-		/* height: 30em; */
+		/* max-height: 30em; */
+		height: 30em;
 		margin-left: auto;
 		margin-right: auto;
-		aspect-ratio: 1;
+		/* aspect-ratio: 1; */
 		border: 0.1rem solid var(--text);
 		box-shadow: var(--shadow-elevation-high);
 		display: flex;

@@ -1,12 +1,16 @@
 <script lang="ts">
 	import { getContext } from 'svelte-typed-context';
 	import { chartKey } from './keys';
-	import { get_ticks } from '../chart/chartUtils';
+
+	import { ticks as createTicks } from 'd3';
+	import Svg from './svg.svelte';
 
 	export let kind: 'y' | 'x';
 	export let count: number;
+	let svg: SVGElement;
 
-	let { xMin, xMax, yMin, yMax } = getContext(chartKey);
+	let { xMin, xMax, yMin, yMax, width, height } = getContext(chartKey);
+
 	let ticks: number[];
 	let formatter = new Intl.NumberFormat([], {
 		notation: 'compact',
@@ -27,8 +31,8 @@
 	$: {
 		ticks =
 			kind === 'y'
-				? get_ticks($yMin, $yMax, count).reverse()
-				: get_ticks($xMin, $xMax, count);
+				? createTicks($yMin, $yMax, count - 1).reverse()
+				: createTicks($xMin, $xMax, count - 1);
 	}
 </script>
 
@@ -37,6 +41,9 @@
 	{#if $$slots['label-before'] || kind === 'y'}
 		<div class="axis-label {kind === 'y' ? 'left' : 'top'}">
 			{#each ticks as value, index}
+				<Svg bind:svg>
+					<!--  -->
+				</Svg>
 				<div>
 					<slot
 						name="label-before"
@@ -107,6 +114,7 @@
 		width: 100%;
 		height: 100%;
 		font-size: var(--font-s);
+		position: relative;
 	}
 	.top {
 		grid-area: top;

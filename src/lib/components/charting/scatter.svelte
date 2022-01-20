@@ -7,8 +7,16 @@
 	import { crossfade } from 'svelte/transition';
 	import Point from './point.svelte';
 
+	type keys = $$Generic<string | number | symbol>;
+	type values = $$Generic;
+
+	export let data: { x: number; y: number; meta?: Record<keys, values> }[];
 	let { xMapping, yMapping } = getContext(chartKey);
-	export let data: { x: number; y: number }[];
+
+	let circleHovered = false,
+		circleSelected = false,
+		tooltipHovered = false;
+	let currentData: typeof data[0] = { x: 0, y: 0 };
 
 	const [send, receive] = crossfade({
 		duration: (d) => Math.sqrt(d * 200),
@@ -30,23 +38,46 @@
 </script>
 
 <template>
-	{#each data as d, i (d)}
-		<Point data={d} />
+	{#each data as datum, index (datum)}
+		<div
+			class="point-wrapper"
+			in:receive={{ key: index }}
+			out:send={{ key: index }}>
+			<Point data={datum} key={index}>
+				<svelte:fragment slot="tooltip" let:value>
+					<slot name="tooltip" {value} />
+				</svelte:fragment>
+			</Point>
+		</div>
 	{/each}
 
-	<!-- <svg>
-		{#each data as d, i (d)}
-			<circle
-				cx={`${$xMapping(d.x)}%`}
-				cy={`${$yMapping(d.y)}%`}
-				r={'5px'}
-				tabindex="0"
-				on:focus={() => activehandler(d)}
-				on:mouseover={() => activehandler(d)}
-				in:receive|local={{ delay: i * 5, key: i }}
-				out:send|local={{ delay: i * 5, key: i }} />
-		{/each}
-	</svg> -->
+	{#if circleHovered || tooltipHovered || circleSelected || false}
+		<div
+			class="tooltip"
+			style="left:{$xMapping(currentData.x)}%; top:{$yMapping(
+				currentData.y
+			)}%;"
+			on:mouseenter={() => {
+				tooltipHovered = true;
+			}}
+			on:mouseleave={() => {
+				tooltipHovered = false;
+			}}
+			data-translate={`${$xMapping(currentData.x) > 50 ? 'l' : 'r'}${
+				$yMapping(currentData.y) > 50 ? 't' : 'b'
+			}`}>
+			<!-- <slot name="tooltip" data={currentData}>
+				<div class="element-info" transition:fade>
+					<div>
+						X: {currentData.x}
+					</div>
+					<div>
+						Y: {currentData.y}
+					</div>
+				</div>
+			</slot> -->
+		</div>
+	{/if}
 </template>
 
 <style lang="postcss">
