@@ -1,0 +1,1 @@
+const r=(e=32)=>globalThis.crypto.getRandomValues(new Uint8Array(e)),a=(e=32)=>o(r(e)),o=e=>window.btoa(String.fromCodePoint(...e)).replace(/=/g,"").replace(/\+/g,"-").replace(/\//g,"_"),t=()=>a(45);export{o as b,t as g,a as r};

@@ -43,7 +43,7 @@
 			href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap"
 			rel="stylesheet"
 		/> -->
-		<title>Search</title><link rel="icon" href="/spotify-waveform/favicon.png" data-svelte="svelte-1o76hds"><link rel="icon" href="/spotify-waveform/favicon.svg" type="image/svg+xml" data-svelte="svelte-1o76hds"><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-1o76hds"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-1o76hds"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-1o76hds"><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-gzq4ss"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-gzq4ss"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-gzq4ss">
+		<title>Spotify Top Track Graphs</title><link rel="icon" href="/spotify-waveform/favicon.png" data-svelte="svelte-1o76hds"><link rel="icon" href="/spotify-waveform/favicon.svg" type="image/svg+xml" data-svelte="svelte-1o76hds"><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-1o76hds"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-1o76hds"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-1o76hds"><link rel="preconnect" href="https://fonts.googleapis.com" data-svelte="svelte-gzq4ss"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" data-svelte="svelte-gzq4ss"><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" data-svelte="svelte-gzq4ss">
 
 		
 
@@ -56,9 +56,8 @@
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/spotifyButton-b1a97f6c.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/overlay-3f2b1dce.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/base-fb8dfd6f.css">
-		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/data/search.svelte-fcb5e691.css">
+		<link rel="stylesheet" href="/spotify-waveform/internal/assets/pages/data/graph.svelte-a315528d.css">
 		<link rel="stylesheet" href="/spotify-waveform/internal/assets/page-b276a4d5.css">
-		<link rel="stylesheet" href="/spotify-waveform/internal/assets/trackBlock-b1f5ae72.css">
 		<link rel="modulepreload" href="/spotify-waveform/internal/start-79c85462.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/vendor-cee53150.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/singletons-a42a5e91.js">
@@ -72,11 +71,8 @@
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/spotifyButton-9c693a52.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/overlay-a9d99749.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/base-f4d5fd0f.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/pages/data/search.svelte-f12eca96.js">
+		<link rel="modulepreload" href="/spotify-waveform/internal/pages/data/graph.svelte-5fe81648.js">
 		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/page-50ce4a6d.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/api-1d4d6776.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/buttonPlus-6cd831ae.js">
-		<link rel="modulepreload" href="/spotify-waveform/internal/chunks/trackBlock-c6f29a45.js">
 
 		<script type="module">
 			import { start } from "/spotify-waveform/internal/start-79c85462.js";
@@ -92,9 +88,9 @@
 					error: null,
 					nodes: [
 						import("/spotify-waveform/internal/pages/data/__layout.reset.svelte-165a5d36.js"),
-						import("/spotify-waveform/internal/pages/data/search.svelte-f12eca96.js")
+						import("/spotify-waveform/internal/pages/data/graph.svelte-5fe81648.js")
 					],
-					url: new URL("http://prerender/data/search"),
+					url: new URL("http://prerender/data/graph"),
 					params: {}
 				}
 			});
@@ -122,6 +118,7 @@
 
 			<li class="shadow-pop"><a sveltekit:prefetch href="/spotify-waveform/">Home</a></li>
 			<li class="shadow-pop"><a sveltekit:prefetch href="/spotify-waveform/data">Data</a>
+					</li><li class="shadow-pop"><a sveltekit:prefetch href="/spotify-waveform/data/search">Search</a>
 					</li><li class="shadow-pop"><a sveltekit:prefetch href="/spotify-waveform/data/top">Top Data</a>
 					</li></ul></nav>
 </header>
@@ -129,20 +126,16 @@
 	
 
 
-<form role="search" class="center-i svelte-1dp52dm"><label id="spotify-search-label" for="spotify-search" class="svelte-1dp52dm">Spotify Search</label>
-	<svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true" class="svelte-1dp52dm"><path d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"></path></svg>
-
-	<input name="search" type="search" placeholder="Search Spotify" autocomplete="off" spellcheck="false" id="spotify-search" style="font-size: var(--font-xl);" class="svelte-1dp52dm" value="">
-	
-</form>
-
-<main class="stack">
 
 
 
+	<header class="dark contrast svelte-1q3s8tw"><h1 class="stack">Spotify Top Track Graphs</h1></header>
 
 
-</main>
+<main class="stack"><section class="stack" style="align-items: flex-start;"><h2>Top Tracks</h2>
+		<div id="d3chart" class="svelte-zvjlex"></div>
+
+		<div id="chart-holder"></div></section></main>
 <footer class="svelte-1q3s8tw"></footer>
 <div style="visibility: hidden;" class="svelte-1s9tm7b"><button aria-pressed="false" aria-label="To Top" class="svg-button  svelte-1jhec4k"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" aria-label="arrow up" style="width:2em" class="svelte-1jhec4k svg-circle"><path d="M12.929.545A1.09 1.09 0 0011.043.54l-9.53 16.361a1.088 1.088 0 00.942 1.639h18.989a1.09 1.09 0 00.944-1.637L12.928.544z"></path></svg>
 </button>
