@@ -24,51 +24,69 @@
 {#if tracks.length > 0 && categories.has('track')}
 	<section transition:slide>
 		<h2>Tracks</h2>
-		<BlockStack
-			component={TrackBlock}
-			items={tracks}
-			limit={5}
-			limitButton={true}
-		/>
+		<div class="box">
+			<BlockStack
+				component={TrackBlock}
+				items={tracks}
+				limit={5}
+				limitButton={true} />
+		</div>
 	</section>
-	<!-- <TrackListPretty {tracks} limit={limitTracks} limitButton={true} /> -->
 {/if}
 
 {#if artists.length > 0 && categories.has('artist')}
 	<section transition:slide>
 		<h2>Artists</h2>
-		<BlockStack
-			component={ArtistBlock}
-			items={artists}
-			limit={5}
-			limitButton={true}
-		/>
+		<div class="box">
+			<BlockStack
+				component={ArtistBlock}
+				items={artists}
+				limit={5}
+				limitButton={true} />
+		</div>
 	</section>
-	<!-- <ArtistListPretty {artists} /> -->
 {/if}
 
 {#if albums.length > 0 && categories.has('album')}
 	<section transition:slide>
 		<h2>Albums</h2>
-		<BlockStack
-			component={AlbumBlock}
-			items={albums}
-			limit={5}
-			limitButton={true}
-		/>
+		<div class="box">
+			<BlockStack
+				component={AlbumBlock}
+				items={albums}
+				limit={5}
+				limitButton={true} />
+		</div>
 	</section>
-	<!-- <ArtistListPretty {artists} /> -->
 {/if}
 
 {#if playlists.length > 0 && categories.has('album')}
 	<section transition:slide>
 		<h2>Playlists</h2>
-		<BlockStack
-			component={PlaylistBlock}
-			items={playlists}
-			limit={5}
-			limitButton={true}
-		/>
-		<!-- <ArtistListPretty {artists} /> -->
+		<div class="box">
+			<BlockStack
+				component={PlaylistBlock}
+				items={playlists}
+				limit={5}
+				limitButton={true} />
+		</div>
 	</section>
 {/if}
+
+<style>
+	section {
+		padding: var(--padding);
+	}
+	h2 {
+		position: sticky;
+		top: 0;
+		background-color: var(--text);
+		color: var(--bg);
+		padding-top: 0.25em;
+		padding-bottom: 0.25em;
+		padding-left: 0.25em;
+
+		box-shadow: var(--shadow-elevation-high);
+		z-index: 15;
+	}
+</style>

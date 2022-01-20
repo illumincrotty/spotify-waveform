@@ -42,18 +42,34 @@
 		}
 	});
 
-	const handleInput = async () => {
+	const handleInput = () => {
 		if (value !== '' && value !== prevSearch) {
-			prevSearch = value;
-			results = await spotify.search({
-				q: value,
-				type: categoryArray,
-			});
+			asyncHandleInput();
+		}
+	};
 
-			tracks = results.tracks.items ?? [];
-			artists = results.artists.items ?? [];
-			albums = results.albums.items ?? [];
-			playlists = results.playlists.items ?? [];
+	const handleSubmit = (event: SubmitEvent) => {
+		event.preventDefault();
+		handleInput();
+	};
+
+	const asyncHandleInput = async () => {
+		prevSearch = value;
+		results = await spotify.search({
+			q: value,
+			type: categoryArray,
+		});
+
+		tracks = results.tracks.items ?? [];
+		artists = results.artists.items ?? [];
+		albums = results.albums.items ?? [];
+		playlists = results.playlists.items ?? [];
+	};
+
+	const handleKey = (event: KeyboardEvent) => {
+		if (event.key === 'Enter') {
+			// Prevent searchbar from being cleared on enter
+			event.preventDefault();
 		}
 	};
 </script>
@@ -66,11 +82,11 @@
 	bind:value
 	{debounce}
 	on:type={handleInput}
+	on:keydown={handleKey}
 	on:clear={() => {
 		tracks = [];
 		artists = [];
 		albums = [];
 		playlists = [];
 	}}
-	on:submit={handleInput}
-/>
+	on:submit={handleSubmit} />
